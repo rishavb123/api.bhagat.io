@@ -62,6 +62,12 @@ export default {
                     viewExists = true;
                 }
             }
+            if (!ignoreView && !viewExists && homepage) {
+                newLinks.push({
+                    name: 'View',
+                    url: homepage,
+                });
+            }
             if (!ignoreSource && !sourceExists) {
                 newLinks.push({
                     name: 'Source',
@@ -72,12 +78,6 @@ export default {
                 newLinks.push({
                     name: 'Download',
                     url: `https://github.com/${USER}/${name}/archive/refs/heads/master.zip`,
-                });
-            }
-            if (!ignoreView && !viewExists && homepage) {
-                newLinks.push({
-                    name: 'View',
-                    url: homepage,
                 });
             }
             return newLinks;
