@@ -1,0 +1,31 @@
+{
+  "name": "api-server",
+  "version": "1.0.0",
+  "description": "The server code for my personal api",
+  "main": "main.js",
+  "scripts": {
+    "test": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rishavb123/api.bhagat.io.git"
+  },
+  "keywords": [
+    "Api",
+    "Server",
+    "Express",
+    "Apollo"
+  ],
+  "author": "Bhagat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rishavb123/api.bhagat.io/issues"
+  },
+  "homepage": "https://github.com/rishavb123/api.bhagat.io#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "puppeteer": "^5.5.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  }
+}
