@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
-    type Deck(url: String) {
+    type Deck {
         url: String
     } 
 `;

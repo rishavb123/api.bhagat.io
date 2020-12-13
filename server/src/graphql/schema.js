@@ -4,7 +4,7 @@ import mtgSchema from './mtg/schema.js';
 
 const schema = gql`
     type Query {
-        deck(url: String): Deck
+        deck: Deck
     }
 `;
 

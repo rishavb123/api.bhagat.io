@@ -1,34 +1,40 @@
 {
-  "name": "api-server",
-  "version": "1.0.0",
-  "description": "The server code for my personal api",
-  "main": "main.js",
-  "type": "module",
-  "scripts": {
-    "test": "nodemon main.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rishavb123/api.bhagat.io.git"
-  },
-  "keywords": [
-    "Api",
-    "Server",
-    "Express",
-    "Apollo"
-  ],
-  "author": "Bhagat",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rishavb123/api.bhagat.io/issues"
-  },
-  "homepage": "https://github.com/rishavb123/api.bhagat.io#readme",
-  "dependencies": {
-    "apollo-server-express": "^2.19.0",
-    "cheerio": "^1.0.0-rc.3",
-    "express": "^4.17.1",
-    "got": "^11.8.1",
-    "graphql": "^15.4.0",
-    "puppeteer": "^5.5.0"
-  }
+    "name": "api-server",
+    "version": "1.0.0",
+    "description": "The server code for my personal api",
+    "main": "main.js",
+    "scripts": {
+        "start": "node dist/main.js",
+        "dev": "babel src -d dev && node dev/main.js",
+        "build": "babel src -d dist"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rishavb123/api.bhagat.io.git"
+    },
+    "keywords": [
+        "Api",
+        "Server",
+        "Express",
+        "Apollo"
+    ],
+    "author": "Bhagat",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rishavb123/api.bhagat.io/issues"
+    },
+    "homepage": "https://github.com/rishavb123/api.bhagat.io#readme",
+    "dependencies": {
+        "apollo-server-express": "^2.19.0",
+        "cheerio": "^1.0.0-rc.3",
+        "express": "^4.17.1",
+        "got": "^11.8.1",
+        "graphql": "^15.4.0",
+        "puppeteer": "^5.5.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.12.10",
+        "@babel/core": "^7.12.10",
+        "@babel/preset-env": "^7.12.10"
+    }
 }

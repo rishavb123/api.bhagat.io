@@ -1,2 +1,0 @@
-import schema from './schema.js';
-export default
