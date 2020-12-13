@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "The server code for my personal api",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "test": "nodemon main.js"
   },
@@ -23,7 +24,12 @@
   },
   "homepage": "https://github.com/rishavb123/api.bhagat.io#readme",
   "dependencies": {
+    "apollo-server-express": "^2.19.0",
+    "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "graphql": "^15.4.0",
+    "graphql-tools": "^7.0.2",
     "puppeteer": "^5.5.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.6"
