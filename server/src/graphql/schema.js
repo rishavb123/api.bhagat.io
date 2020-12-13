@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 import mtgSchema from './mtg/schema';
 
@@ -10,7 +10,7 @@ const schema = gql`
 
 const typeDefs = [
     schema,
-    mtgSchema
+    mtgSchema,
 ];
 
 export default typeDefs;

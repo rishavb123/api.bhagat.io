@@ -8,7 +8,7 @@ export async function getDeckList(url) {
 
     const getProp = (prop) => $(`.deck-list-entry > .deck-list-entry-${prop} > *`);
     const getText = (el) => el.firstChild.data.trim();
-    
+
     const counts = getProp('count');
     const names = getProp('name');
 
@@ -18,12 +18,12 @@ export async function getDeckList(url) {
         deckList.push({
             link: counts[i].attribs.href,
             count: parseInt(getText(counts[i])),
-            name: getText(names[i])
-        });                
+            name: getText(names[i]),
+        });
     }
     return deckList;
 }
 
 export async function getStringDeckList(url) {
-    return (await getDeckList(url)).map((el) => el.count + " " + el.name);
+    return (await getDeckList(url)).map((el) => el.count + ' ' + el.name);
 }

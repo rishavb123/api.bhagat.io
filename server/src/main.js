@@ -11,9 +11,9 @@ server.applyMiddleware({ app });
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
-})
+});
 
 // Start the server
 app.listen(PORT, () => {
-	console.log(`Server running on locahost:${PORT}. GraphQL exposed at localhost:${PORT}/graphql`);
+    console.log(`Server running on locahost:${PORT}. GraphQL exposed at localhost:${PORT}/graphql`);
 });

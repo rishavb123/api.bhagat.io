@@ -3,9 +3,9 @@ import mtgResolvers from './mtg/resolvers';
 const resolvers = {
     Query: {
         deck: () => {
-            url: "sdfklj"
-        }
-    }
-}
+            url: 'sdfklj';
+        },
+    },
+};
 
 export default resolvers;
