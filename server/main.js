@@ -1,6 +1,19 @@
-const { get } = require('request-promise');
-const { getStringDeckList } = require('./modules/mtg/decks');
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
 
-const url = 'https://scryfall.com/@rishavb123/decks/2e961cff-f599-4253-952e-ab66874f4b89';
+import { typeDefs, resolvers } from './graphql/schema.js';
 
-getStringDeckList(url).then(console.log)
+import { PORT } from './constants.js';
+
+const server = new ApolloServer({ typeDefs, resolvers });
+const app = express();
+server.applyMiddleware({ app });
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+})
+
+// Start the server
+app.listen(PORT, () => {
+	console.log(`Server running on locahost:${PORT}. GraphQL exposed at localhost:${PORT}/graphql`);
+});
