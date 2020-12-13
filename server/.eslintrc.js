@@ -13,6 +13,6 @@ module.exports = {
     },
     'rules': {
         'linebreak-style': ["error", "windows"],
-        'space-in-parens': ["error", "always", { "exceptions": ["{}"] }]
+        "object-curly-spacing": "always"
     },
 };
