@@ -13,6 +13,6 @@ module.exports = {
     },
     'rules': {
         'linebreak-style': ["error", "windows"],
-        'space-in-parens': ["error", "never", { "exceptions": ["{}"] }]
+        'space-in-parens': ["error", "always", { "exceptions": ["{}"] }]
     },
 };
