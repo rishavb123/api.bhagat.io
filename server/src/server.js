@@ -15,5 +15,5 @@ app.get('/', (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server running on locahost:${PORT}. GraphQL exposed at localhost:${PORT}/graphql`);
+    console.log(`Server running on https://locahost:${PORT}. GraphQL exposed at https://localhost:${PORT}/graphql`);
 });
