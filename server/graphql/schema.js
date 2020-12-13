@@ -1,26 +1,16 @@
 import { gql } from "apollo-server-express";
 
-// Some fake data
-const books = [
-	{
-        title: "Harry Potter and the Sorcerer's stone",
-        author: 'J.K. Rowling',
-	},
-	{
-        title: 'Jurassic Park',
-        author: 'Michael Crichton',
-	},
-];
+import mtgSchema from './mtg/schema.js';
 
-// The GraphQL schema in string form
-const typeDefs = gql`
-	type Query { books: [Book] }
-	type Book { title: String, author: String }
+const schema = gql`
+    type Query {
+        deck(url: String): Deck
+    }
 `;
 
-// The resolvers
-const resolvers = {
-	Query: { books: () => books },
-};
+const typeDefs = [
+    schema,
+    mtgSchema
+];
 
-export { typeDefs, resolvers };
+export default typeDefs;
