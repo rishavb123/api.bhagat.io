@@ -1,7 +1,7 @@
-const rp = require('request-promise');
-const $ = require('cheerio');
+import * as rp from 'request-promise';
+import * as $ from 'cheerio';
 
-function getDeckList(url) {
+export function getDeckList(url) {
     return rp(url)
         .then((html) => {
             const get_prop = (prop) => $(`.deck-list-entry > .deck-list-entry-${prop} > *`, html);
@@ -24,11 +24,6 @@ function getDeckList(url) {
         .catch(console.log);
 }
 
-function getStringDeckList(url) {
+export function getStringDeckList(url) {
     return getDeckList(url).then((data) => data.map((el) => el.count + " " + el.name));
-}
-
-module.exports = {
-    getDeckList,
-    getStringDeckList
 }
