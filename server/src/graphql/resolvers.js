@@ -1,4 +1,4 @@
-import mtgResolvers from './mtg/resolvers';
+// import mtgResolvers from './mtg/resolvers';
 
 const resolvers = {
     Query: {
