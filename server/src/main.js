@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express';
 
 import { schema, resolvers } from './graphql';
 
-import { PORT } from './constants.js';
+import { PORT } from './constants';
 
 const server = new ApolloServer({ typeDefs: schema, resolvers });
 const app = express();
