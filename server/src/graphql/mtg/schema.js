@@ -8,6 +8,7 @@ export default gql`
     type Card {
         name: String!
         count: Int,
-        link: String
+        link: String!,
+        scryfallApiData: JSON!
     }
 `;
