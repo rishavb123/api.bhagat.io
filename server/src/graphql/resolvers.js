@@ -1,11 +1,14 @@
-// import mtgResolvers from './mtg/resolvers';
+import mtgResolvers from './mtg/resolvers';
 
 const resolvers = {
     Query: {
-        deck: () => {
-            url: 'sdfklj';
-        },
-    },
+        deck: (_, args) => ({
+            url: args.url
+        })
+    }
 };
 
-export default resolvers;
+export default {
+    ...resolvers,
+    ...mtgResolvers
+};
