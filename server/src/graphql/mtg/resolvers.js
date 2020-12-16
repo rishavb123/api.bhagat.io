@@ -1,7 +1,6 @@
 import got from "got/dist/source";
+import cache from 'memory-cache';
 import { getDeckList } from "../../modules/mtg/decks";
-
-const url = 'https://scryfall.com/@rishavb123/decks/2e961cff-f599-4253-952e-ab66874f4b89'
 
 export default {
     Deck: {
@@ -11,7 +10,12 @@ export default {
     },
     Card: {
         scryfallApiData: async ({ name }) => {
-            return JSON.parse((await got("https://api.scryfall.com/cards/named?exact=" + name)).body);
+            let result = cache.get(`scryfall-card-data-${name}`);
+            if (result)
+                return result;
+            result = JSON.parse((await got("https://api.scryfall.com/cards/named?exact=" + name)).body);
+            cache.put(`scryfall-card-data-${name}`, result);
+            return result;
         }
     }
 };
