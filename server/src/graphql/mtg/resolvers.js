@@ -11,7 +11,7 @@ export default {
     },
     Card: {
         scryfallApiData: async ({ name }) => {
-            return (await got("https://api.scryfall.com/cards/named?exact=" + name)).body;
+            return JSON.parse((await got("https://api.scryfall.com/cards/named?exact=" + name)).body);
         }
     }
 };
