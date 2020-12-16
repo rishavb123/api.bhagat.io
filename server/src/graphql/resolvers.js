@@ -5,7 +5,10 @@ const resolvers = {
     Query: {
         deck: (_, args) => ({
             url: args.url
-        })
+        }),
+        card: (_, args) => ({
+            name: args.name
+        }),
     },
     JSON: GraphQLJSON
 };
