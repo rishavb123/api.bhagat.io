@@ -4,13 +4,10 @@ import cache from 'memory-cache';
 
 async function getHtml(url) {
     let html = cache.get(`scryfall-deck-html-${url}`);
-    console.log("LOOK");
-    console.log(url);
     if (!html) {
         const resp = await got(url);
         html = resp.body;
         cache.put(`scryfall-deck-html-${url}`, html);
-        console.log("new data");
     }
     return html;
 } 
