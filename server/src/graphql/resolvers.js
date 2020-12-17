@@ -4,7 +4,7 @@ import mtgResolvers from './mtg/resolvers';
 
 import { myDecks } from './mtg/constants';
 
-const searcher = new FuzzySearch(myDecks, ['name'], { sort: true });
+const searcher = new FuzzySearch(myDecks, ['searchTerm'], { sort: true });
 
 const resolvers = {
     Query: {
@@ -15,9 +15,12 @@ const resolvers = {
             name: args.name
         }),
         mydeck: (_, args) => {
-            console.log(searcher.search(args.name));
-            return searcher.search(args.name)[0];
-        }
+            const searchResults = searcher.search(args.name);
+            if (searchResults.length > 0)
+                return searchResults[0];
+            return null;
+        },
+        mydecks: () => myDecks
     },
     JSON: GraphQLJSON
 };

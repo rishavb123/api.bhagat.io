@@ -7,7 +7,8 @@ const schema = gql`
     type Query {
         deck(url: String): Deck!,
         card(name: String): Card!,
-        mydeck(name: String): Deck
+        mydeck(name: String): Deck,
+        mydecks(name: String): [Deck!]!
     }
 `;
 
