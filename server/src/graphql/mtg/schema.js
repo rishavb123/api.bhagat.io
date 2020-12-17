@@ -4,6 +4,7 @@ export default gql`
     type Deck {
         url: String!
         cards: [Card]!
+        name: String!
     } 
     type Card {
         name: String!

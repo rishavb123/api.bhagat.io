@@ -1,9 +1,23 @@
 import got from 'got';
 import cheerio from 'cheerio';
+import cache from 'memory-cache';
+
+async function getHtml(url) {
+    let html = cache.get(`scryfall-deck-html-${url}`);
+    console.log("LOOK");
+    console.log(url);
+    if (!html) {
+        const resp = await got(url);
+        html = resp.body;
+        cache.put(`scryfall-deck-html-${url}`, html);
+        console.log("new data");
+    }
+    return html;
+} 
 
 export async function getDeckList(url) {
-    const resp = await got(url);
-    const html = resp.body;
+    
+    const html = await getHtml(url);
     const $ = cheerio.load(html);
 
     const getProp = (prop) => $(`.deck-list-entry > .deck-list-entry-${prop} > *`);
@@ -26,4 +40,13 @@ export async function getDeckList(url) {
 
 export async function getStringDeckList(url) {
     return (await getDeckList(url)).map((el) => el.count + ' ' + el.name);
+}
+
+export async function getDeckListName(url) {
+
+    const html = await getHtml(url);
+    const $ = cheerio.load(html);
+
+    return $("h1")[0].firstChild.data;
+
 }

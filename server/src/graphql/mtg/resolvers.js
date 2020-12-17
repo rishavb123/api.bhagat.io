@@ -1,11 +1,14 @@
 import got from "got/dist/source";
 import cache from 'memory-cache';
-import { getDeckList } from "../../modules/mtg/decks";
+import { getDeckList, getDeckListName } from "../../modules/mtg/decks";
 
 export default {
     Deck: {
-        cards: async (url) => {
+        cards: async ({ url }) => {
             return await getDeckList(url);
+        },
+        name: async ({ url }) => {
+            return await getDeckListName(url);
         }
     },
     Card: {
