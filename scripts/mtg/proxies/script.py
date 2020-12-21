@@ -9,6 +9,7 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
 from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
+import json
 
 from constants import graphql_endpoint
 
@@ -36,6 +37,23 @@ result = client.execute(query)["mydecks"]
 result = {obj["name"]: obj["cards"] for obj in result if obj["name"] not in basic_lands}
 result = {key: set([card["name"] for card in val]) for key, val in result.items()}
 
-proxies = {key: {} for key in result}
+proxies = {key: set() for key in result}
 keys = list(result.keys())
 
+for i in range(len(keys)):
+    for j in range(len(keys)):
+        if i != j:
+            proxies[keys[i]] = proxies[keys[i]].union(
+                result[keys[i]].intersection(result[keys[j]])
+            )
+
+total = set()
+
+for key in proxies:
+    total = total.union(proxies[key])
+    proxies[key] = list(proxies[key])
+
+proxies["binder"] = list(total)
+
+with open("proxies.json", "w") as f:
+    json.dump(proxies, f)
