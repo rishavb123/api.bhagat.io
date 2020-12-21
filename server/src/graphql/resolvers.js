@@ -9,23 +9,24 @@ const searcher = new FuzzySearch(myDecks, ['searchTerm'], { sort: true });
 const resolvers = {
     Query: {
         deck: (_, args) => ({
-            url: args.url
+            url: args.url,
         }),
         card: (_, args) => ({
-            name: args.name
+            name: args.name,
         }),
         mydeck: (_, args) => {
             const searchResults = searcher.search(args.name);
-            if (searchResults.length > 0)
+            if (searchResults.length > 0) {
                 return searchResults[0];
+            }
             return null;
         },
-        mydecks: () => myDecks
+        mydecks: () => myDecks,
     },
-    JSON: GraphQLJSON
+    JSON: GraphQLJSON,
 };
 
 export default {
     ...resolvers,
-    ...mtgResolvers
+    ...mtgResolvers,
 };

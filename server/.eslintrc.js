@@ -24,6 +24,7 @@ module.exports = {
                 'FunctionExpression': false,
             },
         }],
+        'new-cap': 'off',
         'max-len': ['error', {
             'code': 120,
             'tabWidth': 4,

@@ -1,5 +1,5 @@
 import express from 'express';
-import { ApolloServerPluginInlineTrace } from "apollo-server-core";
+import { ApolloServerPluginInlineTrace } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-express';
 
 import { schema, resolvers } from './graphql';

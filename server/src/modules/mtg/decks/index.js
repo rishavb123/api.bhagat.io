@@ -10,10 +10,9 @@ async function getHtml(url) {
         cache.put(`scryfall-deck-html-${url}`, html);
     }
     return html;
-} 
+}
 
 export async function getDeckList(url) {
-    
     const html = await getHtml(url);
     const $ = cheerio.load(html);
 
@@ -40,10 +39,8 @@ export async function getStringDeckList(url) {
 }
 
 export async function getDeckListName(url) {
-
     const html = await getHtml(url);
     const $ = cheerio.load(html);
 
-    return $("h1")[0].firstChild.data;
-
+    return $('h1')[0].firstChild.data;
 }
