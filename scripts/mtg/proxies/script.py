@@ -34,7 +34,7 @@ query = gql(
 )
 
 result = client.execute(query)["mydecks"]
-result = {obj["name"]: obj["cards"] for obj in result}
+result = {obj["name"]: filter(lambda card: card["name"] not in basic_lands, obj["cards"]) for obj in result}
 result = {key: set([card["name"] for card in val]) for key, val in result.items()}
 
 proxies = {key: set() for key in result}
