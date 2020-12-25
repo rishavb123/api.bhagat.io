@@ -1,383 +1,386 @@
 Araumi of the Dead Tide EDH Commander Deck
 ------------------------------------------
-Agent of Treachery
-Dismal Backwater
-Fact or Fiction
-Epiphany at the Drownyard
-Decree of Pain
-Peregrine Drake
-Myriad Landscape
-Bojuka Bog
-Talisman of Dominance
-Dimir Signet
-Sol Ring
 Evolving Wilds
-Dimir Aqueduct
-Jwar Isle Refuge
-Swiftfoot Boots
-Rhystic Study
-Solemn Simulacrum
-Mystic Remora
-Cyclonic Rift
-Fabled Passage
-Lightning Greaves
+Fact or Fiction
 Teferi, Master of Time
-Ashiok, Dream Render
-Gonti, Lord of Luxury
+Decree of Pain
+Talisman of Dominance
+Lightning Greaves
+Myriad Landscape
+Rhystic Study
+Peregrine Drake
+Sol Ring
 Ravenous Chupacabra
+Command Tower
+Dimir Signet
+Gonti, Lord of Luxury
+Solemn Simulacrum
+Dismal Backwater
+Mystic Remora
+Dimir Aqueduct
+Epiphany at the Drownyard
 Glasspool Mimic // Glasspool Shore
+Swiftfoot Boots
+Jwar Isle Refuge
+Ashiok, Dream Render
+Fabled Passage
+Cyclonic Rift
 Terramorphic Expanse
+Agent of Treachery
+Bojuka Bog
 
 Jodah, Archmage Eternal EDH Commander Deck
 ------------------------------------------
-Mana Confluence
-Wayfarer's Bauble
-Sandsteppe Citadel
-Path to Exile
-Enter the Infinite
-Decree of Pain
-Bojuka Bog
-Kodama's Reach
-Void Winnower
-Command Tower
-Cleansing Nova
-Thassa's Oracle
-Smothering Tithe
-Swan Song
-Sol Ring
 Evolving Wilds
-Frontier Bivouac
-Jungle Shrine
-Swiftfoot Boots
-Rhystic Study
-Cyclonic Rift
-Arcane Denial
-Rampant Growth
-Nezahal, Primal Tide
-Mystic Monastery
-Opulent Palace
-Sakura-Tribe Elder
-Recurring Insight
-Jin-Gitaxias, Core Augur
-Exotic Orchard
-Arcane Signet
-Seaside Citadel
-Farseek
-Vivid Meadow
-Golos, Tireless Pilgrim
 Crumbling Necropolis
 Cultivate
-Nature's Claim
-Mystic Remora
-Despark
-Arcane Sanctum
+Arcane Signet
+Mana Confluence
+Farseek
+Frontier Bivouac
+Sol Ring
 Savage Lands
+Seaside Citadel
 Path of Ancestry
-Fabled Passage
-Lightning Greaves
-Merciless Eviction
+Command Tower
+Enter the Infinite
+Despark
+Mystic Remora
 Murmuring Bosk
+Recurring Insight
+Smothering Tithe
+Kodama's Reach
+Opulent Palace
+Arcane Sanctum
+Path to Exile
+Cyclonic Rift
 Ugin, the Spirit Dragon
-Terramorphic Expanse
-Swords to Plowshares
+Decree of Pain
+Nature's Claim
+Mystic Monastery
+Vivid Meadow
+Lightning Greaves
+Sandsteppe Citadel
+Swan Song
+Cleansing Nova
+Rampant Growth
+Exotic Orchard
+Arcane Denial
+Wayfarer's Bauble
+Nezahal, Primal Tide
 Grand Coliseum
+Swiftfoot Boots
+Merciless Eviction
+Golos, Tireless Pilgrim
+Fabled Passage
+Void Winnower
+Thassa's Oracle
+Jin-Gitaxias, Core Augur
+Sakura-Tribe Elder
+Swords to Plowshares
+Jungle Shrine
+Rhystic Study
+Terramorphic Expanse
+Bojuka Bog
 
 Aminatou, the Fateshifter EDH Commander Deck
 --------------------------------------------
-Agent of Treachery
-Dismal Backwater
-Karn's Temporal Sundering
-Arcane Signet
-Brago, King Eternal
-Path to Exile
-Peregrine Drake
-Bojuka Bog
-Talisman of Dominance
-Command Tower
-Cleansing Nova
-Dimir Signet
-Aminatou, the Fateshifter
-Smothering Tithe
 Evolving Wilds
-Sol Ring
-Dimir Aqueduct
-Jwar Isle Refuge
-Mystic Remora
-Cyclonic Rift
-Arcane Sanctum
-Caves of Koilos
-Temporal Mastery
-Fabled Passage
-Time Warp
+Karn's Temporal Sundering
 Teferi, Master of Time
+Talisman of Dominance
+Arcane Signet
+Temporal Mastery
+Bojuka Bog
+Peregrine Drake
+Sol Ring
+Cleansing Nova
+Aminatou, the Fateshifter
+Command Tower
+Dimir Signet
+Dimir Aqueduct
+Cyclonic Rift
+Dismal Backwater
+Mystic Remora
 Ashiok, Dream Render
+Time Warp
+Jwar Isle Refuge
+Smothering Tithe
+Brago, King Eternal
 Merciless Eviction
-Terramorphic Expanse
+Fabled Passage
+Arcane Sanctum
 Swords to Plowshares
+Path to Exile
+Terramorphic Expanse
+Agent of Treachery
+Caves of Koilos
 
 Golos, Tireless Pilgrim EDH Commander Deck
 ------------------------------------------
-Agent of Treachery
-Mana Confluence
-Sandsteppe Citadel
-Brago, King Eternal
-Peregrine Drake
-Bojuka Bog
-Kodama's Reach
-Command Tower
-Smothering Tithe
-Beast Within
 Evolving Wilds
-Sol Ring
-Frontier Bivouac
-Jungle Shrine
-Solemn Simulacrum
-Cyclonic Rift
-Rampant Growth
-Mystic Monastery
-Opulent Palace
-Gonti, Lord of Luxury
-Ravenous Chupacabra
-Eternal Witness
-Sakura-Tribe Elder
+Beast Within
+Reclamation Sage
 Evacuation
-Exotic Orchard
-Alchemist's Refuge
-Seaside Citadel
-Farseek
-Vivid Meadow
-Golos, Tireless Pilgrim
-Aminatou, the Fateshifter
-Avenger of Zendikar
 Crumbling Necropolis
 Cultivate
-Reclamation Sage
+Mana Confluence
+Farseek
+Peregrine Drake
+Frontier Bivouac
+Sol Ring
 Savage Lands
-Arcane Sanctum
-Caves of Koilos
-Path of Ancestry
-Fabled Passage
-Flood of Tears
+Seaside Citadel
 Springbloom Druid
+Path of Ancestry
+Command Tower
+Solemn Simulacrum
 Despark
 Murmuring Bosk
-Terramorphic Expanse
-Swords to Plowshares
+Smothering Tithe
+Kodama's Reach
+Opulent Palace
+Arcane Sanctum
+Cyclonic Rift
+Aminatou, the Fateshifter
+Caves of Koilos
+Alchemist's Refuge
+Flood of Tears
+Mystic Monastery
+Vivid Meadow
+Sandsteppe Citadel
+Rampant Growth
+Ravenous Chupacabra
+Exotic Orchard
+Gonti, Lord of Luxury
 Grand Coliseum
+Avenger of Zendikar
+Brago, King Eternal
+Eternal Witness
+Golos, Tireless Pilgrim
+Fabled Passage
+Sakura-Tribe Elder
+Swords to Plowshares
+Jungle Shrine
+Terramorphic Expanse
+Agent of Treachery
+Bojuka Bog
 
 Kruphix, God of Horizons EDH Commander Deck
 -------------------------------------------
+Evolving Wilds
+Reliquary Tower
+Beast Within
+Curse of the Swine
+Fact or Fiction
+Evacuation
+Cultivate
 Rapid Hybridization
-Wayfarer's Bauble
-Epiphany at the Drownyard
-Blue Sun's Zenith
-Enter the Infinite
-Pongify
-Void Winnower
+Farseek
+Return to Nature
+Sol Ring
+Woodland Stream
 Search for Tomorrow
+Negate
+Reality Shift
 Command Tower
 Mass Manipulation
-Thassa's Oracle
+Enter the Infinite
+Blue Sun's Zenith
 Thornwood Falls
+Mystic Remora
+Recurring Insight
 Bala Ged Recovery // Bala Ged Sanctuary
-Beast Within
-Swan Song
-Evolving Wilds
-Sol Ring
-Temple of Mystery
-Rhystic Study
-Negate
+Simic Growth Chamber
+Ugin, the Spirit Dragon
 Cyclonic Rift
-Arcane Denial
+Alchemist's Refuge
+Flood of Tears
+Nature's Claim
+Stroke of Genius
+Pongify
+Temple of Mystery
+Swan Song
 Rampant Growth
+Arcane Denial
+Counterspell
+Wayfarer's Bauble
+Epiphany at the Drownyard
 Nezahal, Primal Tide
-Evacuation
 Eternal Witness
+Void Winnower
+Thassa's Oracle
 Jin-Gitaxias, Core Augur
 Sakura-Tribe Elder
-Recurring Insight
-Fact or Fiction
-Woodland Stream
-Simic Growth Chamber
-Stroke of Genius
-Alchemist's Refuge
-Farseek
-Counterspell
-Reliquary Tower
-Reality Shift
-Cultivate
-Curse of the Swine
-Nature's Claim
-Mystic Remora
-Flood of Tears
-Return to Nature
-Ugin, the Spirit Dragon
+Rhystic Study
 
 Tatyova, Benthic Druid EDH Commander Deck
 -----------------------------------------
-Rapid Hybridization
-Blue Sun's Zenith
-Pongify
-Kodama's Reach
-Search for Tomorrow
-Mass Manipulation
-Thassa's Oracle
-Bala Ged Recovery // Bala Ged Sanctuary
-Beast Within
-Swan Song
-Sol Ring
 Evolving Wilds
-Temple of Mystery
-Skyshroud Ranger
-Rhystic Study
-Swiftfoot Boots
-Negate
-Cyclonic Rift
-Arcane Denial
-Rampant Growth
+Reliquary Tower
+Beast Within
+Curse of the Swine
 Evacuation
-Sakura-Tribe Elder
-Eternal Witness
-Simic Growth Chamber
-Stroke of Genius
+Cultivate
+Rapid Hybridization
 Farseek
 Myriad Landscape
-Counterspell
-Reliquary Tower
-Avenger of Zendikar
-Reality Shift
-Cultivate
-Curse of the Swine
-Nature's Claim
-Mystic Remora
-Lightning Greaves
-Fabled Passage
-Flood of Tears
-Springbloom Druid
 Return to Nature
+Sol Ring
+Springbloom Druid
+Search for Tomorrow
+Negate
+Reality Shift
+Command Tower
+Mass Manipulation
+Blue Sun's Zenith
+Mystic Remora
+Bala Ged Recovery // Bala Ged Sanctuary
+Kodama's Reach
+Simic Growth Chamber
+Cyclonic Rift
 Ugin, the Spirit Dragon
+Skyshroud Ranger
+Flood of Tears
+Nature's Claim
+Stroke of Genius
+Pongify
+Temple of Mystery
+Lightning Greaves
+Swan Song
+Rampant Growth
+Arcane Denial
+Counterspell
 Glasspool Mimic // Glasspool Shore
+Avenger of Zendikar
+Swiftfoot Boots
+Eternal Witness
+Fabled Passage
+Thassa's Oracle
+Sakura-Tribe Elder
+Rhystic Study
 Terramorphic Expanse
 
 Edric, Spymaster of Trest EDH Commander Deck
 --------------------------------------------
-Rapid Hybridization
 Karn's Temporal Sundering
-Woodland Stream
+Reliquary Tower
+Reclamation Sage
+Skyshroud Ranger
+Nature's Claim
+Rapid Hybridization
+Temporal Mastery
 Pongify
+Swan Song
+Woodland Stream
+Negate
+Arcane Denial
+Reality Shift
+Command Tower
+Time Warp
 Counterspell
 Thornwood Falls
-Reliquary Tower
-Swan Song
-Reality Shift
-Skyshroud Ranger
-Negate
-Nature's Claim
-Reclamation Sage
 Cyclonic Rift
-Arcane Denial
-Temporal Mastery
-Time Warp
 
 Binder
 ------
-Agent of Treachery
+Evolving Wilds
+Karn's Temporal Sundering
+Beast Within
+Talisman of Dominance
+Arcane Signet
 Mana Confluence
-Wayfarer's Bauble
-Epiphany at the Drownyard
-Brago, King Eternal
-Path to Exile
+Farseek
+Savage Lands
+Seaside Citadel
+Springbloom Druid
+Search for Tomorrow
+Negate
+Path of Ancestry
+Reality Shift
+Mass Manipulation
 Enter the Infinite
-Decree of Pain
-Pongify
+Solemn Simulacrum
+Murmuring Bosk
+Recurring Insight
+Smothering Tithe
+Kodama's Reach
+Terramorphic Expanse
+Simic Growth Chamber
+Cyclonic Rift
+Dimir Signet
+Ugin, the Spirit Dragon
+Aminatou, the Fateshifter
+Alchemist's Refuge
+Teferi, Master of Time
+Flood of Tears
+Vivid Meadow
+Cleansing Nova
+Epiphany at the Drownyard
+Glasspool Mimic // Glasspool Shore
+Swiftfoot Boots
+Brago, King Eternal
+Eternal Witness
+Golos, Tireless Pilgrim
+Swords to Plowshares
 Bojuka Bog
+Reliquary Tower
+Reclamation Sage
+Curse of the Swine
+Fact or Fiction
+Evacuation
+Crumbling Necropolis
+Cultivate
+Rapid Hybridization
+Myriad Landscape
+Return to Nature
+Peregrine Drake
+Frontier Bivouac
+Sol Ring
+Woodland Stream
 Command Tower
+Time Warp
+Despark
+Dismal Backwater
+Mystic Remora
+Blue Sun's Zenith
 Thornwood Falls
 Bala Ged Recovery // Bala Ged Sanctuary
-Smothering Tithe
-Swan Song
-Temple of Mystery
-Negate
-Rampant Growth
-Mystic Monastery
-Ravenous Chupacabra
-Evacuation
-Sakura-Tribe Elder
-Recurring Insight
-Fact or Fiction
-Exotic Orchard
-Arcane Signet
-Simic Growth Chamber
-Stroke of Genius
-Seaside Citadel
-Farseek
-Counterspell
-Talisman of Dominance
-Reliquary Tower
-Avenger of Zendikar
-Crumbling Necropolis
-Jwar Isle Refuge
-Cultivate
-Curse of the Swine
-Nature's Claim
-Mystic Remora
-Caves of Koilos
-Fabled Passage
-Lightning Greaves
-Time Warp
-Flood of Tears
-Ashiok, Dream Render
-Despark
-Merciless Eviction
-Murmuring Bosk
-Swords to Plowshares
-Grand Coliseum
-Dismal Backwater
-Rapid Hybridization
-Sandsteppe Citadel
-Blue Sun's Zenith
-Peregrine Drake
-Kodama's Reach
-Void Winnower
-Search for Tomorrow
-Cleansing Nova
-Thassa's Oracle
-Mass Manipulation
-Beast Within
-Sol Ring
-Evolving Wilds
-Frontier Bivouac
-Jungle Shrine
-Skyshroud Ranger
-Swiftfoot Boots
-Rhystic Study
-Solemn Simulacrum
-Cyclonic Rift
-Arcane Denial
-Nezahal, Primal Tide
 Opulent Palace
-Gonti, Lord of Luxury
-Eternal Witness
-Jin-Gitaxias, Core Augur
-Karn's Temporal Sundering
-Woodland Stream
-Alchemist's Refuge
-Myriad Landscape
-Vivid Meadow
-Golos, Tireless Pilgrim
-Dimir Signet
-Aminatou, the Fateshifter
-Reality Shift
-Dimir Aqueduct
-Reclamation Sage
 Arcane Sanctum
-Savage Lands
-Path of Ancestry
+Path to Exile
+Caves of Koilos
+Skyshroud Ranger
+Decree of Pain
+Nature's Claim
+Stroke of Genius
 Temporal Mastery
-Springbloom Druid
-Teferi, Master of Time
-Return to Nature
-Ugin, the Spirit Dragon
-Glasspool Mimic // Glasspool Shore
-Terramorphic Expanse
+Pongify
+Mystic Monastery
+Temple of Mystery
+Lightning Greaves
+Sandsteppe Citadel
+Swan Song
+Rampant Growth
+Ravenous Chupacabra
+Exotic Orchard
+Arcane Denial
+Gonti, Lord of Luxury
+Dimir Aqueduct
+Counterspell
+Wayfarer's Bauble
+Nezahal, Primal Tide
+Grand Coliseum
+Avenger of Zendikar
+Jwar Isle Refuge
+Merciless Eviction
+Fabled Passage
+Void Winnower
+Thassa's Oracle
+Jin-Gitaxias, Core Augur
+Sakura-Tribe Elder
+Jungle Shrine
+Rhystic Study
+Ashiok, Dream Render
+Agent of Treachery
 
