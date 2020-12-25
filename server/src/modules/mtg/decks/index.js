@@ -7,7 +7,7 @@ async function getHtml(url) {
     if (!html) {
         const resp = await got(url);
         html = resp.body;
-        cache.put(`scryfall-deck-html-${url}`, html);
+        cache.put(`scryfall-deck-html-${url}`, html, 60000);
     }
     return html;
 }
