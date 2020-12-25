@@ -34,11 +34,12 @@ query = gql(
 )
 
 result = client.execute(query)["mydecks"]
-result = {obj["name"]: filter(lambda card: card["name"] not in basic_lands, obj["cards"]) for obj in result}
+result = {obj["name"].replace("\u00a0", " "): filter(lambda card: card["name"] not in basic_lands, obj["cards"]) for obj in result}
 result = {key: set([card["name"] for card in val]) for key, val in result.items()}
 
 proxies = {key: set() for key in result}
 keys = list(result.keys())
+keys = [key for key in keys]
 
 for i in range(len(keys)):
     for j in range(len(keys)):
@@ -53,7 +54,19 @@ for key in proxies:
     total = total.union(proxies[key])
     proxies[key] = list(proxies[key])
 
-proxies["binder"] = list(total)
+proxies["Binder"] = list(total)
 
 with open("proxies.json", "w") as f:
-    json.dump(proxies, f)
+    json.dump(proxies, f, indent=4, sort_keys=True)
+
+with open("proxies.txt", "w") as f:
+    lines = []
+    for name in proxies:
+        name = name
+        lines.append(name)
+        lines.append('-' * len(name))
+        for card_name in proxies[name]:
+            lines.append(card_name)
+        lines.append('')
+    lines = [line + "\n" for line in lines]
+    f.writelines(lines)
