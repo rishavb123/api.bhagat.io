@@ -14,7 +14,8 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server running on https://locahost:${PORT}. GraphQL exposed at https://localhost:${PORT}/graphql`);
+const port = process.env.PORT || PORT;
+
+app.listen(port, () => {
+    console.log(`Server running on https://locahost:${port}. GraphQL exposed at https://localhost:${PORT}/graphql`);
 });
