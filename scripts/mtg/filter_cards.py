@@ -45,7 +45,7 @@ def map_func(card):
 
 def filter_func(card):
     price, _ = card
-    l, h = 2.5, 100
+    l, h = 0, 3
     return l <= price <= h
 
 def reduce_func(total, card):
