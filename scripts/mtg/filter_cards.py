@@ -45,7 +45,8 @@ def map_func(card):
 
 def filter_func(card):
     price, _ = card
-    return price <= 3
+    l, h = 2.5, 100
+    return l <= price <= h
 
 def reduce_func(total, card):
     price, _ = card
@@ -62,3 +63,8 @@ print(len(filtered_result))
 reduced_result = reduce(reduce_func, filtered_result)
 
 print(reduced_result)
+
+# 13 cards proxied that I don't have (over 2.5 bucks)
+# 18 cards over 2.5 bucks
+
+# 57 + 32 Mountains under 2.5 bucks totalling to 37 dollars
