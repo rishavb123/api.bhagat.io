@@ -81,8 +81,3 @@ print(len(filtered_result))
 reduced_result = reduce(reduce_func, filtered_result)
 
 print(reduced_result)
-
-# 13 cards proxied that I don't have (over 2.5 bucks)
-# 18 cards over 2.5 bucks
-
-# 57 + 32 Mountains under 2.5 bucks totalling to 37 dollars
