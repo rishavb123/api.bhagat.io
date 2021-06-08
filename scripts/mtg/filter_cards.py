@@ -19,7 +19,7 @@ client = Client(transport=transport, fetch_schema_from_transport=True)
 
 basic_lands = {"Plains", "Island", "Swamp", "Mountain", "Forest"}
 
-query = gql(
+rionya = gql(
     """
 
     query {
@@ -34,6 +34,25 @@ query = gql(
 """
 )
 
+superfriends_proxies = gql(
+    """
+
+    query {
+        deck(url: "https://scryfall.com/@rishavb123/decks/da75e583-a192-46a6-85ec-9af5cf0ae8c1?as=list&with=usd") {
+            cards {
+                name,
+                scryfallApiData
+            }
+        }
+    }
+
+"""
+)
+
+query = superfriends_proxies
+
+l, h = float(sys.argv[1] if len(sys.argv) > 1 else 0), float(sys.argv[2] if len(sys.argv) > 2 else 100)
+
 result = client.execute(query)["deck"]
 result = list(filter(lambda card: card["name"] not in basic_lands, result["cards"]))
 
@@ -45,7 +64,6 @@ def map_func(card):
 
 def filter_func(card):
     price, _ = card
-    l, h = 0, 3
     return l <= price <= h
 
 def reduce_func(total, card):
