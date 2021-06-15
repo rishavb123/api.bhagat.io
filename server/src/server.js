@@ -6,7 +6,13 @@ import { schema, resolvers } from './graphql';
 
 import { PORT } from './constants';
 
-const server = new ApolloServer({ typeDefs: schema, resolvers, plugins: [ApolloServerPluginInlineTrace()] });
+const server = new ApolloServer({
+    typeDefs: schema,
+    resolvers,
+    playground: true,
+    introspection: true,
+    plugins: [ApolloServerPluginInlineTrace()]
+});
 const app = express();
 server.applyMiddleware({ app });
 
