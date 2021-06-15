@@ -20,7 +20,8 @@ async function getHtml(url, site) {
 */
 
 export async function getDeckList(url) {
-    const site = url.replace('www.', '').replace('https://', '').replace('http://', '').split('.com')[0];
+    const site = url.replace('www.', '').replace('https://', '')
+        .replace('http://', '').split('.com')[0].split('.net')[0];
     const html = await getHtml(url, site);
     const $ = cheerio.load(html);
 
