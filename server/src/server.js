@@ -11,7 +11,7 @@ const server = new ApolloServer({
     resolvers,
     playground: true,
     introspection: true,
-    plugins: [ApolloServerPluginInlineTrace()]
+    plugins: [ApolloServerPluginInlineTrace()],
 });
 const app = express();
 server.applyMiddleware({ app });
