@@ -51,6 +51,7 @@
     "memory-cache": "^0.2.0",
     "nodemon": "^2.0.6",
     "puppeteer": "^5.5.0",
+    "puppeteer-core": "^10.0.0",
     "uglifyjs-folder": "^2.0.0"
   },
   "devDependencies": {
