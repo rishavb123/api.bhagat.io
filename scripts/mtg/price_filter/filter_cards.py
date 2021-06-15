@@ -17,7 +17,9 @@ from constants import graphql_endpoint
 from mtg.price_filter.funcs import *
 from mtg.price_filter.config import *
 
-transport = AIOHTTPTransport(url=graphql_endpoint.prod)
+url = graphql_endpoint.prod if env.upper() == "PROD" else graphql_endpoint.dev
+
+transport = AIOHTTPTransport(url=url)
 client = Client(transport=transport, fetch_schema_from_transport=True)
 
 basic_lands = {"Plains", "Island", "Swamp", "Mountain", "Forest"}
