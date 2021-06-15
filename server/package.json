@@ -4,7 +4,7 @@
   "description": "The server code for my personal api",
   "main": "server.js",
   "scripts": {
-    "start": "npm run build && npm run serve",
+    "start": "npm run serve",
     "serve": "node dist/server.js",
     "dev": ".\\node_modules\\.bin\\nodemon --exec .\\node_modules\\.bin\\babel-node -- src\\server.js",
     "build": "babel src -d temp && uglifyjs-folder temp -eo dist -x .js && rm -rf temp",
@@ -53,5 +53,15 @@
     "puppeteer": "^5.5.0",
     "uglifyjs-folder": "^2.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "eslint": "^7.15.0",
+    "eslint-config-google": "^0.14.0",
+    "nodemon": "^2.0.6",
+    "uglifyjs-folder": "^2.0.0"
+  }
 }
