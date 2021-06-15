@@ -13,6 +13,6 @@ export default {
     Card: {
         scryfallApiData: async ({ name }) => {
             return await getScryfallApiData(name);
-        },
+        }
     },
 };
