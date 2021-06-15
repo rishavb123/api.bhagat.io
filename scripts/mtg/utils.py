@@ -106,7 +106,7 @@ jodah_proxies = gql(
 """
 )
 
-query = araumi_proxies
+query = rionya
 
 l, h = float(sys.argv[1] if len(sys.argv) > 1 else 0), float(sys.argv[2] if len(sys.argv) > 2 else 100)
 
