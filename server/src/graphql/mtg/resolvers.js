@@ -1,6 +1,5 @@
-import got from 'got/dist/source';
-import cache from 'memory-cache';
 import { getDeckList, getDeckListName } from '../../modules/mtg/decks';
+import { getScryfallApiData } from '../../modules/mtg/cards';
 
 export default {
     Deck: {
@@ -13,13 +12,7 @@ export default {
     },
     Card: {
         scryfallApiData: async ({ name }) => {
-            let result = cache.get(`scryfall-card-data-${name}`);
-            if (result) {
-                return result;
-            }
-            result = JSON.parse((await got('https://api.scryfall.com/cards/named?exact=' + name)).body);
-            cache.put(`scryfall-card-data-${name}`, result);
-            return result;
+            return await getScryfallApiData(name);
         },
     },
 };
