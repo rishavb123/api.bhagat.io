@@ -12,25 +12,30 @@ async function getHtml(url, site) {
     return html;
 }
 
-// TODO: get moxfield working; right now cannot work because moxfield takes too long to load. Resp is the loading screen.
+/*
+    TODO: get moxfield working;
+    not working because moxfield takes too long to load.
+    Resp is the loading screen.
+    Use pupeteer
+*/
 
 export async function getDeckList(url) {
-    const site = url.replace("www.", "").replace("https://", "").replace("http://", "").split(".com")[0];
+    const site = url.replace('www.', '').replace('https://', '').replace('http://', '').split('.com')[0];
     const html = await getHtml(url, site);
     const $ = cheerio.load(html);
 
     const getProps = {
         scryfall: (prop) => $(`.deck-list-entry > .deck-list-entry-${prop} > *`),
-        moxfield:  (prop) => {
+        moxfield: (prop) => {
             switch (prop) {
-                case "count":
-                    return $(`.table-deck-row > .text-right`);
-                case "name":
-                    return $(`.table-deck-row > td > a`);
-                default:
-                    return "";
+            case 'count':
+                return $(`.table-deck-row > .text-right`);
+            case 'name':
+                return $(`.table-deck-row > td > a`);
+            default:
+                return '';
             }
-        }
+        },
     };
 
     const getProp = getProps[site];
