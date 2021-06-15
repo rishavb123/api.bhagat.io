@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run build && npm run serve",
-    "serve": "node dist\\server.js",
+    "serve": "node dist/server.js",
     "dev": ".\\node_modules\\.bin\\nodemon --exec .\\node_modules\\.bin\\babel-node -- src\\server.js",
     "build": "babel src -d temp && uglifyjs-folder temp -eo dist -x .js && rm -rf temp",
     "lint": ".\\node_modules\\.bin\\eslint src --fix",
