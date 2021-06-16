@@ -1,8 +1,10 @@
 import { getBrowser } from '../../scraping';
 import cache from 'memory-cache';
 
+CACHING = false;
+
 async function getDeckListAndName(url) {
-    let deck = cache.get(`deck-object-${url}`);
+    let deck = CACHING? cache.get(`deck-object-${url}`): null;
     if (!deck) {
         const site = url.replace('www.', '').replace('https://', '')
             .replace('http://', '').split('.com')[0].split('.net')[0];
@@ -45,7 +47,9 @@ async function getDeckListAndName(url) {
                 obj = { name: sName, cards: sCards };
                 break;
         }
-        cache.put(`deck-object-${url}`, obj, 60000);
+        if(CACHING)
+            cache.put(`deck-object-${url}`, obj, 60000);
+        page.close();
         return obj;
     }
     return deck;
@@ -61,4 +65,8 @@ export async function getStringDeckList(url) {
 
 export async function getDeckListName(url) {
     return (await getDeckListAndName(url)).name;
+}
+
+export async function getDeckListsFromUser(user) {
+
 }
