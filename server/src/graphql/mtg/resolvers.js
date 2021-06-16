@@ -15,7 +15,7 @@ export default {
                     name: name.split(' EDH Commander Deck')[0],
                 };
             }
-            return await getDeckList(url)[0];
+            return (await getDeckList(url))[0];
         },
     },
     Card: {
