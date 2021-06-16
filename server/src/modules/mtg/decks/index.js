@@ -1,7 +1,7 @@
 import { getBrowser } from '../../scraping';
 import cache from 'memory-cache';
 
-async function getDeckListAndName(url, caching=true) {
+async function getDeckListAndName(url, caching) {
     const deck = caching? cache.get(`deck-object-${url}`): null;
     if (!deck) {
         const site = url.replace('www.', '').replace('https://', '')
@@ -59,23 +59,23 @@ async function getDeckListAndName(url, caching=true) {
     return deck;
 }
 
-export async function getDeckList(url) {
-    return (await getDeckListAndName(url)).cards;
+export async function getDeckList(url, caching=true) {
+    return (await getDeckListAndName(url, caching)).cards;
 }
 
-export async function getStringDeckList(url) {
-    return (await getDeckList(url)).map((el) => el.count + ' ' + el.name);
+export async function getStringDeckList(url, caching=true) {
+    return (await getDeckList(url, caching)).map((el) => el.count + ' ' + el.name);
 }
 
-export async function getDeckListName(url) {
-    return (await getDeckListAndName(url)).name;
+export async function getDeckListName(url, caching=true) {
+    return (await getDeckListAndName(url, caching)).name;
 }
 
-export async function getDeckType(url) {
-    return (await getDeckListAndName(url)).deckType;
+export async function getDeckType(url, caching=true) {
+    return (await getDeckListAndName(url, caching)).deckType;
 }
 
-export async function getDeckListsFromUser(user, caching=false) {
+export async function getDeckListsFromUser(user, caching=true) {
     const decks = cache.get(`user-decks-${user}`);
     if (!decks) {
         const url = `https://www.moxfield.com/users/${user}`;
