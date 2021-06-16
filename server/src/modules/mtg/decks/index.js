@@ -1,10 +1,8 @@
 import { getBrowser } from '../../scraping';
 import cache from 'memory-cache';
 
-const CACHING = false;
-
-async function getDeckListAndName(url) {
-    const deck = CACHING? cache.get(`deck-object-${url}`): null;
+async function getDeckListAndName(url, caching=false) {
+    const deck = caching? cache.get(`deck-object-${url}`): null;
     if (!deck) {
         const site = url.replace('www.', '').replace('https://', '')
             .replace('http://', '').split('.com')[0].split('.net')[0];
@@ -47,7 +45,7 @@ async function getDeckListAndName(url) {
             obj = { name: sName, cards: sCards };
             break;
         }
-        if (CACHING) {
+        if (caching) {
             cache.put(`deck-object-${url}`, obj, 60000);
         }
         page.close();
@@ -68,8 +66,8 @@ export async function getDeckListName(url) {
     return (await getDeckListAndName(url)).name;
 }
 
-export async function getDeckListsFromUser(user) {
-    const decks = CACHING ? cache.get(`user-decks-${user}`) : null;
+export async function getDeckListsFromUser(user, caching=true) {
+    const decks = caching ? cache.get(`user-decks-${user}`) : null;
     if (!decks) {
         const url = `https://www.moxfield.com/users/${user}`;
         const browser = await getBrowser();
@@ -85,7 +83,7 @@ export async function getDeckListsFromUser(user) {
             }
             return returnVal;
         });
-        if (CACHING) {
+        if (caching) {
             cache.put(`user-decks-${user}`, arr);
         }
         page.close();
