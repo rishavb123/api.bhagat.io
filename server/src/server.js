@@ -4,8 +4,6 @@ import { ApolloServer } from 'apollo-server-express';
 
 import { schema, resolvers } from './graphql';
 
-import { PORT } from './constants';
-
 const server = new ApolloServer({
     typeDefs: schema,
     resolvers,
@@ -20,7 +18,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-const port = process.env.PORT || PORT;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}. GraphQL exposed at http://localhost:${port}/graphql`);
