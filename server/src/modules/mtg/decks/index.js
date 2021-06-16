@@ -1,4 +1,4 @@
-import { getBrowser } from '../../scraping';
+import { getBrowser, $eval } from '../../scraping';
 import cache from 'memory-cache';
 
 async function getDeckListAndName(url, caching) {
@@ -13,9 +13,9 @@ async function getDeckListAndName(url, caching) {
         let obj = { name: 'Not Found', cards: [] };
         switch (site) {
             case 'moxfield':
-                const mName = await page.$eval('.deckheader-name', (el) => el.innerText);
-                const mType = await page.$eval(".badge", (el) => el.innerText);
-                const mDescription = await page.$eval(".font-weight-light", (el) => !el.classList.contains("d-flex") ? el.innerText : null);
+                const mName = await $eval(page, '.deckheader-name', (el) => el.innerText);
+                const mType = await $eval(page, ".badge", (el) => el.innerText);
+                const mDescription = await $eval(page, ".font-weight-light", (el) => !el.classList.contains("d-flex") ? el.innerText : null);
                 const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
                     const returnVal = [];
                     for (const el of elements) {
@@ -31,8 +31,8 @@ async function getDeckListAndName(url, caching) {
                 obj = { name: mName, cards: mCards, deckType: mType, description: mDescription };
                 break;
             case 'scryfall':
-                const sName = await page.$eval('h1', (el) => el.innerText);
-                const sType = await page.$eval(".deck-list-section-title", (el) => el.innerText);
+                const sName = await $eval(page, 'h1', (el) => el.innerText);
+                const sType = await $eval(page, ".deck-list-section-title", (el) => el.innerText);
                 const sDescriptionEl = await page.$(".deck-details-description");
                 const sDescription = sDescriptionEl? await page.evaluate((el) => el.innerText, sDescriptionEl): null;
                 const sCards = await page.$$eval('.deck-list-entry', (elements) => {
