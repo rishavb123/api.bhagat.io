@@ -1,7 +1,7 @@
 import { getBrowser } from '../../scraping';
 import cache from 'memory-cache';
 
-CACHING = false;
+const CACHING = false;
 
 async function getDeckListAndName(url) {
     let deck = CACHING? cache.get(`deck-object-${url}`): null;
@@ -68,5 +68,26 @@ export async function getDeckListName(url) {
 }
 
 export async function getDeckListsFromUser(user) {
-
+    let decks = CACHING ? cache.get(`user-decks-${user}`) : null;
+    if (!decks) {
+        const url = `https://www.moxfield.com/users/${user}`;
+        const browser = await getBrowser();
+        const page = await browser.newPage();
+        await page.goto(url, { waitUntil: 'networkidle2' });
+        const arr = await page.$$eval(".deckbox", (elements) => {
+            const returnVal = [];
+            for (const el of elements) {
+                returnVal.push({
+                    url: el.href,
+                    name: el.querySelector(".deckbox-title").innerText
+                });
+            }
+            return returnVal;
+        });
+        if (CACHING)
+            cache.put(`user-decks-${user}`, arr);
+        page.close();
+        return arr;
+    }
+    return decks;
 }

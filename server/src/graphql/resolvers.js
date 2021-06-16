@@ -22,6 +22,9 @@ const resolvers = {
             return null;
         },
         mydecks: () => myDecks,
+        user: (_, args) => ({
+            user: args.user
+        })
     },
     JSON: GraphQLJSON,
 };

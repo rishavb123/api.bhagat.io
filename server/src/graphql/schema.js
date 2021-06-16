@@ -8,7 +8,8 @@ const schema = gql`
         deck(url: String): Deck!,
         card(name: String): Card!,
         mydeck(name: String): Deck,
-        mydecks(name: String): [Deck!]!
+        mydecks(name: String): [Deck!]!,
+        user(user: String): User!
     }
 `;
 

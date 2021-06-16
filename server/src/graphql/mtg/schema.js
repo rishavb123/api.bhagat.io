@@ -5,11 +5,16 @@ export default gql`
         url: String!
         cards: [Card]!
         name: String!
+        commander: Card!
     } 
     type Card {
         name: String!
         count: Int,
         link: String,
         scryfallApiData: JSON!
+    }
+    type User {
+        user: String
+        decks: [Deck]!
     }
 `;
