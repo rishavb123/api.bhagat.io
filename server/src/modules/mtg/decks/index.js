@@ -1,7 +1,7 @@
 import { getBrowser } from '../../scraping';
 import cache from 'memory-cache';
 
-async function getDeckListAndName(url, caching=false) {
+async function getDeckListAndName(url, caching = true) {
     const deck = caching? cache.get(`deck-object-${url}`): null;
     if (!deck) {
         const site = url.replace('www.', '').replace('https://', '')
@@ -12,38 +12,43 @@ async function getDeckListAndName(url, caching=false) {
 
         let obj = { name: 'Not Found', cards: [] };
         switch (site) {
-        case 'moxfield':
-            const mName = await page.$eval('.deckheader-name', (el) => el.innerText);
-            const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
-                const returnVal = [];
-                for (const el of elements) {
-                    const nameLink = el.querySelector('.text-body');
-                    returnVal.push({
-                        link: nameLink.href,
-                        count: parseInt(el.querySelector('.text-right').innerText),
-                        name: nameLink.innerText,
-                    });
+            case 'moxfield':
+                const mType = await page.$eval(".badge", (el) => el.innerText);
+                const mName = await page.$eval('.deckheader-name', (el) => el.innerText);
+                const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
+                    const returnVal = [];
+                    for (const el of elements) {
+                        const nameLink = el.querySelector('.text-body');
+                        returnVal.push({
+                            link: nameLink.href,
+                            count: parseInt(el.querySelector('.text-right').innerText),
+                            name: nameLink.innerText,
+                        });
+                    }
+                    return returnVal;
+                });
+                obj = { name: mName, cards: mCards, deckType: mType };
+                break;
+            case 'scryfall':
+                const sType = await page.$eval(".deck-list-section-title", (el) => el.innerText);
+                const sName = await page.$eval('h1', (el) => el.innerText);
+                const sCards = await page.$$eval('.deck-list-entry', (elements) => {
+                    const returnVal = [];
+                    for (const el of elements) {
+                        const nameLink = el.querySelector('.deck-list-entry-name a');
+                        returnVal.push({
+                            link: nameLink.href,
+                            count: parseInt(el.querySelector('.deck-list-entry-count a').innerText),
+                            name: nameLink.innerText,
+                        });
+                    }
+                    return returnVal;
+                });
+                obj = { name: sName, cards: sCards };
+                if (sType === "COMMANDER (1)") {
+                    obj.deckType = "COMMANDER / EDH";
                 }
-                return returnVal;
-            });
-            obj = { name: mName, cards: mCards };
-            break;
-        case 'scryfall':
-            const sName = await page.$eval('h1', (el) => el.innerText);
-            const sCards = await page.$$eval('.deck-list-entry', (elements) => {
-                const returnVal = [];
-                for (const el of elements) {
-                    const nameLink = el.querySelector('.deck-list-entry-name a');
-                    returnVal.push({
-                        link: nameLink.href,
-                        count: parseInt(el.querySelector('.deck-list-entry-count a').innerText),
-                        name: nameLink.innerText,
-                    });
-                }
-                return returnVal;
-            });
-            obj = { name: sName, cards: sCards };
-            break;
+                break;
         }
         if (caching) {
             cache.put(`deck-object-${url}`, obj, 60000);
@@ -66,6 +71,10 @@ export async function getDeckListName(url) {
     return (await getDeckListAndName(url)).name;
 }
 
+export async function getDeckType(url) {
+    return (await getDeckListAndName(url)).deckType;
+}
+
 export async function getDeckListsFromUser(user, caching=true) {
     const decks = caching ? cache.get(`user-decks-${user}`) : null;
     if (!decks) {
@@ -79,6 +88,7 @@ export async function getDeckListsFromUser(user, caching=true) {
                 returnVal.push({
                     url: el.href,
                     name: el.querySelector('.deckbox-title').innerText,
+                    deckType: el.querySelector('em').innerText
                 });
             }
             return returnVal;

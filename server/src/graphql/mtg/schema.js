@@ -4,8 +4,9 @@ export default gql`
     type Deck {
         url: String!
         cards: [Card]!
-        name: String!
-        commander: Card!
+        name: String
+        deckType: String
+        commander: Card
     } 
     type Card {
         name: String!
@@ -14,7 +15,7 @@ export default gql`
         scryfallApiData: JSON!
     }
     type User {
-        user: String
+        user: String!
         decks: [Deck]!
     }
 `;
