@@ -94,7 +94,7 @@ export async function getDeckListsFromUser(user, caching=true) {
             return returnVal;
         });
         if (caching) {
-            cache.put(`user-decks-${user}`, arr);
+            cache.put(`user-decks-${user}`, arr, 60000);
         }
         page.close();
         return arr;
