@@ -13,8 +13,9 @@ async function getDeckListAndName(url, caching) {
         let obj = { name: 'Not Found', cards: [] };
         switch (site) {
             case 'moxfield':
-                const mType = await page.$eval(".badge", (el) => el.innerText);
                 const mName = await page.$eval('.deckheader-name', (el) => el.innerText);
+                const mType = await page.$eval(".badge", (el) => el.innerText);
+                const mDescription = await page.$eval(".font-weight-light", (el) => !el.classList.contains("d-flex") ? el.innerText : null);
                 const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
                     const returnVal = [];
                     for (const el of elements) {
@@ -27,11 +28,13 @@ async function getDeckListAndName(url, caching) {
                     }
                     return returnVal;
                 });
-                obj = { name: mName, cards: mCards, deckType: mType };
+                obj = { name: mName, cards: mCards, deckType: mType, description: mDescription };
                 break;
             case 'scryfall':
-                const sType = await page.$eval(".deck-list-section-title", (el) => el.innerText);
                 const sName = await page.$eval('h1', (el) => el.innerText);
+                const sType = await page.$eval(".deck-list-section-title", (el) => el.innerText);
+                const sDescriptionEl = await page.$(".deck-details-description");
+                const sDescription = sDescriptionEl? await page.evaluate((el) => el.innerText, sDescriptionEl): null;
                 const sCards = await page.$$eval('.deck-list-entry', (elements) => {
                     const returnVal = [];
                     for (const el of elements) {
@@ -44,7 +47,7 @@ async function getDeckListAndName(url, caching) {
                     }
                     return returnVal;
                 });
-                obj = { name: sName, cards: sCards };
+                obj = { name: sName, cards: sCards, description: sDescription };
                 if (sType === "COMMANDER (1)") {
                     obj.deckType = "COMMANDER / EDH";
                 }
@@ -73,6 +76,10 @@ export async function getDeckListName(url, caching=true) {
 
 export async function getDeckType(url, caching=true) {
     return (await getDeckListAndName(url, caching)).deckType;
+}
+
+export async function getDeckDescription(url, caching = true) {
+    return (await getDeckListAndName(url, caching)).description;
 }
 
 export async function getDeckListsFromUser(user, caching=true) {

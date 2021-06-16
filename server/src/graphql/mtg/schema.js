@@ -7,6 +7,7 @@ export default gql`
         name: String
         deckType: String
         commander: Card
+        description: String
     } 
     type Card {
         name: String!

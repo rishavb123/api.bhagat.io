@@ -1,4 +1,4 @@
-import { getDeckList, getDeckListName, getDeckListsFromUser, getDeckType } from '../../modules/mtg/decks';
+import { getDeckDescription, getDeckList, getDeckListName, getDeckListsFromUser, getDeckType } from '../../modules/mtg/decks';
 import { getScryfallApiData } from '../../modules/mtg/cards';
 
 export default {
@@ -14,7 +14,7 @@ export default {
         deckType: async ({ url, name, deckType }) => {
             if (deckType) return deckType;
             if (name && name.includes("EDH Commander Deck")) {
-                return "COMMANDER / EDH";
+                return "Commander / EDH";
             }
             return await getDeckType(url);
         },
@@ -25,11 +25,15 @@ export default {
                     name: name.split(' EDH Commander Deck')[0],
                 };
             }
-            if ((deckType | (await getDeckType(url))) !== "COMMANDER / EDH") {
+            if ((deckType || (await getDeckType(url))) !== "Commander / EDH") {
                 return null;
             }
             return (await getDeckList(url))[0];
         },
+        description: async ({ url, description }) => {
+            if (description) return description;
+            return await getDeckDescription(url);
+        }
     },
     Card: {
         scryfallApiData: async ({ name }) => {
