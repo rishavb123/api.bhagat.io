@@ -18,6 +18,13 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+app.get('/usage', (req, res) => {
+    const memUsed = process.memoryUsage().heapUsed / 1024 / 1024;
+    res.json({
+        memory: `${memUsed} mb`
+    });
+})
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
