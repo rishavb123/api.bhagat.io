@@ -4,7 +4,7 @@ let browser;
 
 export async function getBrowser() {
     if (!browser) {
-        browser = await puppeteer.launch();
+        browser = await puppeteer.launch({ args: ['--no-sandbox'] });
         async function exitHandler(options, exitCode) {
             console.log("Closing puppeteer browser . . .")
             await browser.close();
