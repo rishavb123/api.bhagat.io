@@ -4,7 +4,6 @@ import mtgResolvers from './mtg/resolvers';
 import { getDeckListsFromUser } from '../modules/mtg/decks';
 
 
-
 const resolvers = {
     Query: {
         deck: (_, args) => ({
@@ -14,7 +13,7 @@ const resolvers = {
             name: args.name,
         }),
         mydeck: async (_, args) => {
-            const searcher = new FuzzySearch((await getDeckListsFromUser("rishavb123")), ['name'], { sort: true });
+            const searcher = new FuzzySearch((await getDeckListsFromUser('rishavb123')), ['name'], { sort: true });
             const searchResults = searcher.search(args.name);
             if (searchResults.length > 0) {
                 return searchResults[0];
@@ -22,11 +21,11 @@ const resolvers = {
             return null;
         },
         mydecks: async () => {
-            return await getDeckListsFromUser("rishavb123");
+            return await getDeckListsFromUser('rishavb123');
         },
         user: (_, args) => ({
-            user: args.user
-        })
+            user: args.user,
+        }),
     },
     JSON: GraphQLJSON,
 };
