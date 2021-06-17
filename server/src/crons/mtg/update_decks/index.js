@@ -1,13 +1,15 @@
 import { MongoClient } from 'mongodb';
+import { queryGraphQL } from '../../../graphql';
 
 const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}` +
     `@${process.env.MONGODB_CLUSTER}.vjvrg.mongodb.net/${process.env.MONGODB_DBNAME}?retryWrites=true&w=majority`;
 
 export default [
     {
-        expression: '*/30 * * * * *',
+        expression: '*/10 * * * * *',
         task: async () => {
-            console.log("running");
+            
+            console.log("hello");
         },
         disabled: false
     },
