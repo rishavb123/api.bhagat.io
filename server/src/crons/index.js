@@ -4,7 +4,7 @@ export default [
     ...mtgCrons,
     {
         expression: '* * * * * *',
-        task: () => console.log('hi'),
+        task: () => console.log('Running every second!'),
         disabled: true,
     },
 ];
