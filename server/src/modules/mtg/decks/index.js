@@ -12,46 +12,47 @@ async function getDeckListAndName(url, caching) {
 
         let obj = { name: 'Not Found', cards: [] };
         switch (site) {
-            case 'moxfield':
-                const mName = await $eval(page, '.deckheader-name', (el) => el.innerText);
-                const mType = await $eval(page, ".badge", (el) => el.innerText);
-                const mDescription = await $eval(page, ".font-weight-light", (el) => !el.classList.contains("d-flex") ? el.innerText : null);
-                const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
-                    const returnVal = [];
-                    for (const el of elements) {
-                        const nameLink = el.querySelector('.text-body');
-                        returnVal.push({
-                            link: nameLink.href,
-                            count: parseInt(el.querySelector('.text-right').innerText),
-                            name: nameLink.innerText,
-                        });
-                    }
-                    return returnVal;
-                });
-                obj = { name: mName, cards: mCards, deckType: mType, description: mDescription };
-                break;
-            case 'scryfall':
-                const sName = await $eval(page, 'h1', (el) => el.innerText);
-                const sType = await $eval(page, ".deck-list-section-title", (el) => el.innerText);
-                const sDescriptionEl = await page.$(".deck-details-description");
-                const sDescription = sDescriptionEl? await page.evaluate((el) => el.innerText, sDescriptionEl): null;
-                const sCards = await page.$$eval('.deck-list-entry', (elements) => {
-                    const returnVal = [];
-                    for (const el of elements) {
-                        const nameLink = el.querySelector('.deck-list-entry-name a');
-                        returnVal.push({
-                            link: nameLink.href,
-                            count: parseInt(el.querySelector('.deck-list-entry-count a').innerText),
-                            name: nameLink.innerText,
-                        });
-                    }
-                    return returnVal;
-                });
-                obj = { name: sName, cards: sCards, description: sDescription };
-                if (sType === "COMMANDER (1)") {
-                    obj.deckType = "COMMANDER / EDH";
+        case 'moxfield':
+            const mName = await $eval(page, '.deckheader-name', (el) => el.innerText);
+            const mType = await $eval(page, '.badge', (el) => el.innerText);
+            const mDescription = await $eval(page, '.font-weight-light',
+                (el) => !el.classList.contains('d-flex') ? el.innerText : null);
+            const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
+                const returnVal = [];
+                for (const el of elements) {
+                    const nameLink = el.querySelector('.text-body');
+                    returnVal.push({
+                        link: nameLink.href,
+                        count: parseInt(el.querySelector('.text-right').innerText),
+                        name: nameLink.innerText,
+                    });
                 }
-                break;
+                return returnVal;
+            });
+            obj = { name: mName, cards: mCards, deckType: mType, description: mDescription };
+            break;
+        case 'scryfall':
+            const sName = await $eval(page, 'h1', (el) => el.innerText);
+            const sType = await $eval(page, '.deck-list-section-title', (el) => el.innerText);
+            const sDescriptionEl = await page.$('.deck-details-description');
+            const sDescription = sDescriptionEl? await page.evaluate((el) => el.innerText, sDescriptionEl): null;
+            const sCards = await page.$$eval('.deck-list-entry', (elements) => {
+                const returnVal = [];
+                for (const el of elements) {
+                    const nameLink = el.querySelector('.deck-list-entry-name a');
+                    returnVal.push({
+                        link: nameLink.href,
+                        count: parseInt(el.querySelector('.deck-list-entry-count a').innerText),
+                        name: nameLink.innerText,
+                    });
+                }
+                return returnVal;
+            });
+            obj = { name: sName, cards: sCards, description: sDescription };
+            if (sType === 'COMMANDER (1)') {
+                obj.deckType = 'COMMANDER / EDH';
+            }
+            break;
         }
         if (caching) {
             cache.put(`deck-object-${url}`, obj, 60000);
@@ -95,7 +96,7 @@ export async function getDeckListsFromUser(user, caching=true) {
                 returnVal.push({
                     url: el.href,
                     name: el.querySelector('.deckbox-title').innerText,
-                    deckType: el.querySelector('em').innerText
+                    deckType: el.querySelector('em').innerText,
                 });
             }
             return returnVal;

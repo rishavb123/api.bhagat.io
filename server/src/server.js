@@ -1,4 +1,5 @@
 import express from 'express';
+import cron from 'cron';
 import { ApolloServerPluginInlineTrace } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-express';
 
@@ -19,14 +20,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/usage', (req, res) => {
-    const memUsed = (process.memoryUsage().heapUsed + process.memoryUsage().rss + process.memoryUsage().external) / 1024 / 1024;
+    const memUsed = (process.memoryUsage().heapUsed +
+        process.memoryUsage().rss + process.memoryUsage().external) / 1024 / 1024;
     res.json({
-        memory: `${memUsed} mb`
+        memory: `${memUsed} mb`,
     });
-})
+});
 
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}. GraphQL exposed at http://localhost:${port}/graphql`);
+});
+
+cron.schedule('* * * * *', () => {
+    console.log('TESTING');
 });

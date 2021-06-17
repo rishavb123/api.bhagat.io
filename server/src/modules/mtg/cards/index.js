@@ -7,7 +7,8 @@ export async function getScryfallApiData(name, caching=true) {
         return result;
     }
     result = JSON.parse((await got('https://api.scryfall.com/cards/named?exact=' + name)).body);
-    if (caching)
+    if (caching) {
         cache.put(`scryfall-card-data-${name}`, result, 10000);
+    }
     return result;
 }
