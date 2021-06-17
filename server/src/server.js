@@ -29,12 +29,17 @@ app.get('/usage', (req, res) => {
     });
 });
 
+app.get('/wakeup', (req, res) => {
+    res.send('Server is awake!');
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}. GraphQL exposed at http://localhost:${port}/graphql`);
 });
 
 for (const job of jobs) {
-    if (job.disabled !== true)
+    if (job.disabled !== true) {
         cron.schedule(job.expression, job.task, job.options || {});
+    }
 }

@@ -1,7 +1,7 @@
 import got from 'got/dist/source';
 import cache from 'memory-cache';
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function getScryfallApiData(name, caching=true) {
     let result = cache.get(`scryfall-card-data-${name}`);

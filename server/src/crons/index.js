@@ -5,6 +5,6 @@ export default [
     {
         expression: '* * * * * *',
         task: () => console.log('hi'),
-        disabled: true
-    }
+        disabled: true,
+    },
 ];
