@@ -47,6 +47,7 @@
     "fuzzy-search": "^3.2.1",
     "got": "^11.8.1",
     "graphql": "^15.4.0",
+    "graphql-tools": "^7.0.5",
     "graphql-type-json": "^0.3.2",
     "memory-cache": "^0.2.0",
     "mongodb": "^3.6.9",
