@@ -7,14 +7,14 @@ const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PAS
 
 export default [
     {
-        expression: '40 * * * *',
+        expression: '5 */2 * * *',
         task: async () => {
             console.log("Starting update_decks task");
             const decks = await getDeckListsFromUser("rishavb123", false);
             while (decks.length == 0) {
                 await getDeckListsFromUser("rishavb123", false);
             }
-            console.log(`Read in ${decks.length} decks from moxfield`);
+            console.log(`\tRead in ${decks.length} decks from moxfield`);
             for (const deck of decks) {
                 const moreInfo = await getDeckListInfo(deck.url, false);
                 deck.cards = moreInfo.cards;
@@ -46,7 +46,7 @@ export default [
                 }
                 deck.commander.image_url = data.image_uris.png;
             }
-            console.log('Pushing decks to MongoDB . . .');
+            console.log('\tPushing decks to MongoDB . . .');
             const client = new MongoClient(uri, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
@@ -60,7 +60,7 @@ export default [
                     await collection.drop();
                 await collection.insertMany(decks);
 
-                console.log('Decks inserted to MongoDB');
+                console.log('\tDecks inserted to MongoDB. Job finished!');
 
             } catch (e) {
                 console.log(e);
