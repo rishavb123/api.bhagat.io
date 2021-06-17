@@ -1,9 +1,11 @@
 import express from 'express';
-import cron from 'cron';
+import cron from 'node-cron';
 import { ApolloServerPluginInlineTrace } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-express';
 
 import { schema, resolvers } from './graphql';
+import jobs from './crons';
+
 
 const server = new ApolloServer({
     typeDefs: schema,
@@ -28,11 +30,10 @@ app.get('/usage', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}. GraphQL exposed at http://localhost:${port}/graphql`);
 });
 
-cron.schedule('* * * * *', () => {
-    console.log('TESTING');
-});
+for (const job of jobs) {
+    cron.schedule(job.expression, job.task, job.options);
+}
