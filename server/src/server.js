@@ -5,6 +5,7 @@ import { ApolloServer } from 'apollo-server-express';
 
 import { schema, resolvers } from './graphql';
 import jobs from './crons';
+import setupApp from './routes';
 
 
 const server = new ApolloServer({
@@ -17,21 +18,7 @@ const server = new ApolloServer({
 const app = express();
 server.applyMiddleware({ app });
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
-app.get('/usage', (req, res) => {
-    const memUsed = (process.memoryUsage().heapUsed +
-        process.memoryUsage().rss + process.memoryUsage().external) / 1024 / 1024;
-    res.json({
-        memory: `${memUsed} mb`,
-    });
-});
-
-app.get('/wakeup', (req, res) => {
-    res.send('Server is awake!');
-});
+setupApp(app);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
