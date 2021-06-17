@@ -5,7 +5,14 @@ const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PAS
 
 export default [
     {
-        expression: '*/10 * * * * *',
+        expression: '*/30 * * * * *',
+        task: async () => {
+            console.log("running");
+        },
+        disabled: false
+    },
+    {
+        expression: '*/30 * * * * *',
         task: async () => {
             try {
                 const client = new MongoClient(uri, {
