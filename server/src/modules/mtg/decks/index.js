@@ -84,7 +84,7 @@ export async function getDeckDescription(url, caching = true) {
 }
 
 export async function getDeckListsFromUser(user, caching=true) {
-    const decks = cache.get(`user-decks-${user}`);
+    const decks = caching? cache.get(`user-decks-${user}`): null;
     if (!decks) {
         const url = `https://www.moxfield.com/users/${user}`;
         const browser = await getBrowser();
