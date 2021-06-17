@@ -9,10 +9,10 @@ export default [
     {
         expression: '5 */2 * * *',
         task: async () => {
-            console.log("Starting update_decks task");
-            const decks = await getDeckListsFromUser("rishavb123", false);
+            console.log('Starting update_decks task');
+            const decks = await getDeckListsFromUser('rishavb123', false);
             while (decks.length == 0) {
-                await getDeckListsFromUser("rishavb123", false);
+                await getDeckListsFromUser('rishavb123', false);
             }
             console.log(`\tRead in ${decks.length} decks from moxfield`);
             for (const deck of decks) {
@@ -23,10 +23,9 @@ export default [
                     deck.commander = {
                         name: deck.name.split(' EDH Commander Deck')[0],
                     };
-                }
-                else if (deck.deckType === 'Commander / EDH') {
+                } else if (deck.deckType === 'Commander / EDH') {
                     deck.commander = {
-                        name: moreInfo.cards[0].name
+                        name: moreInfo.cards[0].name,
                     };
                 } else {
                     continue;
@@ -41,34 +40,34 @@ export default [
                             break;
                         }
                     }
-                    if (!found)
-                    data = data.card_faces[0];
+                    if (!found) {
+                        data = data.card_faces[0];
+                    }
                 }
                 deck.commander.image_url = data.image_uris.png;
             }
             console.log('\tPushing decks to MongoDB . . .');
             const client = new MongoClient(uri, {
                 useNewUrlParser: true,
-                useUnifiedTopology: true
+                useUnifiedTopology: true,
             });
             try {
                 await client.connect();
                 const db = await client.db('bhagat-db');
                 const collection = await db.collection('mtg-edh-decks');
 
-                if ((await collection.countDocuments()) !== 0)
+                if ((await collection.countDocuments()) !== 0) {
                     await collection.drop();
+                }
                 await collection.insertMany(decks);
 
                 console.log('\tDecks inserted to MongoDB. Job finished!');
-
             } catch (e) {
                 console.log(e);
             } finally {
                 await client.close();
             }
-
         },
-        disabled: false
-    }
+        disabled: false,
+    },
 ];
