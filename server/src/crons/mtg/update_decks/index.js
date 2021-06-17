@@ -43,6 +43,6 @@ export default [
                 await client.close();
             }
         },
-        options: {},
+        disabled: true,
     },
 ];
