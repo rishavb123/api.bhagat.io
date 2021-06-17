@@ -7,9 +7,14 @@ const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PAS
 
 export default [
     {
-        expression: '0 * * * *',
+        expression: '40 * * * *',
         task: async () => {
+            console.log("Starting update_decks task");
             const decks = await getDeckListsFromUser("rishavb123", false);
+            while (decks.length == 0) {
+                await getDeckListsFromUser("rishavb123", false);
+            }
+            console.log(`Read in ${decks.length} decks from moxfield`);
             for (const deck of decks) {
                 const moreInfo = await getDeckListInfo(deck.url, false);
                 deck.cards = moreInfo.cards;
@@ -40,19 +45,23 @@ export default [
                     data = data.card_faces[0];
                 }
                 deck.commander.image_url = data.image_uris.png;
-                console.log(deck.commander.name);
             }
-            
+            console.log('Pushing decks to MongoDB . . .');
             const client = new MongoClient(uri, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             });
             try {
                 await client.connect();
-                const db = await client.db('bhagat-db').collection('mtg-edh-decks');
+                const db = await client.db('bhagat-db');
+                const collection = await db.collection('mtg-edh-decks');
 
-                await db.drop();
-                await db.insertMany(decks);
+                if ((await collection.countDocuments()) !== 0)
+                    await collection.drop();
+                await collection.insertMany(decks);
+
+                console.log('Decks inserted to MongoDB');
+
             } catch (e) {
                 console.log(e);
             } finally {
@@ -61,5 +70,5 @@ export default [
 
         },
         disabled: false
-    },
+    }
 ];
