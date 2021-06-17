@@ -1,7 +1,7 @@
 import { getBrowser, $eval } from '../../scraping';
 import cache from 'memory-cache';
 
-async function getDeckListAndName(url, caching) {
+export async function getDeckListInfo(url, caching) {
     const deck = caching? cache.get(`deck-object-${url}`): null;
     if (!deck) {
         const site = url.replace('www.', '').replace('https://', '')
@@ -64,7 +64,7 @@ async function getDeckListAndName(url, caching) {
 }
 
 export async function getDeckList(url, caching=true) {
-    return (await getDeckListAndName(url, caching)).cards;
+    return (await getDeckListInfo(url, caching)).cards;
 }
 
 export async function getStringDeckList(url, caching=true) {
@@ -72,15 +72,15 @@ export async function getStringDeckList(url, caching=true) {
 }
 
 export async function getDeckListName(url, caching=true) {
-    return (await getDeckListAndName(url, caching)).name;
+    return (await getDeckListInfo(url, caching)).name;
 }
 
 export async function getDeckType(url, caching=true) {
-    return (await getDeckListAndName(url, caching)).deckType;
+    return (await getDeckListInfo(url, caching)).deckType;
 }
 
 export async function getDeckDescription(url, caching = true) {
-    return (await getDeckListAndName(url, caching)).description;
+    return (await getDeckListInfo(url, caching)).description;
 }
 
 export async function getDeckListsFromUser(user, caching=true) {
