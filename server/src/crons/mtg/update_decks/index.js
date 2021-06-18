@@ -1,6 +1,6 @@
-import { getScryfallApiData } from '../../modules/mtg/cards';
-import { getDeckListInfo, getDeckListsFromUser } from '../../modules/mtg/decks';
-import { wrapFunctionality } from '../../modules/db';
+import { getScryfallApiData } from '../../../modules/mtg/cards';
+import { getDeckListInfo, getDeckListsFromUser } from '../../../modules/mtg/decks';
+import { wrapFunctionality } from '../../../modules/db';
 
 export default [
     {
