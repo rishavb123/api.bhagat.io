@@ -1,7 +1,7 @@
 import { wrapFunctionality } from '../../modules/db';
 
 export default function(app) {
-    app.get('/db', async (req, res) => {
+    app.post('/db', async (req, res) => {
         const params = req.body;
         await wrapFunctionality(async (client) => {
             const db = await client.db(params.db || 'bhagat-db');
