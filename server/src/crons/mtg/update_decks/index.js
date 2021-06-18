@@ -4,6 +4,14 @@ import { wrapFunctionality } from '../../../modules/db';
 
 export default [
     {
+        name: 'good_morning',
+        expression: '30 7 * * *',
+        task: async () => {
+            console.log("Good Morning!");
+        }
+    },
+    {
+        name: 'update_decks',
         expression: '5 */2 * * *',
         task: async () => {
             console.log('Starting update_decks task');
