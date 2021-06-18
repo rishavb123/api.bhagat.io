@@ -6,7 +6,9 @@ export default [
     {
         expression: '0 0 1 1 0',
         task: async () => {
-            console.log('RUNNING');
+            const decks = await getDeckListsFromUser('rishavb123', false);
+            console.log(`Read in ${decks.length} decks from moxfield`);
+            console.log(decks.map((deck) => deck.name));
         },
         runOnStart: true,
     },
