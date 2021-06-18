@@ -1,9 +1,7 @@
 import { MongoClient } from 'mongodb';
-import { getScryfallApiData } from '../../../modules/mtg/cards';
-import { getDeckListInfo, getDeckListsFromUser } from '../../../modules/mtg/decks';
-
-const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}` +
-    `@${process.env.MONGODB_CLUSTER}.vjvrg.mongodb.net/${process.env.MONGODB_DBNAME}?retryWrites=true&w=majority`;
+import { getScryfallApiData } from '../../modules/mtg/cards';
+import { getDeckListInfo, getDeckListsFromUser } from '../../modules/mtg/decks';
+import { uri } from '../../modules/db/constants';
 
 export default [
     {
