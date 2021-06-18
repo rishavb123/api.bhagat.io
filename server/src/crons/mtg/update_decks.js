@@ -1,7 +1,6 @@
-import { MongoClient } from 'mongodb';
 import { getScryfallApiData } from '../../modules/mtg/cards';
 import { getDeckListInfo, getDeckListsFromUser } from '../../modules/mtg/decks';
-import { uri } from '../../modules/db/constants';
+import { wrapFunctionality } from '../../modules/db';
 
 export default [
     {
@@ -45,12 +44,7 @@ export default [
                 deck.commander.image_url = data.image_uris.png;
             }
             console.log('\tPushing decks to MongoDB . . .');
-            const client = new MongoClient(uri, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            });
-            try {
-                await client.connect();
+            await wrapFunctionality(async (client) => {
                 const db = await client.db('bhagat-db');
                 const collection = await db.collection('mtg-edh-decks');
 
@@ -60,11 +54,7 @@ export default [
                 await collection.insertMany(decks);
 
                 console.log('\tDecks inserted to MongoDB. Job finished!');
-            } catch (e) {
-                console.log(e);
-            } finally {
-                await client.close();
-            }
+            });
         },
         disabled: false,
     },
