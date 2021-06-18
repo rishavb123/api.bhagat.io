@@ -4,15 +4,6 @@ import { wrapFunctionality } from '../../../modules/db';
 
 export default [
     {
-        expression: '0 0 1 1 0',
-        task: async () => {
-            const decks = await getDeckListsFromUser('rishavb123', false);
-            console.log(`Read in ${decks.length} decks from moxfield`);
-            console.log(decks.map((deck) => deck.name));
-        },
-        runOnStart: true,
-    },
-    {
         expression: '5 */2 * * *',
         task: async () => {
             console.log('Starting update_decks task');
@@ -65,7 +56,6 @@ export default [
                 console.log('\tDecks inserted to MongoDB. Job finished!');
             });
         },
-        disabled: false,
-        runOnStart: false,
+        disabled: false
     },
 ];
