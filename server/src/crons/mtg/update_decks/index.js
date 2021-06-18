@@ -43,6 +43,7 @@ export default [
                     }
                 }
                 deck.commander.image_url = data.image_uris.png;
+                deck.commander.art_crop = data.image_uris.art_crop;
             }
             console.log('\tPushing decks to MongoDB . . .');
             await wrapFunctionality(async (client) => {
