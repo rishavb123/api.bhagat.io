@@ -1,4 +1,4 @@
-import { getBrowser, $eval } from '../../scraping';
+import { getBrowser, $eval } from '../scraping';
 import cache from 'memory-cache';
 
 export async function getDeckListInfo(url, caching) {
@@ -83,6 +83,7 @@ export async function getDeckDescription(url, caching = true) {
     return (await getDeckListInfo(url, caching)).description;
 }
 
+// TODO: only getting the top 12 decks since there is a load more button
 export async function getDeckListsFromUser(user, caching=true) {
     const decks = caching? cache.get(`user-decks-${user}`): null;
     if (!decks) {
