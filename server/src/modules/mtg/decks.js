@@ -83,7 +83,6 @@ export async function getDeckDescription(url, caching = true) {
     return (await getDeckListInfo(url, caching)).description;
 }
 
-// TODO: only getting the top 12 decks since there is a load more button
 export async function getDeckListsFromUser(user, caching=true) {
     const decks = caching? cache.get(`user-decks-${user}`): null;
     if (!decks) {
@@ -91,6 +90,14 @@ export async function getDeckListsFromUser(user, caching=true) {
         const browser = await getBrowser();
         const page = await browser.newPage();
         await page.goto(url, { waitUntil: 'networkidle2' });
+        await page.waitForFunction(async function loadAll() {
+            const el = document.querySelector('.btn-secondary.btn-custom');
+            if (el) {
+                el.click();
+                return new Promise(async (res, rej) => setTimeout(async () => res(await loadAll()), 500));
+            }
+            return 1;
+        });
         const arr = await page.$$eval('.deckbox', (elements) => {
             const returnVal = [];
             for (const el of elements) {
