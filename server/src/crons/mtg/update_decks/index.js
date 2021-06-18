@@ -4,6 +4,13 @@ import { wrapFunctionality } from '../../../modules/db';
 
 export default [
     {
+        expression: "0 0 1 1 0",
+        task: async () => {
+            console.log("RUNNING");
+        },
+        runOnStart: true
+    },
+    {
         expression: '5 */2 * * *',
         task: async () => {
             console.log('Starting update_decks task');
