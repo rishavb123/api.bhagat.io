@@ -1,6 +1,6 @@
 import { wrapFunctionality } from '../../modules/db';
 
-export default function (app) {
+export default function(app) {
     app.get('/db', async (req, res) => {
         const params = req.body;
         console.log(params);

@@ -4,11 +4,11 @@ import { wrapFunctionality } from '../../../modules/db';
 
 export default [
     {
-        expression: "0 0 1 1 0",
+        expression: '0 0 1 1 0',
         task: async () => {
-            console.log("RUNNING");
+            console.log('RUNNING');
         },
-        runOnStart: true
+        runOnStart: true,
     },
     {
         expression: '5 */2 * * *',
@@ -64,6 +64,6 @@ export default [
             });
         },
         disabled: false,
-        runOnStart: false
+        runOnStart: false,
     },
 ];

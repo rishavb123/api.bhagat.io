@@ -1,10 +1,10 @@
-import { MongoClient } from "mongodb";
+import { MongoClient } from 'mongodb';
 import { uri } from './constants';
 
 export function makeClient() {
     const client = new MongoClient(uri, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
     });
     return client;
 }
@@ -18,7 +18,7 @@ export async function wrapFunctionality(func) {
     } catch (e) {
         console.log(e);
     } finally {
-        await client.close()
+        await client.close();
     }
     return returnVal;
 }
