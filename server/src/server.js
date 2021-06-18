@@ -31,6 +31,9 @@ app.listen(port, () => {
 
 for (const job of jobs) {
     if (job.disabled !== true) {
+        if (job.runOnStart) {
+            job.task();
+        }
         cron.schedule(job.expression, job.task, job.options || {});
     }
 }
