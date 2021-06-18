@@ -1,4 +1,5 @@
 import dbRoutes from './db';
+import jobRoutes from './jobs';
 
 export default function(app) {
     app.get('/', (req, res) => {
@@ -18,4 +19,5 @@ export default function(app) {
     });
 
     dbRoutes(app);
+    jobRoutes(app);
 }
