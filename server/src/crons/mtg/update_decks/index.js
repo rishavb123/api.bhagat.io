@@ -29,6 +29,7 @@ export default [
                     continue;
                 }
                 let data = await getScryfallApiData(deck.commander.name);
+                deck.commander.color_identity = data.color_identity;
                 if (data.card_faces) {
                     let found = false;
                     for (const face of data.card_faces) {
@@ -44,7 +45,6 @@ export default [
                 }
                 deck.commander.image_url = data.image_uris.png;
                 deck.commander.art_crop = data.image_uris.art_crop;
-                deck.commander.color_identity = data.color_identity;
                 deck.commander.mana_value = data.cmc;
             }
             console.log('\tPushing decks to MongoDB . . .');
