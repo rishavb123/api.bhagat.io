@@ -12,7 +12,7 @@ export default gql`
     }
     type ExtraRepoInfo {
         imageUrl: String!
-        links: [Links]!
+        links: [Link]!
     }
     type Language {
         name: String!

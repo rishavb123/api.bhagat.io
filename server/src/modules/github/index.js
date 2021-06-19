@@ -3,21 +3,23 @@ import cache from 'memory-cache';
 
 import { USER, INFO_FILE_NAME, INFO_FILE_BRANCH } from './constants';
 
-export async function getMyRepositoriesWithBhagatTopic(page, caching=true) {
-    let result = caching? cache.get(`github-list-repos-${user}`): null;
+export async function getMyRepositoriesWithBhagatTopic(page, pageSize, caching=true) {
+    let result = caching? cache.get(`github-list-repos-${USER}-${page}-${pageSize}`): null;
     if (result) {
         return result;
     }
-    result = JSON.parse((await got('https://api.github.com/search/repositories', {
+    const resp = await got('https://api.github.com/search/repositories', {
         searchParams: {
             page: page,
             sort: 'updated',
-            per_page: 50,
+            per_page: pageSize,
             q: `user:${USER} topic:bhagat-topic`,
         },
-    })));
+    });
+    console.log(resp);
+    result = JSON.parse(resp.body).items;
     if (caching) {
-        cache.put(`github-list-repos-${user}`, 60000);
+        cache.put(`github-list-repos-${USER}-${page}-${pageSize}`, 60000);
     }
     return result;
 }
@@ -28,7 +30,7 @@ export async function getAdditionalInfo(repoName, caching=true) {
         return result;
     }
     result = JSON.parse(
-        await got(`https://raw.githubusercontent.com/${USER}/${repoName}/${INFO_FILE_BRANCH}/${INFO_FILE_NAME}`),
+        (await got(`https://raw.githubusercontent.com/${USER}/${repoName}/${INFO_FILE_BRANCH}/${INFO_FILE_NAME}`)).body,
     );
     if (caching) {
         cache.put(`github-additional-info-${repoName}`, 60000);
@@ -41,7 +43,7 @@ export async function getLanguages(languageUrl, caching=true) {
     if (result) {
         return result;
     }
-    const resp = JSON.parse(await got(languageUrl));
+    const resp = JSON.parse((await got(languageUrl)).body);
     result = [];
     let sum = 0;
     for (const amount of resp) {
