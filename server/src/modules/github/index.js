@@ -18,7 +18,7 @@ export async function getMyRepositoriesWithBhagatTopic(page, pageSize, caching=t
     });
     result = JSON.parse(resp.body).items;
     if (caching) {
-        cache.put(`github-list-repos-${USER}-${page}-${pageSize}`, 60000);
+        cache.put(`github-list-repos-${USER}-${page}-${pageSize}`, result, 60000);
     }
     return result;
 }
@@ -32,7 +32,7 @@ export async function getAdditionalInfo(repoName, caching=true) {
         (await got(`https://raw.githubusercontent.com/${USER}/${repoName}/${INFO_FILE_BRANCH}/${INFO_FILE_NAME}`)).body,
     );
     if (caching) {
-        cache.put(`github-additional-info-${repoName}`, 60000);
+        cache.put(`github-additional-info-${repoName}`, result, 60000);
     }
     return result;
 }
@@ -57,7 +57,7 @@ export async function getLanguages(languageUrl, caching=true) {
         }
     }
     if (caching) {
-        cache.put(`github-languages-${languageUrl}`, 60000);
+        cache.put(`github-languages-${languageUrl}`, result, 60000);
     }
     return result;
 }
