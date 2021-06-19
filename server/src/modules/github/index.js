@@ -16,7 +16,6 @@ export async function getMyRepositoriesWithBhagatTopic(page, pageSize, caching=t
             q: `user:${USER} topic:bhagat-topic`,
         },
     });
-    console.log(resp);
     result = JSON.parse(resp.body).items;
     if (caching) {
         cache.put(`github-list-repos-${USER}-${page}-${pageSize}`, 60000);
