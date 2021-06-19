@@ -7,9 +7,9 @@ export default [
         task: async () => {
             const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             await delay(5000);
-            console.log("Good Morning!");
+            console.log('Good Morning!');
         },
-        disabled: true
+        disabled: true,
     },
     ...mtgCrons,
 ];

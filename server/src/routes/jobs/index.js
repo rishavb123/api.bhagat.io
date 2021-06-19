@@ -1,20 +1,20 @@
 import jobs from '../../crons';
 
-export default function (app) {
+export default function(app) {
     app.get('/jobs', (req, res) => {
         res.json({
             jobs: jobs.map((job) => ({
                 name: job.name,
                 expression: job.expression,
                 disabled: job.disabled || false,
-                runOnStart: job.runOnStart || false
-            }))
+                runOnStart: job.runOnStart || false,
+            })),
         });
     });
 
     app.get('/jobs/:jobName', (req, res) => {
         res.json({
-            job: jobs.find((job) => job.name == req.params.jobName)
+            job: jobs.find((job) => job.name == req.params.jobName),
         });
     });
 
@@ -26,20 +26,20 @@ export default function (app) {
                 await job.task();
                 res.json({
                     status: 0,
-                    msg: 'Finished running job'
+                    msg: 'Finished running job',
                 });
             } else {
                 job.task();
                 res.json({
                     status: 0,
-                    msg: 'Started job in the background'
+                    msg: 'Started job in the background',
                 });
             }
         } else {
             res.json({
                 status: 1,
-                msg: 'Job not found. See /jobs to see all jobs. '
+                msg: 'Job not found. See /jobs to see all jobs. ',
             });
         }
-    })
+    });
 }

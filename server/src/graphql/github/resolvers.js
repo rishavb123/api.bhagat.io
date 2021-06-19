@@ -10,7 +10,7 @@ export default {
             const info = await getAdditionalInfo(name);
             return {
                 ...info,
-                name
+                name,
             };
         },
         createdDate: ({ created_at }) => {
@@ -29,16 +29,18 @@ export default {
             let sourceExists = false;
             let downloadExists = false;
             for (const link of links) {
-                if (link.name.toLowerCase() === 'source')
+                if (link.name.toLowerCase() === 'source') {
                     sourceExists = true;
-                if (link.name.toLowerCase() === 'download')
+                }
+                if (link.name.toLowerCase() === 'download') {
                     downloadExists = true;
+                }
             }
             if (!ignoreSource && !sourceExists) {
                 newLinks.push({
                     name: 'Source',
-                    url: `https://github.com/${USER}/${name},`
-                })
+                    url: `https://github.com/${USER}/${name},`,
+                });
             }
             if (!ignoreDownload && !downloadExists) {
                 newLinks.push({
@@ -48,5 +50,5 @@ export default {
             }
             return newLinks;
         },
-    }
-}
+    },
+};

@@ -60,6 +60,6 @@ export default [
                 console.log('\tDecks inserted to MongoDB. Job finished!');
             });
         },
-        disabled: false
+        disabled: false,
     },
 ];

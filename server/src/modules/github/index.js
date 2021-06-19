@@ -27,7 +27,9 @@ export async function getAdditionalInfo(repoName, caching=true) {
     if (result) {
         return result;
     }
-    result = JSON.parse(await got(`https://raw.githubusercontent.com/${USER}/${repoName}/${INFO_FILE_BRANCH}/${INFO_FILE_NAME}`));
+    result = JSON.parse(
+        await got(`https://raw.githubusercontent.com/${USER}/${repoName}/${INFO_FILE_BRANCH}/${INFO_FILE_NAME}`),
+    );
     if (caching) {
         cache.put(`github-additional-info-${repoName}`, 60000);
     }
@@ -46,10 +48,12 @@ export async function getLanguages(languageUrl, caching=true) {
         sum += amount;
     }
     for (const lang in resp) {
-        result.push({
-            name: lang,
-            percent: resp[lang] / sum,
-        });
+        if (resp.hasOwnProperty(lang)) {
+            result.push({
+                name: lang,
+                percent: resp[lang] / sum,
+            });
+        }
     }
     if (caching) {
         cache.put(`github-languages-${languageUrl}`, 60000);
