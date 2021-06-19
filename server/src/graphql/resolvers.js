@@ -2,6 +2,7 @@ import GraphQLJSON from 'graphql-type-json';
 import FuzzySearch from 'fuzzy-search';
 import mtgResolvers from './mtg/resolvers';
 import { getDeckListsFromUser } from '../modules/mtg/decks';
+import { getMyRepositoriesWithBhagatTopic } from '../modules/github';
 
 
 const resolvers = {
@@ -26,6 +27,10 @@ const resolvers = {
         user: (_, args) => ({
             user: args.user,
         }),
+
+        repos: async (_, args) => {
+            return await getMyRepositoriesWithBhagatTopic(args.page, args.pageSize);
+        },
     },
     JSON: GraphQLJSON,
 };
