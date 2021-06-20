@@ -15,7 +15,8 @@ export async function getDeckListInfo(url, caching) {
         case 'moxfield':
             const mName = await $eval(page, '.deckheader-name', (el) => el.innerText);
             const mType = await $eval(page, '.badge', (el) => el.innerText);
-            // TODO: read deck description from a comment instead to remove character limit
+            // TODO: read deck description from a comment instead to remove character limit.
+            // Concat with normal description(short phrase)
             const mDescription = await $eval(page, '.font-weight-light',
                 (el) => !el.classList.contains('d-flex') ? el.innerText : null);
             const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
