@@ -6,11 +6,12 @@ export default {
         owner: ({ owner }) => {
             return owner.login;
         },
-        info: async ({ name }) => {
+        info: async ({ name, homepage }) => {
             const info = await getAdditionalInfo(name);
             return {
                 ...info,
                 name,
+                homepage,
             };
         },
         createdDate: ({ created_at }) => {
@@ -24,18 +25,22 @@ export default {
         },
     },
     ExtraRepoInfo: {
-        links: ({ name, links, ignoreSource, ignoreDownload }) => {
+        links: ({ name, links, ignoreSource, ignoreDownload, ignoreView, homepage }) => {
             if (!links)
                 links = [];
             const newLinks = [...links];
             let sourceExists = false;
             let downloadExists = false;
+            let viewExists = false;
             for (const link of links) {
                 if (link.name.toLowerCase() === 'source') {
                     sourceExists = true;
                 }
                 if (link.name.toLowerCase() === 'download') {
                     downloadExists = true;
+                }
+                if (link.name.toLowerCase() === 'view') {
+                    viewExists = true;
                 }
             }
             if (!ignoreSource && !sourceExists) {
@@ -48,6 +53,12 @@ export default {
                 newLinks.push({
                     name: 'Download',
                     url: `https://github.com/${USER}/${name}/archive/refs/heads/master.zip`,
+                });
+            }
+            if (!ignoreView && !viewExists && homepage) {
+                newLinks.push({
+                    name: 'View',
+                    url: homepage,
                 });
             }
             return newLinks;
