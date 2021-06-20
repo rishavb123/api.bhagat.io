@@ -1,6 +1,8 @@
 {
-    "links": {
+    "links": [{
         "name": "Open API",
         "url": "http://api.bhagat.io"
-    }
+    }]
+
+    
 }
