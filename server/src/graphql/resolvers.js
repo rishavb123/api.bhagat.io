@@ -1,6 +1,7 @@
 import GraphQLJSON from 'graphql-type-json';
 import FuzzySearch from 'fuzzy-search';
 import mtgResolvers from './mtg/resolvers';
+import githubResolvers from './github/resolvers';
 import { getDeckListsFromUser } from '../modules/mtg/decks';
 import { getMyRepositoriesWithBhagatTopic } from '../modules/github';
 
@@ -38,4 +39,5 @@ const resolvers = {
 export default {
     ...resolvers,
     ...mtgResolvers,
+    ...githubResolvers,
 };
