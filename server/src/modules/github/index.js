@@ -28,9 +28,13 @@ export async function getAdditionalInfo(repoName, caching=true) {
     if (result) {
         return result;
     }
-    result = JSON.parse(
-        (await got(`https://raw.githubusercontent.com/${USER}/${repoName}/${INFO_FILE_BRANCH}/${INFO_FILE_NAME}`)).body,
-    );
+    try {
+        result = JSON.parse(
+            (await got(`https://raw.githubusercontent.com/${USER}/${repoName}/${INFO_FILE_BRANCH}/${INFO_FILE_NAME}`)).body,
+        );
+    } catch (e) {
+        return null;
+    }
     if (caching) {
         cache.put(`github-additional-info-${repoName}`, result, 60000);
     }
