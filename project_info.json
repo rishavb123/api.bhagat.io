@@ -1,8 +1,8 @@
 {
     "links": [{
-        "name": "Open API",
-        "url": "http://api.bhagat.io"
+        "name": "GraphQL Playground",
+        "url": "http://api.bhagat.io/graphql"
     }]
 
-    
+
 }
