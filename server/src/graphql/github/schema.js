@@ -4,14 +4,14 @@ export default gql`
     type Repo {
         name: String!
         owner: String!
-        info: ExtraRepoInfo!
+        info: ExtraRepoInfo
         description: String
         createdDate: String!
         lastUpdated: String!
         languages: [Language]!
     }
     type ExtraRepoInfo {
-        imageUrl: String!
+        imageUrl: String
         links: [Link]!
     }
     type Language {
