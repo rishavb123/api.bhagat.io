@@ -25,6 +25,8 @@ export default {
     },
     ExtraRepoInfo: {
         links: ({ name, links, ignoreSource, ignoreDownload }) => {
+            if (!links)
+                links = [];
             const newLinks = [...links];
             let sourceExists = false;
             let downloadExists = false;
