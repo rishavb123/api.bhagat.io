@@ -2,6 +2,7 @@ import mtgCrons from './mtg';
 
 // TODO: Add cron to get data from github and store it into mongo db
 // (use local executable schema)
+// TODO: only run crons in production environment unless runOnDev: true
 
 export default [
     {
