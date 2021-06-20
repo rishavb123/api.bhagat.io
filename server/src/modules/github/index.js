@@ -30,7 +30,8 @@ export async function getAdditionalInfo(repoName, caching=true) {
     }
     try {
         result = JSON.parse(
-            (await got(`https://raw.githubusercontent.com/${USER}/${repoName}/${INFO_FILE_BRANCH}/${INFO_FILE_NAME}`)).body,
+            (await got(`https://raw.githubusercontent.com/${USER}/${repoName}/${INFO_FILE_BRANCH}/${INFO_FILE_NAME}`))
+                .body,
         );
     } catch (e) {
         return null;

@@ -1,5 +1,11 @@
 import jobs from '../../crons';
 
+/* TODO: Add more functionality to jobs route by wrapping task functions
+    - add automatic logging
+    - add last executed time
+    - add currently executing
+    - add access to all this data through the job route
+*/
 export default function(app) {
     app.get('/jobs', (req, res) => {
         res.json({
