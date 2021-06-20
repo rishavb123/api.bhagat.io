@@ -49,16 +49,14 @@ export async function getLanguages(languageUrl, caching=true) {
     const resp = JSON.parse((await got(languageUrl)).body);
     result = [];
     let sum = 0;
-    for (const amount of resp) {
+    for (const amount of Object.values(resp)) {
         sum += amount;
     }
-    for (const lang in resp) {
-        if (resp.hasOwnProperty(lang)) {
-            result.push({
-                name: lang,
-                percent: resp[lang] / sum,
-            });
-        }
+    for (const lang of Object.keys(resp)) {
+        result.push({
+            name: lang,
+            percent: resp[lang] / sum,
+        });
     }
     if (caching) {
         cache.put(`github-languages-${languageUrl}`, result, 60000);
