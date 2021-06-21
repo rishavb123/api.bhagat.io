@@ -9,9 +9,9 @@ export default [
 
             console.log('Starting read_repos task');
 
-            const resp = await queryGraphQL(`
+            const query = `
                 query {
-                    repos(forceNoDb=true) {
+                    repos(forceNoDb: true) {
                         name
                         description
                         info {
@@ -30,7 +30,8 @@ export default [
                         lastUpdated
                     }
                 }
-            `);
+            `;
+            const resp = await queryGraphQL(query);
 
             console.log('Read in data using Github API. Now pushing to MongoDB . . .');
 
