@@ -7,6 +7,7 @@ import cron from 'node-cron';
 import { schema, resolvers } from './graphql';
 import jobs from './crons';
 import addRoutes from './routes';
+import { PORT } from './constants';
 
 
 const app = express();
@@ -24,9 +25,8 @@ server.applyMiddleware({ app });
 
 addRoutes(app);
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}. GraphQL exposed at http://localhost:${port}/graphql`);
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}. GraphQL exposed at http://localhost:${PORT}/graphql`);
 });
 
 for (const job of jobs) {
