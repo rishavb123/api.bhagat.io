@@ -1,17 +1,11 @@
 import got from 'got/dist/source';
-import cache from 'memory-cache';
+import { wrapWithCache } from '../utils/caching';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export async function getScryfallApiData(name, caching=true) {
-    let result = cache.get(`scryfall-card-data-${name}`);
-    if (result) {
-        return result;
-    }
-    await delay(100);
-    result = JSON.parse((await got('https://api.scryfall.com/cards/named?exact=' + name)).body);
-    if (caching) {
-        cache.put(`scryfall-card-data-${name}`, result, 10000);
-    }
-    return result;
+export async function getScryfallApiData(name, caching = true) {
+    return await wrapWithCache(async () => {
+        await delay(100);
+        return JSON.parse((await got('https://api.scryfall.com/cards/named?exact=' + name)).body);
+    }, `scryfall-card-data-${name}`, 60000, caching = caching);
 }

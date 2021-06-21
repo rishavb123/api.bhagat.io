@@ -1,9 +1,8 @@
 import { getBrowser, $eval } from '../scraping';
-import cache from 'memory-cache';
+import { wrapWithCache } from '../utils/caching';
 
 export async function getDeckListInfo(url, caching) {
-    const deck = caching? cache.get(`deck-object-${url}`): null;
-    if (!deck) {
+    return await wrapWithCache(async () => {
         const site = url.replace('www.', '').replace('https://', '')
             .replace('http://', '').split('.com')[0].split('.net')[0];
         const browser = await getBrowser();
@@ -57,28 +56,24 @@ export async function getDeckListInfo(url, caching) {
             }
             break;
         }
-        if (caching) {
-            cache.put(`deck-object-${url}`, obj, 60000);
-        }
         page.close();
         return obj;
-    }
-    return deck;
+    }, `deck-object-${url}`, 120000, caching = caching);
 }
 
-export async function getDeckList(url, caching=true) {
+export async function getDeckList(url, caching = true) {
     return (await getDeckListInfo(url, caching)).cards;
 }
 
-export async function getStringDeckList(url, caching=true) {
+export async function getStringDeckList(url, caching = true) {
     return (await getDeckList(url, caching)).map((el) => el.count + ' ' + el.name);
 }
 
-export async function getDeckListName(url, caching=true) {
+export async function getDeckListName(url, caching = true) {
     return (await getDeckListInfo(url, caching)).name;
 }
 
-export async function getDeckType(url, caching=true) {
+export async function getDeckType(url, caching = true) {
     return (await getDeckListInfo(url, caching)).deckType;
 }
 
@@ -86,9 +81,8 @@ export async function getDeckDescription(url, caching = true) {
     return (await getDeckListInfo(url, caching)).description;
 }
 
-export async function getDeckListsFromUser(user, caching=true) {
-    const decks = caching? cache.get(`user-decks-${user}`): null;
-    if (!decks) {
+export async function getDeckListsFromUser(user, caching = true) {
+    return await wrapWithCache(async () => {
         const url = `https://www.moxfield.com/users/${user}`;
         const browser = await getBrowser();
         const page = await browser.newPage();
@@ -112,11 +106,7 @@ export async function getDeckListsFromUser(user, caching=true) {
             }
             return returnVal;
         });
-        if (caching) {
-            cache.put(`user-decks-${user}`, arr, 60000);
-        }
         page.close();
         return arr;
-    }
-    return decks;
+    }, `user-decks-${user}`, 120000, caching = caching);
 }
