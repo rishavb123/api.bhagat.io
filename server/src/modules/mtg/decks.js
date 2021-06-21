@@ -30,7 +30,7 @@ export async function getDeckListInfo(url, caching) {
                 return returnVal;
             });
             let fullDesc = (mDescription ? mDescription : '') +
-                ((!!mDescription && !!mComment) ? ';' : '') +
+                ((!!mDescription && !!mComment) ? '; ' : '') +
                 (mComment || '');
             if (fullDesc.length == 0) {
                 fullDesc = null;
