@@ -14,6 +14,7 @@ export default function(app) {
                 expression: job.expression,
                 disabled: job.disabled || false,
                 runOnStart: job.runOnStart || false,
+                runInDev: job.runInDev || false,
             })),
         });
     });
