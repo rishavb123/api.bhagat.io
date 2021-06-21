@@ -1,9 +1,9 @@
-import { wrapFunctionality } from '../../modules/db';
+import { wrapWithDbClient } from '../../modules/db';
 
 export default function(app) {
     app.post('/db', async (req, res) => {
         const params = req.body;
-        await wrapFunctionality(async (client) => {
+        await wrapWithDbClient(async (client) => {
             const db = await client.db(params.db || 'bhagat-db');
             const collection = await db.collection(params.collection || 'mtg-edh-decks');
             const cursor = await collection.find(params.query || {}, params.options || {});

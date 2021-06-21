@@ -9,7 +9,7 @@ export function makeClient() {
     return client;
 }
 
-export async function wrapFunctionality(func) {
+export async function wrapWithDbClient(func) {
     const client = makeClient();
     let returnVal;
     try {

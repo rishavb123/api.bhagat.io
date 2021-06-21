@@ -1,6 +1,6 @@
 import { getScryfallApiData } from '../../../modules/mtg/cards';
 import { getDeckListInfo, getDeckListsFromUser } from '../../../modules/mtg/decks';
-import { wrapFunctionality } from '../../../modules/db';
+import { wrapWithDbClient } from '../../../modules/db';
 
 export default [
     {
@@ -48,7 +48,7 @@ export default [
                 deck.commander.art_crop = data.image_uris.art_crop;
             }
             console.log('\tPushing decks to MongoDB . . .');
-            await wrapFunctionality(async (client) => {
+            await wrapWithDbClient(async (client) => {
                 const db = await client.db('bhagat-db');
                 const collection = await db.collection('mtg-edh-decks');
 
