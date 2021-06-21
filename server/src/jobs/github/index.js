@@ -4,7 +4,7 @@ import { wrapWithDbClient } from '../../modules/db';
 export default [
     {
         name: 'read_repos',
-        expression: '5 1-23/2 * * *',
+        expression: '55 */2 * * *',
         task: async () => {
 
             console.log('Starting read_repos task');
