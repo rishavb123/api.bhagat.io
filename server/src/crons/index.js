@@ -6,14 +6,15 @@ import mtgCrons from './mtg';
 
 export default [
     {
-        name: 'good_morning',
-        expression: '30 7 * * *',
+        name: 'hello_world',
+        expression: '* * * * *',
         task: async () => {
             const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             await delay(5000);
             console.log('Good Morning!');
         },
-        disabled: true,
+        disabled: false,
+        runInDev: false,
     },
     ...mtgCrons,
 ];
