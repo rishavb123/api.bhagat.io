@@ -1,4 +1,5 @@
 import mtgCrons from './mtg';
+import githubCrons from './github';
 
 // TODO: Add cron to get data from github and store it into mongo db
 // (use local executable schema)
@@ -16,4 +17,5 @@ export default [
         runInDev: false,
     },
     ...mtgCrons,
+    ...githubCrons,
 ];
