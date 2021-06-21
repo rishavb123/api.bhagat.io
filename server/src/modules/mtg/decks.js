@@ -16,7 +16,7 @@ export async function getDeckListInfo(url, caching) {
             const mType = await $eval(page, '.badge', (el) => el.innerText);
             const mDescription = await $eval(page, '.font-weight-light',
                 (el) => !el.classList.contains('d-flex') ? el.innerText : null);
-            const mComment = await $eval(page, '.comment p', (el) => el?.innerText, false);
+            const mComment = await $eval(page, '.comment p', (el) => el? el.innerText: null, false);
             const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
                 const returnVal = [];
                 for (const el of elements) {
