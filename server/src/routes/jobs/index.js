@@ -1,4 +1,4 @@
-import jobs from '../../crons';
+import jobs from '../../jobs';
 
 /* TODO: Add more functionality to jobs route by wrapping task functions
     - add automatic logging

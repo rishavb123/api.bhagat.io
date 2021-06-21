@@ -5,7 +5,7 @@ import { ApolloServer } from 'apollo-server-express';
 import cron from 'node-cron';
 
 import { schema, resolvers } from './graphql';
-import jobs from './crons';
+import jobs from './jobs';
 import addRoutes from './routes';
 import { port } from './constants';
 
