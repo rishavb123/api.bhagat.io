@@ -48,3 +48,11 @@ export async function getLanguages(languageUrl, caching = true) {
         return languages;
     }, `github-languages-${languageUrl}`, 120000, caching = caching);
 }
+
+export async function numRequestsLeft() {
+    const resp = JSON.parse((await got('https://api.github.com/rate_limit')).body);
+    return {
+        core: resp.resources.core.remaining,
+        search: resp.resources.search.remaining,
+    };
+}

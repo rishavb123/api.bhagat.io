@@ -15,7 +15,7 @@ const schema = gql`
         mydecks(name: String): [Deck!]!,
         user(user: String): User!,
 
-        repos(page: Int=1, pageSize: Int=100): [Repo]!
+        repos(page: Int=1, pageSize: Int=100, forceNoDb: Boolean=false): [Repo]!
     }
 `;
 

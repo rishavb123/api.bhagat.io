@@ -11,7 +11,7 @@ export default [
 
             const resp = await queryGraphQL(`
                 query {
-                    repos {
+                    repos(forceNoDb=true) {
                         name
                         description
                         info {

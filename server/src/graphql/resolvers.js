@@ -3,7 +3,8 @@ import FuzzySearch from 'fuzzy-search';
 import mtgResolvers from './mtg/resolvers';
 import githubResolvers from './github/resolvers';
 import { getDeckListsFromUser } from '../modules/mtg/decks';
-import { getMyRepositoriesWithBhagatTopic } from '../modules/github';
+import { getMyRepositoriesWithBhagatTopic, numRequestsLeft } from '../modules/github';
+import { wrapWithDbClient } from '../modules/db';
 
 
 const resolvers = {
@@ -30,6 +31,19 @@ const resolvers = {
         }),
 
         repos: async (_, args) => {
+            const reqRemaining = args.forceNoDb ? null : await numRequestsLeft();
+            if (!args.forceNoDb && (reqRemaining.core < 15 || reqRemaining.search < 4)) {
+                return await wrapWithDbClient(async (client) => {
+                    const db = await client.db('bhagat-db');
+                    const collection = await db.collection('gh-repos');
+                    const cursor = await collection.find();
+                    const docs = await cursor.toArray();
+                    for (const doc of docs) {
+                        doc.fromDB = true;
+                    }
+                    return docs;
+                });
+            }
             return await getMyRepositoriesWithBhagatTopic(args.page, args.pageSize);
         },
     },
