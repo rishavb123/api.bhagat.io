@@ -14,11 +14,9 @@ export async function getDeckListInfo(url, caching) {
         case 'moxfield':
             const mName = await $eval(page, '.deckheader-name', (el) => el.innerText);
             const mType = await $eval(page, '.badge', (el) => el.innerText);
-            // TODO: read deck description from a comment
-            // instead to remove character limit.
-            // Concat with normal description(short phrase)
             const mDescription = await $eval(page, '.font-weight-light',
                 (el) => !el.classList.contains('d-flex') ? el.innerText : null);
+            const mComment = await $eval(page, '.comment p', (el) => el?.innerText, false);
             const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
                 const returnVal = [];
                 for (const el of elements) {
@@ -31,7 +29,10 @@ export async function getDeckListInfo(url, caching) {
                 }
                 return returnVal;
             });
-            obj = { name: mName, cards: mCards, deckType: mType, description: mDescription };
+            let fullDesc = (mDescription ? mDescription : "") + ((!!mDescription && !!mComment)? ";" : "") + (mComment || "");
+            if (fullDesc.length == 0)
+                fullDesc = null;
+            obj = { name: mName, cards: mCards, deckType: mType, description: fullDesc };
             break;
         case 'scryfall':
             const sName = await $eval(page, 'h1', (el) => el.innerText);
