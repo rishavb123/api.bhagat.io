@@ -26,8 +26,9 @@ export async function getBrowser() {
 }
 
 export async function $eval(page, selector, func, guaranteed = true) {
-    if (guaranteed)
+    if (guaranteed) {
         await page.waitForSelector(selector);
+    }
     try {
         return await page.$eval(selector, func);
     } catch (e) {

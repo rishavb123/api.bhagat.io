@@ -29,9 +29,12 @@ export async function getDeckListInfo(url, caching) {
                 }
                 return returnVal;
             });
-            let fullDesc = (mDescription ? mDescription : "") + ((!!mDescription && !!mComment)? ";" : "") + (mComment || "");
-            if (fullDesc.length == 0)
+            let fullDesc = (mDescription ? mDescription : '') +
+                ((!!mDescription && !!mComment) ? ';' : '') +
+                (mComment || '');
+            if (fullDesc.length == 0) {
                 fullDesc = null;
+            }
             obj = { name: mName, cards: mCards, deckType: mType, description: fullDesc };
             break;
         case 'scryfall':
