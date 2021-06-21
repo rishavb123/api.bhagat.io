@@ -12,7 +12,7 @@ export default [
             await delay(5000);
             console.log('Good Morning!');
         },
-        disabled: false,
+        disabled: true,
         runInDev: false,
     },
     ...mtgCrons,
