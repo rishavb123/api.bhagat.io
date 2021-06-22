@@ -12,7 +12,7 @@ export default [
             while (decks.length == 0) {
                 await getDeckListsFromUser('rishavb123', false);
             }
-            console.log(`\tRead in ${decks.length} decks from moxfield`);
+            console.log(`Read in ${decks.length} decks from moxfield`);
             for (const deck of decks) {
                 const moreInfo = await getDeckListInfo(deck.url, false);
                 deck.cards = moreInfo.cards;
@@ -47,7 +47,7 @@ export default [
                 deck.commander.image_url = data.image_uris.png;
                 deck.commander.art_crop = data.image_uris.art_crop;
             }
-            console.log('\tPushing decks to MongoDB . . .');
+            console.log('Pushing decks to MongoDB . . .');
             await wrapWithDbClient(async (client) => {
                 const db = await client.db('bhagat-db');
                 const collection = await db.collection('mtg-edh-decks');
@@ -57,8 +57,8 @@ export default [
                 }
                 await collection.insertMany(decks);
 
-                console.log('\tDecks inserted to MongoDB. Job finished!');
             });
+            console.log('Decks inserted to MongoDB. Job finished!');
         },
         disabled: false,
     },
