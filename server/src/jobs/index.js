@@ -1,7 +1,25 @@
 import mtgCrons from './mtg';
 import githubCrons from './github';
 
-export default [
+function processJobs(jobs) {
+    for (const job of jobs) {
+        job.running = false;
+        job.call = async () => {
+            if (job.running) {
+                console.log(`Job ${job.name} is already running`);
+            }
+            console.log(`Starting ${job.name} job`);
+            job.running = true;
+            await job.task();
+            console.log(`Finished ${job.name} job`);
+            job.lastExecuted = new Date().toString();
+            job.running = false;
+        }
+    }
+    return jobs;
+}
+
+export default processJobs([
     {
         name: 'hello_world',
         expression: '* * * * *',
@@ -15,4 +33,4 @@ export default [
     },
     ...mtgCrons,
     ...githubCrons,
-];
+]);

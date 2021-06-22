@@ -1,11 +1,5 @@
 import jobs from '../../jobs';
 
-/* TODO: Add more functionality to jobs route by wrapping task functions
-    - add automatic logging
-    - add last executed time
-    - add currently executing
-    - add access to all this data through the job route
-*/
 export default function(app) {
     app.get('/jobs', (req, res) => {
         res.json({
@@ -15,6 +9,8 @@ export default function(app) {
                 disabled: job.disabled || false,
                 runOnStart: job.runOnStart || false,
                 runInDev: job.runInDev || false,
+                currentlyRunning: job.running,
+                lastExecuted: job.lastExecuted
             })),
         });
     });
@@ -29,14 +25,20 @@ export default function(app) {
         const wait = req.query.wait || 'false';
         const job = jobs.find((job) => job.name == req.params.jobName);
         if (job) {
-            if (wait.toLowerCase() === 'true') {
-                await job.task();
+            if (job.running) {
+                res.json({
+                    status: 1,
+                    msg: 'Job is already running',
+                });
+            }
+            else if (wait.toLowerCase() === 'true') {
+                await job.call();
                 res.json({
                     status: 0,
                     msg: 'Finished running job',
                 });
             } else {
-                job.task();
+                job.call();
                 res.json({
                     status: 0,
                     msg: 'Started job in the background',

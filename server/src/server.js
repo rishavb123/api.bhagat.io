@@ -32,10 +32,10 @@ app.listen(port, () => {
 for (const job of jobs) {
     if (job.disabled !== true) {
         if (job.runOnStart) {
-            job.task();
+            job.call();
         }
         if (process.env.NODE_ENV !== 'DEV' || job.runInDev) {
-            cron.schedule(job.expression, job.task, job.options || {});
+            cron.schedule(job.expression, job.call, job.options || {});
         }
     }
 }
