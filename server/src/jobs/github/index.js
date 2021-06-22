@@ -6,7 +6,6 @@ export default [
         name: 'read_repos',
         expression: '55 */2 * * *',
         task: async () => {
-
             console.log('Starting read_repos task');
 
             const query = `

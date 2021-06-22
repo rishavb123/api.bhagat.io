@@ -22,7 +22,7 @@ export default {
         },
         createdDate: ({ created_at, fromDB, createdDate }) => {
             if (fromDB) {
-                return createdDate
+                return createdDate;
             }
             return created_at;
         },
