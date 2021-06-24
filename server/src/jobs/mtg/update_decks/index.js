@@ -7,7 +7,7 @@ export default [
         name: 'update_decks',
         expression: '5 */2 * * *',
         task: async () => {
-             const decks = await getDeckListsFromUser('rishavb123', false);
+            const decks = await getDeckListsFromUser('rishavb123', false);
             while (decks.length == 0) {
                 await getDeckListsFromUser('rishavb123', false);
             }
