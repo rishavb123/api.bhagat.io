@@ -1,1 +1,6 @@
 - Created cron job to keep server awake. View it at https://console.cron-job.org/dashboard
+- Mongo DB Atlas Instance: https://cloud.mongodb.com/v2/60c974355020c318555b87e3
+- Github Repo: https://github.com/rishavb123/api.bhagat.io
+- HTTPS api: https://bhagat-api.herokuapp.com/
+- HTTP api: http://api.bhagat.io
+- Heroku App: https://dashboard.heroku.com/apps/bhagat-api
