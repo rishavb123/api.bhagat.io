@@ -5,6 +5,7 @@ import githubResolvers from './github/resolvers';
 import { getDeckListsFromUser } from '../modules/mtg/decks';
 import { getMyRepositoriesWithBhagatTopic, numRequestsLeft } from '../modules/github';
 import { wrapWithDbClient } from '../modules/db';
+import { MOXFIELD_USER } from '../modules/mtg/constants';
 
 
 const resolvers = {
@@ -16,7 +17,7 @@ const resolvers = {
             name: args.name,
         }),
         mydeck: async (_, args) => {
-            const searcher = new FuzzySearch((await getDeckListsFromUser('rishavb123')), ['name'], { sort: true });
+            const searcher = new FuzzySearch((await getDeckListsFromUser(MOXFIELD_USER)), ['name'], { sort: true });
             const searchResults = searcher.search(args.name);
             if (searchResults.length > 0) {
                 return searchResults[0];
@@ -24,7 +25,7 @@ const resolvers = {
             return null;
         },
         mydecks: async () => {
-            return await getDeckListsFromUser('rishavb123');
+            return await getDeckListsFromUser(MOXFIELD_USER);
         },
         user: (_, args) => ({
             user: args.user,

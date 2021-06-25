@@ -1,15 +1,16 @@
 import { getScryfallApiData } from '../../../modules/mtg/cards';
 import { getDeckListInfo, getDeckListsFromUser } from '../../../modules/mtg/decks';
 import { wrapWithDbClient } from '../../../modules/db';
+import { MOXFIELD_USER } from '../../../modules/mtg/constants';
 
 export default [
     {
         name: 'update_decks',
         expression: '5 */2 * * *',
         task: async () => {
-            const decks = await getDeckListsFromUser('rishavb123', false);
+            const decks = await getDeckListsFromUser(MOXFIELD_USER, false);
             while (decks.length == 0) {
-                await getDeckListsFromUser('rishavb123', false);
+                await getDeckListsFromUser(MOXFIELD_USER, false);
             }
             console.log(`Read in ${decks.length} decks from moxfield`);
             for (const deck of decks) {
