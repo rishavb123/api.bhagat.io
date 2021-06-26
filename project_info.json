@@ -2,7 +2,6 @@
     "links": [{
         "name": "GraphQL Playground",
         "url": "http://api.bhagat.io/graphql"
-    }]
-
-
+    }],
+    "imageUrl": "https://raw.githubusercontent.com/rishavb123/api.bhagat.io/master/preview.png"
 }
