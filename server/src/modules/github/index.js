@@ -3,9 +3,19 @@ import { wrapWithCache } from '../utils/caching';
 
 import { USER, INFO_FILE_NAME, INFO_FILE_BRANCH } from './constants';
 
+const instance = got.extend({
+    hooks: {
+        beforeRequest: [
+            options => {
+                options.headers.Authorization = `token ${process.env.GH_ACCESS_TOKEN}`
+            }
+        ]
+    }
+});
+
 export async function getMyRepositoriesWithBhagatTopic(page, pageSize, caching = true) {
     return await wrapWithCache(async () => {
-        const resp = await got('https://api.github.com/search/repositories', {
+        const resp = await instance('https://api.github.com/search/repositories', {
             searchParams: {
                 page: page,
                 sort: 'updated',
@@ -21,7 +31,7 @@ export async function getAdditionalInfo(repoName, caching = true) {
     return await wrapWithCache(async () => {
         try {
             return JSON.parse(
-                (await got(
+                (await instance(
                     `https://raw.githubusercontent.com/${USER}/${repoName}/${INFO_FILE_BRANCH}/${INFO_FILE_NAME}`,
                 )).body,
             );
@@ -33,7 +43,7 @@ export async function getAdditionalInfo(repoName, caching = true) {
 
 export async function getLanguages(languageUrl, caching = true) {
     return await wrapWithCache(async () => {
-        const resp = JSON.parse((await got(languageUrl)).body);
+        const resp = JSON.parse((await instance(languageUrl)).body);
         const languages = [];
         let sum = 0;
         for (const amount of Object.values(resp)) {
@@ -51,12 +61,12 @@ export async function getLanguages(languageUrl, caching = true) {
 
 export async function getCommits(commitsUrl, caching = true) {
     return await wrapWithCache(async () => {
-        return JSON.parse((await got(commitsUrl)).body);
+        return JSON.parse((await instance(commitsUrl)).body);
     }, `github-commits-${commitsUrl}`, 120000, caching = caching);
 }
 
 export async function numRequestsLeft() {
-    const resp = JSON.parse((await got('https://api.github.com/rate_limit')).body);
+    const resp = JSON.parse((await instance('https://api.github.com/rate_limit')).body);
     return {
         core: resp.resources.core.remaining,
         search: resp.resources.search.remaining,
