@@ -71,7 +71,7 @@ export default {
             if (!ignoreSource && !sourceExists) {
                 newLinks.push({
                     name: 'Source',
-                    url: `https://github.com/${USER}/${name},`,
+                    url: `https://github.com/${USER}/${name}`,
                 });
             }
             if (!ignoreDownload && !downloadExists) {
