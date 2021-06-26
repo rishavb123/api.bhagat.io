@@ -12,13 +12,6 @@ async function getHtml(url, site) {
     return html;
 }
 
-/*
-    TODO: get moxfield working;
-    not working because moxfield takes too long to load.
-    Resp is the loading screen.
-    Use pupeteer
-*/
-
 export async function getDeckList(url) {
     const site = url.replace('www.', '').replace('https://', '')
         .replace('http://', '').split('.com')[0].split('.net')[0];
