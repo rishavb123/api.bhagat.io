@@ -1,4 +1,4 @@
-import { getAdditionalInfo, getLanguages } from '../../modules/github';
+import { getAdditionalInfo, getCommits, getLanguages } from '../../modules/github';
 import { USER } from '../../modules/github/constants';
 
 export default {
@@ -26,11 +26,22 @@ export default {
             }
             return created_at;
         },
-        lastUpdated: ({ updated_at, fromDB, lastUpdated }) => {
+        lastUpdated: async ({ commits_url, updated_at, fromDB, lastUpdated }) => {
             if (fromDB) {
                 return lastUpdated;
             }
-            return updated_at;
+            const updated = updated_at;
+            const updateDate = new Date(updated);
+            const invalidate = (date) => (date.getDate() == 25 || date.getDate() == 26) && date.getMonth() + 1 == 6 && date.getFullYear() == 2021;
+            if (invalidate(updateDate)) {
+                const commits = await getCommits(commits_url.substring(0, commits_url.length - 6));
+                for (const commit of commits) {
+                    if (!invalidate(new Date(commit.commit.committer.date))) {
+                        return commit.commit.committer.date;
+                    }
+                }
+            }
+            return updated;
         },
         languages: async ({ languages_url, fromDB, languages }) => {
             if (fromDB) {

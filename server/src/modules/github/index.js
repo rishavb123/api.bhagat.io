@@ -49,6 +49,12 @@ export async function getLanguages(languageUrl, caching = true) {
     }, `github-languages-${languageUrl}`, 120000, caching = caching);
 }
 
+export async function getCommits(commitsUrl, caching = true) {
+    return await wrapWithCache(async () => {
+        return JSON.parse((await got(commitsUrl)).body);
+    }, `github-commits-${commitsUrl}`, 120000, caching = caching);
+}
+
 export async function numRequestsLeft() {
     const resp = JSON.parse((await got('https://api.github.com/rate_limit')).body);
     return {
