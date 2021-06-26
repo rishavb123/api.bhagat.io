@@ -6,8 +6,6 @@ export default [
         name: 'read_repos',
         expression: '55 */2 * * *',
         task: async () => {
-            console.log('Starting read_repos task');
-
             const query = `
                 query {
                     repos(forceNoDb: true) {
@@ -43,8 +41,6 @@ export default [
                         await collection.drop();
                     }
                     await collection.insertMany(resp.data.repos);
-
-                    console.log('Repos inserted to MongoDB. Job finished!');
                 });
             }
         },
