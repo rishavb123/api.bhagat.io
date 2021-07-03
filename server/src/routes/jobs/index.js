@@ -44,7 +44,7 @@ export default function(app) {
             throw err;
         }
         res.json({
-            ...result, data,
+            ...result.data,
             status: 1,
         });
     });
