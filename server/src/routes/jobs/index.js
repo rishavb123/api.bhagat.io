@@ -2,34 +2,38 @@ import { queryGraphQL } from '../../graphql/local';
 import jobs from '../../jobs';
 
 export default function(app) {
-    app.get('/jobs', (req, res) => {
-        res.json(queryGraphQL(`
-            jobs {
-                name
-                expression
-                disabled
-                runOnStart
-                runInDev
-                currentlyRunning
-                lastExecuted
+    app.get('/jobs', async (req, res) => {
+        res.json((await queryGraphQL(`
+            query getJobs {
+                jobs {
+                    name
+                    expression
+                    disabled
+                    runOnStart
+                    runInDev
+                    currentlyRunning
+                    lastExecuted
+                }
             }
-        `));
+        `)).data.jobs);
     });
 
-    app.get('/jobs/:jobName', (req, res) => {
-        res.json(queryGraphQL(`
-            job(name: $name) {
-                name
-                expression
-                disabled
-                runOnStart
-                runInDev
-                currentlyRunning
-                lastExecuted
+    app.get('/jobs/:jobName', async (req, res) => {
+        res.json((await queryGraphQL(`
+            query getJob ($name: String!){
+                job(name: $name) {
+                    name
+                    expression
+                    disabled
+                    runOnStart
+                    runInDev
+                    currentlyRunning
+                    lastExecuted
+                }
             }
-        `), {
+        `, {
             name: req.params.jobName
-        });
+        })).data.job);
     });
 
     app.get('/jobs/:jobName/run', async (req, res) => {
