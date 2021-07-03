@@ -10,8 +10,12 @@ export const invalidDates = [
         year: 2021
     },
     {
-        day: 3,
+        day: 13,
         month: 7,
         year: 2021
     },
+];
+
+export const invalidMessagePatterns = [
+    /project_info.json/i
 ];

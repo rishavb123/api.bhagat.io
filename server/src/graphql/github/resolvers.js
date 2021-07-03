@@ -1,6 +1,6 @@
 import { getAdditionalInfo, getCommits, getLanguages } from '../../modules/github';
 import { USER } from '../../modules/github/constants';
-import { invalidDates } from './constants';
+import { invalidDates, invalidMessagePatterns } from './constants';
 
 export default {
     Repo: {
@@ -27,13 +27,11 @@ export default {
             }
             return created_at;
         },
-        lastUpdated: async ({ commits_url, updated_at, fromDB, lastUpdated }) => {
+        lastUpdated: async ({ commits_url, updated_at, created_at, fromDB, lastUpdated }) => {
             if (fromDB) {
                 return lastUpdated;
             }
-            const updated = updated_at;
-            const updateDate = new Date(updated);
-            const invalidate = (date) => {
+            const invalidateDate = (date) => {
                 for (const invalidDate of invalidDates) {
                     if (
                         date.getDate() == invalidDate.day &&
@@ -44,15 +42,27 @@ export default {
                 }
                 return false;
             };
-            if (invalidate(updateDate)) {
-                const commits = await getCommits(commits_url.substring(0, commits_url.length - 6));
-                for (const commit of commits) {
-                    if (!invalidate(new Date(commit.commit.committer.date))) {
-                        return commit.commit.committer.date;
+            const invalidateMessage = (message) => {
+                for (const invalidPattern of invalidMessagePatterns) {
+                    if (message.match(invalidPattern)) {
+                        return true;
                     }
                 }
+                return false;
             }
-            return updated;
+            const commits = await getCommits(commits_url.substring(0, commits_url.length - 6));
+            for (const commit of commits) {
+                if (!invalidateDate(new Date(commit.commit.committer.date)) && !invalidateMessage(commit.commit.message)) {
+                    return commit.commit.committer.date;
+                }
+            }
+            const updateDate = new Date(updated_at);
+            if (invalidate(updateDate)) {
+                return updated_at;
+            } else {
+                return created_at;
+            }
+
         },
         languages: async ({ languages_url, fromDB, languages }) => {
             if (fromDB) {
