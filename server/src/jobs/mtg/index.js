@@ -1,7 +1,7 @@
-import { getScryfallApiData } from '../../../modules/mtg/cards';
-import { getDeckListInfo, getDeckListsFromUser } from '../../../modules/mtg/decks';
-import { wrapWithDbClient } from '../../../modules/db';
-import { MOXFIELD_USER } from '../../../modules/mtg/constants';
+import { getScryfallApiData } from '../../modules/mtg/cards';
+import { getDeckListInfo, getDeckListsFromUser } from '../../modules/mtg/decks';
+import { wrapWithDbClient } from '../../modules/db';
+import { MOXFIELD_USER } from '../../modules/mtg/constants';
 
 // TODO: switch to graphql query
 export default [
