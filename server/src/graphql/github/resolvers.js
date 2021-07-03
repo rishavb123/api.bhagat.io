@@ -1,6 +1,8 @@
 import { getAdditionalInfo, getCommits, getLanguages } from '../../modules/github';
 import { USER } from '../../modules/github/constants';
 import { invalidDates, invalidMessagePatterns } from './constants';
+import { getMyRepositoriesWithBhagatTopic, numRequestsLeft } from '../../modules/github';
+import { wrapWithDbClient } from '../../modules/db';
 
 export default {
     Repo: {
@@ -119,6 +121,24 @@ export default {
         },
         priority: ({ priority }) => {
             return priority || 0;
+        },
+    },
+    Query: {
+        repos: async (_, args) => {
+            const reqRemaining = args.forceNoDb ? null : await numRequestsLeft();
+            if (!args.forceNoDb && (reqRemaining.core < 15 || reqRemaining.search < 4)) {
+                return await wrapWithDbClient(async (client) => {
+                    const db = await client.db('bhagat-db');
+                    const collection = await db.collection('gh-repos');
+                    const cursor = await collection.find();
+                    const docs = await cursor.toArray();
+                    for (const doc of docs) {
+                        doc.fromDB = true;
+                    }
+                    return docs;
+                });
+            }
+            return await getMyRepositoriesWithBhagatTopic(args.page, args.pageSize);
         },
     },
 };

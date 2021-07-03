@@ -1,3 +1,5 @@
+import FuzzySearch from 'fuzzy-search';
+
 import {
     getDeckDescription,
     getDeckList,
@@ -6,6 +8,7 @@ import {
     getDeckType,
 } from '../../modules/mtg/decks';
 import { getScryfallApiData } from '../../modules/mtg/cards';
+import { MOXFIELD_USER } from '../../modules/mtg/constants';
 
 export default {
     Deck: {
@@ -51,4 +54,26 @@ export default {
             return await getDeckListsFromUser(user);
         },
     },
+    Query: {
+        deck: (_, args) => ({
+            url: args.url,
+        }),
+        card: (_, args) => ({
+            name: args.name,
+        }),
+        mydeck: async (_, args) => {
+            const searcher = new FuzzySearch((await getDeckListsFromUser(MOXFIELD_USER)), ['name'], { sort: true });
+            const searchResults = searcher.search(args.name);
+            if (searchResults.length > 0) {
+                return searchResults[0];
+            }
+            return null;
+        },
+        mydecks: async () => {
+            return await getDeckListsFromUser(MOXFIELD_USER);
+        },
+        user: (_, args) => ({
+            user: args.user,
+        }),
+    }
 };
