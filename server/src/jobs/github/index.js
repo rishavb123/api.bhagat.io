@@ -1,4 +1,4 @@
-import { queryGraphQL } from '../../graphql/query';
+import { queryGraphQL } from '../../graphql/local';
 import { wrapWithDbClient } from '../../modules/db';
 
 export default [
