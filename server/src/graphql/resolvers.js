@@ -3,7 +3,6 @@ import mtgResolvers from './mtg/resolvers';
 import githubResolvers from './github/resolvers';
 import jobResolvers from './jobs/resolvers';
 
-
 const resolvers = {
     JSON: GraphQLJSON,
 };
