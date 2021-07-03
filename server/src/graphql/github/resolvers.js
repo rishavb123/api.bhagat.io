@@ -93,5 +93,8 @@ export default {
             }
             return newLinks;
         },
+        priority: ({ priority }) => {
+            return priority || 0;
+        },
     },
 };
