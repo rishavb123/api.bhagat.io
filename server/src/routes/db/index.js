@@ -1,7 +1,8 @@
 import { wrapWithDbClient } from '../../modules/db';
+import { addRoute } from '../utils';
 
 export default function(app) {
-    app.post('/db', async (req, res) => {
+    addRoute('/db', app.post.bind(app), async (req, res) => {
         const params = req.body;
         await wrapWithDbClient(async (client) => {
             const db = await client.db(params.db || 'bhagat-db');

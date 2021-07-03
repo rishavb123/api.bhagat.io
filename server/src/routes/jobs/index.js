@@ -1,25 +1,29 @@
 import { queryGraphQL } from '../../graphql/local';
 import jobs from '../../jobs';
+import { addRoute } from '../utils';
 
 export default function(app) {
-    app.get('/jobs', async (req, res) => {
-        res.json((await queryGraphQL(`
-            query getJobs {
-                jobs {
-                    name
-                    expression
-                    disabled
-                    runOnStart
-                    runInDev
-                    currentlyRunning
-                    lastExecuted
+    addRoute('/jobs', app.get.bind(app), async (req, res) => {
+        res.json({
+            ...(await queryGraphQL(`
+                query getJobs {
+                    jobs {
+                        name
+                        expression
+                        disabled
+                        runOnStart
+                        runInDev
+                        currentlyRunning
+                        lastExecuted
+                    }
                 }
-            }
-        `)).data.jobs);
+            `)).data,
+            status: 1
+        });
     });
 
-    app.get('/jobs/:jobName', async (req, res) => {
-        res.json((await queryGraphQL(`
+    addRoute('/jobs/:jobName', app.get.bind(app), async (req, res) => {
+        const result = await queryGraphQL(`
             query getJob ($name: String!){
                 job(name: $name) {
                     name
@@ -31,12 +35,21 @@ export default function(app) {
                     lastExecuted
                 }
             }
-        `, {
+            `, {
             name: req.params.jobName
-        })).data.job);
+        });
+        if (result.errors) {
+            const err = new Error("Invalid job name");
+            err.name = "InvalidInput";
+            throw err;
+        }
+        res.json({
+            ...result,data,
+            status: 1
+        });
     });
 
-    app.get('/jobs/:jobName/run', async (req, res) => {
+    addRoute('/jobs/:jobName/run', app.get.bind(app), async (req, res) => {
         const wait = req.query.wait || 'false';
         const job = jobs.find((job) => job.name == req.params.jobName);
         if (job) {
