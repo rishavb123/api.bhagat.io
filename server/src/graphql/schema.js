@@ -1,4 +1,4 @@
-import { gql, mergeSchemas } from 'apollo-server-express';
+import { gql } from 'apollo-server-express';
 
 import mtgSchema from './mtg/schema';
 import githubSchema from './github/schema';
