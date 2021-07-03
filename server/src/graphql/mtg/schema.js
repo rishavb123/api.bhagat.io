@@ -38,7 +38,7 @@ export default gql`
     }
 
     """A moxfield user"""
-    type User {
+    type MoxfieldUser {
         """The username of the user"""
         user: String!
 
@@ -60,6 +60,6 @@ export default gql`
         mydecks(name: String): [Deck!]!,
 
         """Get a moxfield user by username"""
-        user(user: String): User!,
+        moxfielduser(user: String): MoxfieldUser!,
     }
 `;

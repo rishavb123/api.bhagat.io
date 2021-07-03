@@ -3,6 +3,7 @@ import { getDeckListInfo, getDeckListsFromUser } from '../../../modules/mtg/deck
 import { wrapWithDbClient } from '../../../modules/db';
 import { MOXFIELD_USER } from '../../../modules/mtg/constants';
 
+// TODO: switch to graphql query
 export default [
     {
         name: 'update_decks',

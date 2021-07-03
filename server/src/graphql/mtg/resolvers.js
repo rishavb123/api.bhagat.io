@@ -49,7 +49,7 @@ export default {
             return await getScryfallApiData(name);
         },
     },
-    User: {
+    MoxfieldUser: {
         decks: async ({ user }) => {
             return await getDeckListsFromUser(user);
         },
@@ -72,7 +72,7 @@ export default {
         mydecks: async () => {
             return await getDeckListsFromUser(MOXFIELD_USER);
         },
-        user: (_, args) => ({
+        moxfielduser: (_, args) => ({
             user: args.user,
         }),
     },
