@@ -11,5 +11,5 @@ export default {
     Query: {
         jobs: () => jobs,
         job: (_, args) => jobs.find((job) => job.name == args.name),
-    }
+    },
 };

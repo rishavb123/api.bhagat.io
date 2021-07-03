@@ -75,5 +75,5 @@ export default {
         user: (_, args) => ({
             user: args.user,
         }),
-    }
+    },
 };

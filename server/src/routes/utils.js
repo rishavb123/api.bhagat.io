@@ -1,4 +1,4 @@
-import { wrapWithErrorHandling } from "../modules/utils/errors";
+import { wrapWithErrorHandling } from '../modules/utils/errors';
 
 export function addRoute(route, method, ...handlers) {
     method(route, ...handlers.map((handler) => wrapWithErrorHandling(
@@ -10,9 +10,9 @@ export function addRoute(route, method, ...handlers) {
                 error: {
                     name: e.name,
                     msg: e.message,
-                    trace: e.stack
+                    trace: e.stack,
                 },
-            })
-        }
+            });
+        },
     )));
 }

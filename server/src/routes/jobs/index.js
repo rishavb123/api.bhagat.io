@@ -18,7 +18,7 @@ export default function(app) {
                     }
                 }
             `)).data,
-            status: 1
+            status: 1,
         });
     });
 
@@ -36,16 +36,16 @@ export default function(app) {
                 }
             }
             `, {
-            name: req.params.jobName
+            name: req.params.jobName,
         });
         if (result.errors) {
-            const err = new Error("Invalid job name");
-            err.name = "InvalidInput";
+            const err = new Error('Invalid job name');
+            err.name = 'InvalidInput';
             throw err;
         }
         res.json({
-            ...result,data,
-            status: 1
+            ...result, data,
+            status: 1,
         });
     });
 
