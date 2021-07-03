@@ -1,5 +1,6 @@
 import { getAdditionalInfo, getCommits, getLanguages } from '../../modules/github';
 import { USER } from '../../modules/github/constants';
+import { invalidDates } from './constants';
 
 export default {
     Repo: {
@@ -32,7 +33,17 @@ export default {
             }
             const updated = updated_at;
             const updateDate = new Date(updated);
-            const invalidate = (date) => (date.getDate() == 25 || date.getDate() == 26) && date.getMonth() + 1 == 6 && date.getFullYear() == 2021;
+            const invalidate = (date) => {
+                for (const invalidDate of invalidDates) {
+                    if (
+                        date.getDate() == invalidDate.day &&
+                        date.getMonth() + 1 == invalidDate.month &&
+                        date.getFullYear() == invalidDate.year
+                    )
+                        return true;
+                }
+                return false;
+            };
             if (invalidate(updateDate)) {
                 const commits = await getCommits(commits_url.substring(0, commits_url.length - 6));
                 for (const commit of commits) {
