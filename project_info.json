@@ -1,8 +1,10 @@
 {
-    "links": [{
-        "name": "GraphQL",
-        "url": "http://api.bhagat.io/graphql"
-    }],
+    "links": [
+        {
+            "name": "GraphQL",
+            "url": "http://api.bhagat.io/graphql"
+        }
+    ],
     "ignoreView": true,
     "imageUrl": "https://raw.githubusercontent.com/rishavb123/api.bhagat.io/master/preview.png"
 }
