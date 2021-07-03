@@ -19,4 +19,11 @@ export default gql`
         user: String!
         decks: [Deck]!
     }
+    type Query {
+        deck(url: String): Deck!,
+        card(name: String): Card!,
+        mydeck(name: String): Deck,
+        mydecks(name: String): [Deck!]!,
+        user(user: String): User!,
+    }
 `;

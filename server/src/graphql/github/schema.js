@@ -23,4 +23,7 @@ export default gql`
         name: String!
         url: String!
     }
+    type Query {
+        repos(page: Int=1, pageSize: Int=100, forceNoDb: Boolean=false): [Repo]!
+    }
 `;

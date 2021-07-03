@@ -4,7 +4,7 @@ import { ApolloServerPluginInlineTrace } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-express';
 import cron from 'node-cron';
 
-import { schema, resolvers } from './graphql';
+import schema from './graphql';
 import jobs from './jobs';
 import addRoutes from './routes';
 import { port } from './constants';
@@ -15,8 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 const server = new ApolloServer({
-    typeDefs: schema,
-    resolvers,
+    schema: schema,
     playground: true,
     introspection: true,
     plugins: [ApolloServerPluginInlineTrace()],

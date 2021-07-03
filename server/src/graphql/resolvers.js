@@ -51,8 +51,8 @@ const resolvers = {
     JSON: GraphQLJSON,
 };
 
-export default {
-    ...resolvers,
-    ...mtgResolvers,
-    ...githubResolvers,
-};
+export default [
+    resolvers,
+    mtgResolvers,
+    githubResolvers,
+];
