@@ -17,6 +17,7 @@ export default [
                                 url
                             }
                             imageUrl
+                            priority
                         }
                         languages {
                             name
