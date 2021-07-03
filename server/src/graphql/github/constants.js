@@ -10,7 +10,7 @@ export const invalidDates = [
         year: 2021
     },
     {
-        day: 13,
+        day: 3,
         month: 7,
         year: 2021
     },
