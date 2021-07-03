@@ -10,10 +10,15 @@ function processJobs(jobs) {
             }
             console.log(`Starting ${job.name} job`);
             job.running = true;
-            await job.task();
-            console.log(`Finished ${job.name} job`);
-            job.lastExecuted = new Date().toString();
-            job.running = false;
+            try {
+                await job.task();
+                console.log(`Finished ${job.name} job`);
+            } catch (e) {
+                console.log(`Error occured in ${job.name} job`, e.message);
+            } finally {
+                job.lastExecuted = new Date().toString();
+                job.running = false;
+            }
         };
     }
     return jobs;
