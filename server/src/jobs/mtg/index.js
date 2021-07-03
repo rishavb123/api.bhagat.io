@@ -66,5 +66,5 @@ export default [
                 throw new Error(result.errors[0].message);
             }
         },
-    }
+    },
 ];
