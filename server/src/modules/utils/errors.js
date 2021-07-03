@@ -3,7 +3,7 @@ export function wrapWithErrorHandling(func, name, errorCallback = null) {
         try {
             return await func(...args);
         } catch (e) {
-            console.log(`Error in ${name}:`, e);
+            console.log(`ERROR - ${name}:`, e);
             if (errorCallback) {
                 errorCallback(e, ...args);
             }
