@@ -56,7 +56,6 @@ export default [
                     await collection.drop();
                 }
                 await collection.insertMany(decks);
-
             });
         },
         disabled: false,

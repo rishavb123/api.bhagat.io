@@ -10,7 +10,7 @@ export default function(app) {
                 runOnStart: job.runOnStart || false,
                 runInDev: job.runInDev || false,
                 currentlyRunning: job.running,
-                lastExecuted: job.lastExecuted
+                lastExecuted: job.lastExecuted,
             })),
         });
     });
@@ -30,8 +30,7 @@ export default function(app) {
                     status: 1,
                     msg: 'Job is already running',
                 });
-            }
-            else if (wait.toLowerCase() === 'true') {
+            } else if (wait.toLowerCase() === 'true') {
                 await job.call();
                 res.json({
                     status: 0,

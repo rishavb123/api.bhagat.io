@@ -7,5 +7,5 @@ import { mergeSchemas } from 'apollo-server-express';
 
 export default mergeSchemas({
     schemas,
-    resolvers
+    resolvers,
 });

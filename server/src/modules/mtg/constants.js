@@ -1,1 +1,1 @@
-export const MOXFIELD_USER = "rishavb123";
+export const MOXFIELD_USER = 'rishavb123';

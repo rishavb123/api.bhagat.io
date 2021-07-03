@@ -6,11 +6,11 @@ import { USER, INFO_FILE_NAME, INFO_FILE_BRANCH } from './constants';
 const instance = got.extend({
     hooks: {
         beforeRequest: [
-            options => {
-                options.headers.Authorization = `token ${process.env.GH_ACCESS_TOKEN}`
-            }
-        ]
-    }
+            (options) => {
+                options.headers.Authorization = `token ${process.env.GH_ACCESS_TOKEN}`;
+            },
+        ],
+    },
 });
 
 export async function getMyRepositoriesWithBhagatTopic(page, pageSize, caching = true) {

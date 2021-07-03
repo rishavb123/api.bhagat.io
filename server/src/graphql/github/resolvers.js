@@ -37,8 +37,9 @@ export default {
                         date.getDate() == invalidDate.day &&
                         date.getMonth() + 1 == invalidDate.month &&
                         date.getFullYear() == invalidDate.year
-                    )
+                    ) {
                         return true;
+                    }
                 }
                 return false;
             };
@@ -49,10 +50,13 @@ export default {
                     }
                 }
                 return false;
-            }
+            };
             const commits = await getCommits(commits_url.substring(0, commits_url.length - 6));
             for (const commit of commits) {
-                if (!invalidateDate(new Date(commit.commit.committer.date)) && !invalidateMessage(commit.commit.message)) {
+                if (
+                    !invalidateDate(new Date(commit.commit.committer.date)) &&
+                    !invalidateMessage(commit.commit.message)
+                ) {
                     return commit.commit.committer.date;
                 }
             }
@@ -62,7 +66,6 @@ export default {
             } else {
                 return created_at;
             }
-
         },
         languages: async ({ languages_url, fromDB, languages }) => {
             if (fromDB) {

@@ -14,7 +14,7 @@ function processJobs(jobs) {
             console.log(`Finished ${job.name} job`);
             job.lastExecuted = new Date().toString();
             job.running = false;
-        }
+        };
     }
     return jobs;
 }
