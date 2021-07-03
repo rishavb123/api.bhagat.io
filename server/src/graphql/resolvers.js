@@ -2,6 +2,7 @@ import GraphQLJSON from 'graphql-type-json';
 import FuzzySearch from 'fuzzy-search';
 import mtgResolvers from './mtg/resolvers';
 import githubResolvers from './github/resolvers';
+import jobResolvers from './jobs/resolvers';
 import { getDeckListsFromUser } from '../modules/mtg/decks';
 import { getMyRepositoriesWithBhagatTopic, numRequestsLeft } from '../modules/github';
 import { wrapWithDbClient } from '../modules/db';
@@ -55,4 +56,5 @@ export default [
     resolvers,
     mtgResolvers,
     githubResolvers,
+    jobResolvers,
 ];
