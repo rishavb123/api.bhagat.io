@@ -1,11 +1,11 @@
-export function wrapWithErrorHandling(func, errorCallback = null) {
+export function wrapWithErrorHandling(func, name, errorCallback = null) {
     return async (...args) => {
         try {
             return await func(...args);
         } catch (e) {
-            console.log(`Error in ${func.name}:`, e);
+            console.log(`Error in ${name}:`, e);
             if (errorCallback) {
-                errorCallback(e);
+                errorCallback(e, ...args);
             }
         }
     };
