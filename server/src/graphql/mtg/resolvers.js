@@ -66,15 +66,15 @@ export default {
         },
     },
     Query: {
-        deck: (_, { url, caching=false }) => ({
+        deck: (_, { url, caching=true }) => ({
             url,
             caching,
         }),
-        card: (_, { name, caching=false }) => ({
+        card: (_, { name, caching=true }) => ({
             name,
             caching,
         }),
-        mydeck: async (_, { name, caching=false }) => {
+        mydeck: async (_, { name, caching=true }) => {
             const searcher = new FuzzySearch((await getDeckListsFromUser(MOXFIELD_USER, caching)), ['name'], { sort: true });
             const searchResults = searcher.search(name);
             if (searchResults.length > 0) {
@@ -84,14 +84,14 @@ export default {
             }
             return null;
         },
-        mydecks: async (_, { caching=false }) => {
+        mydecks: async (_, { caching=true }) => {
             const result = await getDeckListsFromUser(MOXFIELD_USER, caching);
             for (const r of result) {
                 r.caching = caching;
             }
             return result;
         },
-        moxfielduser: (_, { user, caching=false }) => ({
+        moxfielduser: (_, { user, caching=true }) => ({
             user,
             caching
         }),
