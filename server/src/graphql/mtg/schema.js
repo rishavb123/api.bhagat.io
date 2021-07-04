@@ -48,18 +48,41 @@ export default gql`
 
     type Query {
         """Get a deck from a url (from a deck-building site)"""
-        deck(url: String!, caching: Boolean): Deck!,
+        deck(
+            """the deck url"""
+            url: String!,
+            """Whether or not to cache the results of the query. Defaults to true"""
+            caching: Boolean
+        ): Deck!,
 
         """Get a card by exact name"""
-        card(name: String!, caching: Boolean): Card!,
+        card(
+            """The exact name of the card"""
+            name: String!,
+            """Whether or not to cache the results of the query. Defaults to true"""
+            caching: Boolean
+        ): Card!,
 
         """Get one of my decks by name using a fuzzy search"""
-        mydeck(name: String!, caching: Boolean): Deck,
+        mydeck(
+            """The name of the deck you are looking for. This does not need to be exact."""
+            name: String!,
+            """Whether or not to cache the results of the query. Defaults to true"""
+            caching: Boolean
+        ): Deck,
 
         """Get all my decks"""
-        mydecks(name: String!, caching: Boolean): [Deck!]!,
+        mydecks(
+            """Whether or not to cache the results of the query. Defaults to true"""
+            caching: Boolean
+        ): [Deck!]!,
 
         """Get a moxfield user by username"""
-        moxfielduser(user: String!, caching: Boolean): MoxfieldUser!,
+        moxfielduser(
+            """The username of the moxfield user"""
+            user: String!,
+            """Whether or not to cache the results of the query. Defaults to true"""
+            caching: Boolean
+        ): MoxfieldUser!,
     }
 `;

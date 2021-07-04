@@ -57,6 +57,15 @@ export default gql`
 
     type Query {
         """Get the repositories marked with the """
-        repos(page: Int, pageSize: Int, forceNoDb: Boolean, caching: Boolean): [Repo]!
+        repos(
+            """The page number to get data from. Defaults to 1"""
+            page: Int,
+            """The number of repositories per page. Defaults to 100"""
+            pageSize: Int,
+            """Force the query to not fallback to the database rate limiting becomes a problem. Defaults to false"""
+            forceNoDb: Boolean,
+            """Whether or not to cache the query results. Defaults to true"""
+            caching: Boolean
+        ): [Repo]!
     }
 `;

@@ -33,6 +33,9 @@ export default gql`
         jobs: [Job]!,
 
         """Get a specific job by name"""
-        job(name: String!): Job!
+        job(
+            """The name of the job"""
+            name: String!
+        ): Job!
     }
 `;
