@@ -7,8 +7,8 @@ export default [
         expression: '5 */2 * * *',
         task: async () => {
             const query = `
-                query getDecks {
-                    mydecks {
+                query getDecks($caching: Boolean!) {
+                    mydecks(caching: $caching) {
                         url
                         name
                         deckType
@@ -25,7 +25,10 @@ export default [
                     }
                 }
             `;
-            const result = await queryGraphQL(query);
+            const variables = {
+                caching: false,
+            }
+            const result = await queryGraphQL(query, variables);
             if (!result.errors) {
                 const decks = result.data.mydecks;
                 console.log(`Read in ${decks.length} decks from moxfield. Processing data . . .`);
