@@ -12,15 +12,16 @@ export default {
             }
             return owner.login;
         },
-        info: async ({ name, homepage, fromDB, info }) => {
+        info: async ({ name, homepage, fromDB, info, caching }) => {
             if (fromDB) {
                 return info;
             }
-            const additionalInfo = await getAdditionalInfo(name);
+            const additionalInfo = await getAdditionalInfo(name, caching);
             return {
                 ...additionalInfo,
                 name,
                 homepage,
+                caching,
             };
         },
         createdDate: ({ created_at, fromDB, createdDate }) => {
@@ -29,7 +30,7 @@ export default {
             }
             return created_at;
         },
-        lastUpdated: async ({ commits_url, updated_at, created_at, fromDB, lastUpdated }) => {
+        lastUpdated: async ({ commits_url, updated_at, created_at, fromDB, lastUpdated, caching }) => {
             if (fromDB) {
                 return lastUpdated;
             }
@@ -53,7 +54,7 @@ export default {
                 }
                 return false;
             };
-            const commits = await getCommits(commits_url.substring(0, commits_url.length - 6));
+            const commits = await getCommits(commits_url.substring(0, commits_url.length - 6), caching);
             for (const commit of commits) {
                 if (
                     !invalidateDate(new Date(commit.commit.committer.date)) &&
@@ -69,11 +70,11 @@ export default {
                 return created_at;
             }
         },
-        languages: async ({ languages_url, fromDB, languages }) => {
+        languages: async ({ languages_url, fromDB, languages, caching }) => {
             if (fromDB) {
                 return languages;
             }
-            return await getLanguages(languages_url);
+            return await getLanguages(languages_url, caching);
         },
     },
     ExtraRepoInfo: {
@@ -138,7 +139,9 @@ export default {
                     return docs;
                 });
             }
-            return await getMyRepositoriesWithBhagatTopic(args.page, args.pageSize);
+            const result = await getMyRepositoriesWithBhagatTopic(args.page, args.pageSize, args.caching);
+            result.caching = args.caching;
+            return result;
         },
     },
 };

@@ -57,6 +57,6 @@ export default gql`
 
     type Query {
         """Get the repositories marked with the """
-        repos(page: Int=1, pageSize: Int=100, forceNoDb: Boolean=false): [Repo]!
+        repos(page: Int=1, pageSize: Int=100, forceNoDb: Boolean=false, caching: Boolean=true): [Repo]!
     }
 `;
