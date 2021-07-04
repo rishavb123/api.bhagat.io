@@ -52,16 +52,20 @@ export default [
                     deck.commander.image_url = data.image_uris.png;
                     deck.commander.art_crop = data.image_uris.art_crop;
                 }
-                console.log('Pushing decks to MongoDB . . .');
-                await wrapWithDbClient(async (client) => {
-                    const db = await client.db('bhagat-db');
-                    const collection = await db.collection('mtg-edh-decks');
+                if (decks.length > 0) {
+                    console.log('Pushing decks to MongoDB . . .');
+                    await wrapWithDbClient(async (client) => {
+                        const db = await client.db('bhagat-db');
+                        const collection = await db.collection('mtg-edh-decks');
 
-                    if ((await collection.countDocuments()) !== 0) {
-                        await collection.drop();
-                    }
-                    await collection.insertMany(decks);
-                });
+                        if ((await collection.countDocuments()) !== 0) {
+                            await collection.drop();
+                        }
+                        await collection.insertMany(decks);
+                    });
+                } else {
+                    console.log('0 decks found! Not pushing to MongoDB');
+                }
             } else {
                 throw new Error(result.errors[0].message);
             }
