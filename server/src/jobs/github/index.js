@@ -7,8 +7,8 @@ export default [
         expression: '55 */2 * * *',
         task: async () => {
             const query = `
-                query {
-                    repos(forceNoDb: true) {
+                query readRepos($caching: Boolean!, $forceNoDb: Boolean!) {
+                    repos(caching: $caching, forceNoDb: $forceNoDb) {
                         name
                         description
                         info {
@@ -29,8 +29,11 @@ export default [
                     }
                 }
             `;
-            const resp = await queryGraphQL(query);
-
+            const variables = {
+                caching: false,
+                forceNoDb: true,
+            };
+            const resp = await queryGraphQL(query, variables);
             
             if (resp.data && resp.data.repos && resp.data.repos.length > 0) {
                 console.log('Read in data using Github API. Now pushing to MongoDB . . .');
