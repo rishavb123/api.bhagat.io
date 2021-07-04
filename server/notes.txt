@@ -4,4 +4,4 @@
 - HTTPS api: https://bhagat-api.herokuapp.com/
 - HTTP api: http://api.bhagat.io
 - Heroku App: https://dashboard.heroku.com/apps/bhagat-api
-- Apollo Sandbox: https://studio.apollographql.com/sandbox/explorer
+- Apollo Sandbox: https://studio.apollographql.com/graph/Personal-API/explorer?variant=current
