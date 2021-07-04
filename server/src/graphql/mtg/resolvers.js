@@ -12,68 +12,88 @@ import { MOXFIELD_USER } from '../../modules/mtg/constants';
 
 export default {
     Deck: {
-        cards: async ({ url, cards }) => {
+        cards: async ({ url, cards, caching }) => {
             if (cards) return cards;
-            return await getDeckList(url);
+            const result = await getDeckList(url);
+            for (const r of result) {
+                r.caching = caching;
+            }
+            return result;
         },
-        name: async ({ url, name }) => {
+        name: async ({ url, name, caching }) => {
             if (name) return name;
-            return await getDeckListName(url);
+            return await getDeckListName(url, caching);
         },
-        deckType: async ({ url, name, deckType }) => {
+        deckType: async ({ url, name, deckType, caching }) => {
             if (deckType) return deckType;
             if (name && name.includes('EDH Commander Deck')) {
                 return 'Commander / EDH';
             }
-            return await getDeckType(url);
+            return await getDeckType(url, caching);
         },
-        commander: async ({ url, name, deckType, commander }) => {
+        commander: async ({ url, name, deckType, commander, caching }) => {
             if (commander) return commander;
-            if (name && name.includes('EDH Commander Deck')) {
+            if (name && name.includes(' EDH Commander Deck')) {
                 return {
                     name: name.split(' EDH Commander Deck')[0],
+                    caching,
                 };
             }
             if ((deckType || (await getDeckType(url))) !== 'Commander / EDH') {
                 return null;
             }
-            return (await getDeckList(url))[0];
+            const result = (await getDeckList(url, args.caching))[0];
+            result.caching = caching;
+            return result;
         },
-        description: async ({ url, description }) => {
+        description: async ({ url, description, caching }) => {
             if (description) return description;
-            return await getDeckDescription(url);
+            return await getDeckDescription(url, caching);
         },
     },
     Card: {
-        scryfallApiData: async ({ name }) => {
-            return await getScryfallApiData(name);
+        scryfallApiData: async ({ name, caching }) => {
+            return await getScryfallApiData(name, caching);
         },
     },
     MoxfieldUser: {
-        decks: async ({ user }) => {
-            return await getDeckListsFromUser(user);
+        decks: async ({ user, caching }) => {
+            const result = await getDeckListsFromUser(user, caching);
+            for (const r of result) {
+                r.caching = caching;
+            }
+            return result;
         },
     },
     Query: {
         deck: (_, args) => ({
             url: args.url,
+            caching: args.caching,
         }),
         card: (_, args) => ({
             name: args.name,
+            caching: args.caching,
         }),
         mydeck: async (_, args) => {
-            const searcher = new FuzzySearch((await getDeckListsFromUser(MOXFIELD_USER)), ['name'], { sort: true });
+            const searcher = new FuzzySearch((await getDeckListsFromUser(MOXFIELD_USER, args.caching)), ['name'], { sort: true });
             const searchResults = searcher.search(args.name);
             if (searchResults.length > 0) {
-                return searchResults[0];
+                const result = searchResults[0];
+                result.caching = args.caching;
+                return result;
             }
             return null;
         },
-        mydecks: async () => {
-            return await getDeckListsFromUser(MOXFIELD_USER);
+        mydecks: async (_, args) => {
+            const result = await getDeckListsFromUser(MOXFIELD_USER, args.caching);
+            for (const r of result) {
+                r.caching = args.caching;
+            }
+            return result;
         },
         moxfielduser: (_, args) => ({
             user: args.user,
+            caching: args.caching,
         }),
     },
 };

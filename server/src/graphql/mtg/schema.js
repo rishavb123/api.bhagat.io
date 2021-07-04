@@ -48,18 +48,18 @@ export default gql`
 
     type Query {
         """Get a deck from a url (from a deck-building site)"""
-        deck(url: String): Deck!,
+        deck(url: String, caching: Boolean=true): Deck!,
 
         """Get a card by exact name"""
-        card(name: String): Card!,
+        card(name: String, caching: Boolean=true): Card!,
 
         """Get one of my decks by name using a fuzzy search"""
-        mydeck(name: String): Deck,
+        mydeck(name: String, caching: Boolean=true): Deck,
 
         """Get all my decks"""
-        mydecks(name: String): [Deck!]!,
+        mydecks(name: String, caching: Boolean=true): [Deck!]!,
 
         """Get a moxfield user by username"""
-        moxfielduser(user: String): MoxfieldUser!,
+        moxfielduser(user: String, caching: Boolean=true): MoxfieldUser!,
     }
 `;
