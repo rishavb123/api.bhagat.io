@@ -125,9 +125,9 @@ export default {
         },
     },
     Query: {
-        repos: async (_, args) => {
-            const reqRemaining = args.forceNoDb ? null : await numRequestsLeft();
-            if (!args.forceNoDb && (reqRemaining.core < 15 || reqRemaining.search < 4)) {
+        repos: async (_, { page=1, pageSize=100, forceNoDb=false, caching=true }) => {
+            const reqRemaining = forceNoDb ? null : await numRequestsLeft();
+            if (!forceNoDb && (reqRemaining.core < 15 || reqRemaining.search < 4)) {
                 return await wrapWithDbClient(async (client) => {
                     const db = await client.db('bhagat-db');
                     const collection = await db.collection('gh-repos');
@@ -139,8 +139,8 @@ export default {
                     return docs;
                 });
             }
-            const result = await getMyRepositoriesWithBhagatTopic(args.page, args.pageSize, args.caching);
-            result.caching = args.caching;
+            const result = await getMyRepositoriesWithBhagatTopic(page, pageSize, caching);
+            result.caching = caching;
             return result;
         },
     },

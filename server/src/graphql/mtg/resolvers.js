@@ -66,34 +66,34 @@ export default {
         },
     },
     Query: {
-        deck: (_, args) => ({
-            url: args.url,
-            caching: args.caching,
+        deck: (_, { url, caching=false }) => ({
+            url,
+            caching,
         }),
-        card: (_, args) => ({
-            name: args.name,
-            caching: args.caching,
+        card: (_, { name, caching=false }) => ({
+            name,
+            caching,
         }),
-        mydeck: async (_, args) => {
-            const searcher = new FuzzySearch((await getDeckListsFromUser(MOXFIELD_USER, args.caching)), ['name'], { sort: true });
-            const searchResults = searcher.search(args.name);
+        mydeck: async (_, { name, caching=false }) => {
+            const searcher = new FuzzySearch((await getDeckListsFromUser(MOXFIELD_USER, caching)), ['name'], { sort: true });
+            const searchResults = searcher.search(name);
             if (searchResults.length > 0) {
                 const result = searchResults[0];
-                result.caching = args.caching;
+                result.caching = caching;
                 return result;
             }
             return null;
         },
-        mydecks: async (_, args) => {
-            const result = await getDeckListsFromUser(MOXFIELD_USER, args.caching);
+        mydecks: async (_, { caching=false }) => {
+            const result = await getDeckListsFromUser(MOXFIELD_USER, caching);
             for (const r of result) {
-                r.caching = args.caching;
+                r.caching = caching;
             }
             return result;
         },
-        moxfielduser: (_, args) => ({
-            user: args.user,
-            caching: args.caching,
+        moxfielduser: (_, { user, caching=false }) => ({
+            user,
+            caching
         }),
     },
 };
