@@ -10,10 +10,12 @@ import addRoutes from './routes';
 import { port } from './constants';
 
 
+// Express initialization
 const app = express();
 app.use(express.json());
 app.use(cors());
 
+// GraphQL Apollo Server initialization
 const server = new ApolloServer({
     schema: schema,
     playground: true,
@@ -22,12 +24,15 @@ const server = new ApolloServer({
 });
 server.applyMiddleware({ app });
 
+// Add all REST server routes
 addRoutes(app);
 
+// Start server
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}. GraphQL exposed at http://localhost:${port}/graphql`);
 });
 
+// Setup all scheduled jobs
 for (const job of jobs) {
     if (job.disabled !== true) {
         if (job.runOnStart) {
