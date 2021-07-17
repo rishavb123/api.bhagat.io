@@ -1,4 +1,4 @@
-import { getAdditionalInfo, getCommits, getLanguages } from '../../modules/github';
+import { getAdditionalInfo, getCommits, getHooks, getLanguages } from '../../modules/github';
 import { USER } from '../../modules/github/constants';
 import { invalidDates, invalidMessagePatterns } from './constants';
 import { getMyRepositoriesWithBhagatTopic, numRequestsLeft } from '../../modules/github';
@@ -76,6 +76,12 @@ export default {
             }
             return await getLanguages(languages_url, caching);
         },
+        hooks: async ({ hooks_url, fromDB, hooks, caching }) => {
+            if (fromDB) {
+                return hooks
+            }
+            return await getHooks(hooks_url, caching);
+        }
     },
     ExtraRepoInfo: {
         links: ({ name, links, ignoreSource, ignoreDownload, ignoreView, homepage, fromDB }) => {
