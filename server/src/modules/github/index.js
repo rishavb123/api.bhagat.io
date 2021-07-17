@@ -59,6 +59,23 @@ export async function getLanguages(languageUrl, caching = true) {
     }, `github-languages-${languageUrl}`, 120000, caching = caching);
 }
 
+export async function getHooks(hooksUrl, caching = true) {
+    return await wrapWithCache(async () => {
+        return JSON.parse((await instance(hooksUrl)).body);
+    }, `github-hooks-${hooksUrl}`, 120000, caching = true);
+}
+
+export async function addHook(newHook, hooksUrl) {
+    const hooks = await getHooks(hooksUrl, false);
+    for (const hook of hooks) {
+        if (hook.config.url == newHook.config.url)
+            return hook;
+    }
+    return await instance.post(hooksUrl, {
+        body: JSON.stringify(newHook)
+    })
+}
+
 export async function getCommits(commitsUrl, caching = true) {
     return await wrapWithCache(async () => {
         return JSON.parse((await instance(commitsUrl)).body);
