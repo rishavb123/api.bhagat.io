@@ -75,7 +75,11 @@ export default {
             caching,
         }),
         mydeck: async (_, { name, caching=true }) => {
-            const searcher = new FuzzySearch((await getDeckListsFromUser(MOXFIELD_USER, caching)), ['name'], { sort: true });
+            const searcher = new FuzzySearch(
+                (await getDeckListsFromUser(MOXFIELD_USER, caching)),
+                ['name'],
+                { sort: true },
+            );
             const searchResults = searcher.search(name);
             if (searchResults.length > 0) {
                 const result = searchResults[0];
@@ -93,7 +97,7 @@ export default {
         },
         moxfielduser: (_, { user, caching=true }) => ({
             user,
-            caching
+            caching,
         }),
     },
 };

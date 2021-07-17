@@ -78,10 +78,10 @@ export default {
         },
         hooks: async ({ hooks_url, fromDB, hooks, caching }) => {
             if (fromDB) {
-                return hooks
+                return hooks;
             }
             return await getHooks(hooks_url, caching);
-        }
+        },
     },
     ExtraRepoInfo: {
         links: ({ name, links, ignoreSource, ignoreDownload, ignoreView, homepage, fromDB }) => {

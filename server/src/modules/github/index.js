@@ -67,9 +67,9 @@ function processHookJson(hook) {
         secure: hook.config.insecure_ssl === '0',
         active: hook.active,
         createdDate: hook.created_at,
-        lastUpdated: hook.update_at,
+        lastUpdated: hook.updated_at,
         lastResponse: hook.last_response,
-    }
+    };
 }
 
 export async function getHooks(hooksUrl, caching = true) {
@@ -81,11 +81,12 @@ export async function getHooks(hooksUrl, caching = true) {
 export async function addHook(newHook, hooksUrl) {
     const hooks = await getHooks(hooksUrl, false);
     for (const hook of hooks) {
-        if (hook.config.url == newHook.config.url)
+        if (hook.config.url == newHook.config.url) {
             return processHookJson(hook);
+        }
     }
     return processHookJson(await instance.post(hooksUrl, {
-        body: JSON.stringify(newHook)
+        body: JSON.stringify(newHook),
     }));
 }
 

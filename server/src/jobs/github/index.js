@@ -34,7 +34,7 @@ export default [
                 forceNoDb: true,
             };
             const resp = await queryGraphQL(query, variables);
-            
+
             if (resp.data && resp.data.repos && resp.data.repos.length > 0) {
                 console.log('Read in data using Github API. Now pushing to MongoDB . . .');
                 await wrapWithDbClient(async (client) => {
@@ -47,7 +47,7 @@ export default [
                     await collection.insertMany(resp.data.repos);
                 });
             } else {
-                console.log("No data found. Not pushing to MongoDB");
+                console.log('No data found. Not pushing to MongoDB');
             }
         },
         runOnStart: false,
