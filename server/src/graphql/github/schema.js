@@ -23,6 +23,9 @@ export default gql`
 
         """The programming languages used in the repository and usage percentage split"""
         languages: [Language]!
+
+        """The web hooks that the github repo is connected to"""
+        hooks: [Hook]!
     }
 
     """Additional info read from the project_info.json file"""
@@ -37,6 +40,15 @@ export default gql`
         priority: Int
     }
 
+    """Link to display on my website projects section"""
+    type Link {
+        """The name of the link to show on my website"""
+        name: String!
+
+        """The url to go to when the link is actually clicked"""
+        url: String!
+    }
+
     """Programming language information in a repository"""
     type Language {
         """The name of the programming language"""
@@ -46,13 +58,44 @@ export default gql`
         percent: Float
     }
 
-    """Link to display on my website projects section"""
-    type Link {
-        """The name of the link to show on my website"""
-        name: String!
+    """Github WebHook information"""
+    type Hook {
+        """The hook id"""
+        id: Int!
 
-        """The url to go to when the link is actually clicked"""
+        """The url that the hook calls on updates"""
         url: String!
+
+        """The content type of the webhook"""
+        contentType: String!
+
+        """Whether the web hook uses SSL or not"""
+        secure: Boolean!
+
+        """Whether or not this webhook is active"""
+        active: Boolean!
+
+        """ISO date string for when the hook was created"""
+        createdDate: String!
+
+        """ISO date string for when the hook was last updated"""
+        lastUpdated: String!
+
+        """The last response from the webhook"""
+        lastResponse: HookResponse
+
+    }
+
+    """Response information from a github web hook call"""
+    type HookResponse {
+        """The status code of the hook response"""
+        code: Int!
+
+        """The message from the response"""
+        message: String!
+
+        """The status from the response"""
+        status: String!
     }
 
     type Query {
