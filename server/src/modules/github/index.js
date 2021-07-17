@@ -75,19 +75,20 @@ function processHookJson(hook) {
 export async function getHooks(hooksUrl, caching = true) {
     return await wrapWithCache(async () => {
         return JSON.parse((await instance(hooksUrl)).body).map(processHookJson);
-    }, `github-hooks-${hooksUrl}`, 120000, caching = true);
+    }, `github-hooks-${hooksUrl}`, 120000, caching = caching);
 }
 
 export async function addHook(newHook, hooksUrl) {
     const hooks = await getHooks(hooksUrl, false);
     for (const hook of hooks) {
-        if (hook.config.url == newHook.config.url) {
-            return processHookJson(hook);
+        if (hook.url == newHook.config.url) {
+            return hook;
         }
     }
-    return processHookJson(await instance.post(hooksUrl, {
+    const result = (await instance.post(hooksUrl, {
         body: JSON.stringify(newHook),
-    }));
+    })).body;
+    return processHookJson(JSON.parse(result));
 }
 
 export async function getCommits(commitsUrl, caching = true) {
