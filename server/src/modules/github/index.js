@@ -59,9 +59,22 @@ export async function getLanguages(languageUrl, caching = true) {
     }, `github-languages-${languageUrl}`, 120000, caching = caching);
 }
 
+function processHookJson(hook) {
+    return {
+        id: hook.id,
+        url: hook.config.url,
+        contentType: hook.config.content_type,
+        secure: hook.config.insecure_ssl === '0',
+        active: hook.active,
+        createdDate: hook.created_at,
+        lastUpdated: hook.update_at,
+        lastResponse: hook.last_response,
+    }
+}
+
 export async function getHooks(hooksUrl, caching = true) {
     return await wrapWithCache(async () => {
-        return JSON.parse((await instance(hooksUrl)).body);
+        return JSON.parse((await instance(hooksUrl)).body).map(processHookJson);
     }, `github-hooks-${hooksUrl}`, 120000, caching = true);
 }
 
@@ -69,11 +82,11 @@ export async function addHook(newHook, hooksUrl) {
     const hooks = await getHooks(hooksUrl, false);
     for (const hook of hooks) {
         if (hook.config.url == newHook.config.url)
-            return hook;
+            return processHookJson(hook);
     }
-    return await instance.post(hooksUrl, {
+    return processHookJson(await instance.post(hooksUrl, {
         body: JSON.stringify(newHook)
-    })
+    }));
 }
 
 export async function getCommits(commitsUrl, caching = true) {
