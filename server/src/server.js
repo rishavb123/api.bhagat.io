@@ -8,6 +8,7 @@ import schema from './graphql';
 import jobs from './jobs';
 import addRoutes from './routes';
 import { port } from './constants';
+
 import { startDiscordBot } from './modules/discord';
 
 
@@ -30,6 +31,7 @@ addRoutes(app);
 
 // Start server
 app.listen(port, () => {
+    console.log(`Server up in ${process.env.NODE_ENV} environment`);
     console.log(`Server running on http://localhost:${port}. GraphQL exposed at http://localhost:${port}/graphql`);
 });
 

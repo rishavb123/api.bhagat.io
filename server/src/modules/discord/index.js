@@ -1,10 +1,14 @@
 import Discord from 'discord.js';
+import { LOGS_CHANNEL_ID } from './contants';
 
 const client = new Discord.Client();
 
 export async function startDiscordBot() {
     // Init Bot
     await client.login(process.env.DISCORD_BOT_TOKEN);
+    if (process.env.NODE_ENV === 'PROD') {
+        discordLog('bhagat-api', 'Server up and running in the heroku environment');
+    }
 }
 
 export async function getChannel(channelId) {
@@ -36,4 +40,8 @@ export async function sendMessageEmbed(
         .setThumbnail(thumbnail)
         .setURL(url);
     await sendMessage(channelId, msgEmbed);
+}
+
+export async function discordLog(app, message) {
+    sendMessage(LOGS_CHANNEL_ID, `__${new Date().toLocaleString()}__ - **${app}** - ${message}`);
 }
