@@ -2,7 +2,7 @@ import { queryGraphQL } from '../../graphql/local';
 import jobs from '../../jobs';
 import { addRoute } from '../utils';
 
-export default function(app) {
+export default function (app) {
     addRoute('/jobs', app.get.bind(app), async (req, res) => {
         res.json({
             ...(await queryGraphQL(`
