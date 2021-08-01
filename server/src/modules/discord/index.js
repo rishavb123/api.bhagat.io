@@ -20,3 +20,16 @@ export async function getChannel(channelId) {
 export async function sendMessage(channelId, message) {
     await (await getChannel(channelId)).send(message);
 }
+
+export async function sendMessageEmbed(channelId, title, message, author='', color='', footer='', imageUrl='', thumbnail='', url='') {
+    const msgEmbed = new Discord.MessageEmbed()
+        .setTitle(title)
+        .setDescription(message)
+        .setAuthor(author)
+        .setColor(color)
+        .setFooter(footer)
+        .setImage(imageUrl)
+        .setThumbnail(thumbnail)
+        .setURL(url);
+    await sendMessage(channelId, msgEmbed);
+}
