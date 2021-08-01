@@ -1,6 +1,6 @@
 import { sendMessageEmbed } from "../../modules/discord";
 import { API_MESSAGES_CHANNEL_ID, USER_ID } from "../../modules/discord/contants";
-import { makeComposeUrl } from "../../modules/email/urls";
+import { makeComposeUrl } from "../../modules/email/utils";
 import { addRoute } from "../utils";
 
 export default function (app) {
@@ -13,7 +13,7 @@ export default function (app) {
             `New Message from ${name}!`,
             `<@${USER_ID}> \n${message}\nReach me at [${returnAddress}](${composeUrl})!`,
         );
-        
+
         res.json({
             status: 0,
         });
