@@ -2,6 +2,8 @@ import { queryGraphQL } from '../../graphql/local';
 import jobs from '../../jobs';
 import { addRoute } from '../utils';
 
+// TODO: 0 should be success and 1 should be failure. Need to make that consistent.
+
 export default function (app) {
     addRoute('/jobs', app.get.bind(app), async (req, res) => {
         res.json({
