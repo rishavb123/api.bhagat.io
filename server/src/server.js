@@ -8,6 +8,7 @@ import schema from './graphql';
 import jobs from './jobs';
 import addRoutes from './routes';
 import { port } from './constants';
+import { startDiscordBot } from './modules/discord';
 
 
 // Express initialization
@@ -43,3 +44,6 @@ for (const job of jobs) {
         }
     }
 }
+
+// Starts the discord bot
+startDiscordBot();
