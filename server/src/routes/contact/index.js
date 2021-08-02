@@ -13,6 +13,7 @@ export default function(app) {
                 status: 1,
                 msg: 'Invalid Email Address',
             });
+            return;
         }
 
         await sendMessageEmbed(
