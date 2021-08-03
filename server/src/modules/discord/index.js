@@ -18,6 +18,7 @@ export async function getChannel(channelId) {
         await delay(1000);
         return await client.channels.fetch(channelId);
     }
+    return result;
 }
 
 export async function sendMessage(channelId, message) {
