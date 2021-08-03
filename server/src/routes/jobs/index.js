@@ -21,7 +21,7 @@ export default function(app) {
                     }
                 }
             `)).data,
-            status: 1,
+            status: 0,
         });
     });
 
@@ -48,7 +48,7 @@ export default function(app) {
         }
         res.json({
             ...result.data,
-            status: 1,
+            status: 0,
         });
     });
 

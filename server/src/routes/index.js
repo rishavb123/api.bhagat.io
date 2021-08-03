@@ -13,7 +13,7 @@ export default function(app) {
         const memUsed = (process.memoryUsage().heapUsed +
         process.memoryUsage().rss + process.memoryUsage().external) / 1024 / 1024;
         res.json({
-            status: 1,
+            status: 0,
             memory: `${memUsed} mb`,
         });
     });

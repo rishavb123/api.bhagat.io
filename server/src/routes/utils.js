@@ -6,7 +6,7 @@ export function addRoute(route, method, ...handlers) {
         `REST ${route}`,
         (e, req, res) => {
             res.json({
-                status: 0,
+                status: 1,
                 error: {
                     name: e.name,
                     msg: e.message,
