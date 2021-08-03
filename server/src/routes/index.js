@@ -1,7 +1,7 @@
 import dbRoutes from './db';
 import jobRoutes from './jobs';
 import contactRoutes from './contact';
-import logsRoutes from './logs';
+import logRoutes from './log';
 import { addRoute } from './utils';
 
 export default function(app) {
@@ -25,5 +25,5 @@ export default function(app) {
     dbRoutes(app);
     jobRoutes(app);
     contactRoutes(app);
-    logsRoutes(app);
+    logRoutes(app);
 }
