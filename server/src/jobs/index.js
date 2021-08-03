@@ -1,5 +1,6 @@
 import mtgCrons from './mtg';
 import githubCrons from './github';
+import { delay } from '../modules/utils/misc';
 
 function processJobs(jobs) {
     for (const job of jobs) {
@@ -29,7 +30,6 @@ export default processJobs([
         name: 'hello_world',
         expression: '* * * * *',
         task: async () => {
-            const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             await delay(5000);
             console.log('Good Morning!');
         },

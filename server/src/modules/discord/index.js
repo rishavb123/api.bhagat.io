@@ -1,4 +1,5 @@
 import Discord from 'discord.js';
+import { delay } from '../utils/misc';
 import { LOGS_CHANNEL_ID } from './contants';
 
 const client = new Discord.Client();
@@ -12,11 +13,15 @@ export async function startDiscordBot() {
 }
 
 export async function getChannel(channelId) {
-    return await client.channels.fetch(channelId);
+    const result = await client.channels.fetch(channelId);
+    if (result == null) {
+        await delay(1000);
+        return await client.channels.fetch(channelId);
+    }
 }
 
 export async function sendMessage(channelId, message) {
-    await (await getChannel(channelId)).send(message);
+    await (await getChannel(channelId))?.send(message);
 }
 
 export async function sendMessageEmbed(
@@ -43,16 +48,17 @@ export async function sendMessageEmbed(
 }
 
 export async function discordLog(app, message, state = {}) {
-    let logMessage = `__${new Date().toLocaleString()}__ - **${app}** - ${message}`;
+    let logMessage = `__${new Date().toLocaleString()}__ — **${app}** — *${message}*`;
     let first = true;
-    for (let key in state) {
+    for (const key in state) {
         if (first) {
-            logMessage += ' - ';
+            logMessage += ' — ';
             first = false;
         }
+        const value = state[key];
         logMessage += `${key}=${value}, `;
     }
     if (!first)
-        logMessage = logMessage.substring(logMessage.length - 2);
+        logMessage = logMessage.substring(0, logMessage.length - 2);
     sendMessage(LOGS_CHANNEL_ID, logMessage);
 }

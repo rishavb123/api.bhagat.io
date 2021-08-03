@@ -1,7 +1,6 @@
 import got from 'got/dist/source';
 import { wrapWithCache } from '../utils/caching';
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+import { delay } from '../utils/misc';
 
 export async function getScryfallApiData(name, caching = true) {
     return await wrapWithCache(async () => {
