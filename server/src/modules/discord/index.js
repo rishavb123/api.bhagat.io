@@ -21,7 +21,7 @@ export async function getChannel(channelId) {
 }
 
 export async function sendMessage(channelId, message) {
-    await (await getChannel(channelId))?.send(message);
+    await (await getChannel(channelId)).send(message);
 }
 
 export async function sendMessageEmbed(
