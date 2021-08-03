@@ -6,7 +6,7 @@ const client = new Discord.Client();
 
 export async function startDiscordBot() {
     await client.login(process.env.DISCORD_BOT_TOKEN);
-    if (process.env.NODE_ENV === 'PROD') {
+    if (process.env.NODE_ENV === 'production') {
         discordLog('bhagat-api', 'Server up and running in the heroku environment');
     }
 }

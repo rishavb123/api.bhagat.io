@@ -41,7 +41,7 @@ for (const job of jobs) {
         if (job.runOnStart) {
             job.call();
         }
-        if (process.env.NODE_ENV !== 'DEV' || job.runInDev) {
+        if (process.env.NODE_ENV !== 'development' || job.runInDev) {
             cron.schedule(job.expression, job.call, job.options || {});
         }
     }
