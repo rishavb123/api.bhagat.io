@@ -43,7 +43,7 @@ export async function sendMessageEmbed(
 }
 
 export async function discordLog(app, message, state = {}) {
-    const logMessage = `__${new Date().toLocaleString()}__ - **${app}** - ${message}`;
+    let logMessage = `__${new Date().toLocaleString()}__ - **${app}** - ${message}`;
     let first = true;
     for (let key in state) {
         if (first) {
