@@ -42,6 +42,17 @@ export async function sendMessageEmbed(
     await sendMessage(channelId, msgEmbed);
 }
 
-export async function discordLog(app, message) {
-    sendMessage(LOGS_CHANNEL_ID, `__${new Date().toLocaleString()}__ - **${app}** - ${message}`);
+export async function discordLog(app, message, state = {}) {
+    const logMessage = `__${new Date().toLocaleString()}__ - **${app}** - ${message}`;
+    let first = true;
+    for (let key in state) {
+        if (first) {
+            logMessage += ' - ';
+            first = false;
+        }
+        logMessage += `${key}=${value}, `;
+    }
+    if (!first)
+        logMessage = logMessage.substring(logMessage.length - 2);
+    sendMessage(LOGS_CHANNEL_ID, logMessage);
 }
