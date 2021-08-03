@@ -1,5 +1,5 @@
 import { sendMessageEmbed } from '../../modules/discord';
-import { API_MESSAGES_CHANNEL_ID, USER_ID } from '../../modules/discord/contants';
+import { API_MESSAGES_CHANNEL_ID, USER_ID } from '../../modules/discord/constants';
 import { makeComposeUrl, validateEmail } from '../../modules/email/utils';
 import { addRoute } from '../utils';
 

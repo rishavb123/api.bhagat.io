@@ -1,6 +1,6 @@
 import Discord from 'discord.js';
 import { delay } from '../utils/misc';
-import { LOGS_CHANNEL_ID } from './contants';
+import { LOGS_CHANNEL_ID } from './constants';
 
 const client = new Discord.Client();
 
