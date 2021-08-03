@@ -1,9 +1,9 @@
 import { discordLog } from '../../modules/discord';
 import { hashString, generatePassword, checkHash } from '../../modules/utils/encryption';
-import { wrapWithDbClient } from "../../modules/db";
-import { addRoute } from "../utils";
+import { wrapWithDbClient } from '../../modules/db';
+import { addRoute } from '../utils';
 
-export default function (app) {
+export default function(app) {
     addRoute('/log/register', app.post.bind(app), async (req, res) => {
         await wrapWithDbClient(async (client) => {
             const db = await client.db('bhagat-db');
@@ -12,10 +12,10 @@ export default function (app) {
             const password = req.body.auth || generatePassword(10);
             const hash = hashString(password);
             const cursor = await collection.find({
-                name: req.body.app
+                name: req.body.app,
             }, {
                 projection: {
-                    "__id": 0,
+                    '__id': 0,
                 },
                 limit: 1,
             });
@@ -46,10 +46,10 @@ export default function (app) {
             const collection = await db.collection('log-apps');
 
             const cursor = await collection.find({
-                name: req.body.app
+                name: req.body.app,
             }, {
                 projection: {
-                    "__id": 0,
+                    '__id': 0,
                 },
                 limit: 1,
             });
@@ -82,10 +82,10 @@ export default function (app) {
             const collection = await db.collection('log-apps');
 
             const cursor = await collection.find({
-                name: req.body.app
+                name: req.body.app,
             }, {
                 projection: {
-                    "__id": 0,
+                    '__id': 0,
                 },
                 limit: 1,
             });
@@ -104,7 +104,7 @@ export default function (app) {
                     });
                     res.json({
                         status: 0,
-                        msg: `App ${req.body.app} unregistered`
+                        msg: `App ${req.body.app} unregistered`,
                     });
                 } else {
                     res.json({

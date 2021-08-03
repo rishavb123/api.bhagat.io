@@ -5,7 +5,6 @@ import { LOGS_CHANNEL_ID } from './contants';
 const client = new Discord.Client();
 
 export async function startDiscordBot() {
-    // Init Bot
     await client.login(process.env.DISCORD_BOT_TOKEN);
     if (process.env.NODE_ENV === 'PROD') {
         discordLog('bhagat-api', 'Server up and running in the heroku environment');
@@ -51,7 +50,7 @@ export async function sendMessageEmbed(
 export async function discordLog(app, message, state = {}) {
     let logMessage = `__${new Date().toLocaleString()}__ — **${app}** — *${message}*`;
     let first = true;
-    for (const key in state) {
+    for (const key of Object.keys(state)) {
         if (first) {
             logMessage += ' — ';
             first = false;
@@ -59,7 +58,8 @@ export async function discordLog(app, message, state = {}) {
         const value = state[key];
         logMessage += `${key}=${value}, `;
     }
-    if (!first)
+    if (!first) {
         logMessage = logMessage.substring(0, logMessage.length - 2);
+    }
     sendMessage(LOGS_CHANNEL_ID, logMessage);
 }
