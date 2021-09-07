@@ -10,6 +10,7 @@ import addRoutes from './routes';
 import { port } from './constants';
 
 import { startDiscordBot } from './modules/discord';
+import { startGTMTGDiscordBot } from './modules/gtmtg/discord';
 
 
 // Express initialization
@@ -47,5 +48,6 @@ for (const job of jobs) {
     }
 }
 
-// Starts the discord bot
+// Starts the discord bots
 startDiscordBot();
+startGTMTGDiscordBot();
