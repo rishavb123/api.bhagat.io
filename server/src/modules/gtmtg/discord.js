@@ -13,11 +13,9 @@ export async function startGTMTGDiscordBot() {
     client.on('guildMemberAdd', async (member) => {
         await sendMessageEmbed(
             WELCOME_CHANNEL_ID,
-            `Welcome to the server!`,
-            `<@${member.id}> \n Make sure to check out <#${ROLES_CHANNEL_ID}> to add any roles you want and throw an introduction for yourself in <#${INTRODUCTIONS_CHANNEL_ID}>.` +
-            `Also, please change your nickname on the server to your first name (and last name if you want). \n\n` +
-            `To see any upcoming events or announcements, see the <#${ANNOUNCEMENTS_CHANNEL_ID}> or check our website at https://mtg.bhagat.io ! \n\n` +
-            `Feel free to poke around the different server channels and join us on Friday for our weekly game nights!`
+            `Welcome, fellow Planeswalker!`,
+            `<@${member.id}> \n Make sure to give yourself <#${ROLES_CHANNEL_ID}> and introduce yourself in <#${INTRODUCTIONS_CHANNEL_ID}>. Also, please change your server nickname to your real name. \n\n
+            Check <#${ANNOUNCEMENTS_CHANNEL_ID}> or our website https://mtg.bhagat.io/ for any upcoming events. Feel free to poke around various channels and join us on Fridays for our weekly game nights!`
         );
     });
 }
