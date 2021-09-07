@@ -1,6 +1,6 @@
 import Discord from 'discord.js';
 import { delay } from '../utils/misc';
-import { SANDBOX_CHANNEL_ID,  } from './constants';
+import { SANDBOX_CHANNEL_ID, WELCOME_CHANNEL_ID, ROLES_CHANNEL_ID, INTRODUCTIONS_CHANNEL_ID, ANNOUNCEMENTS_CHANNEL_ID } from './constants';
 
 
 const client = new Discord.Client();
@@ -10,8 +10,15 @@ export async function startGTMTGDiscordBot() {
     if (process.env.NODE_ENV === 'production') {
         await sendMessage(SANDBOX_CHANNEL_ID, 'Discord Bot is up and running in the heroku environment.');
     }
-    client.on("guildMemberAdd", member => {
-
+    client.on('guildMemberAdd', async (member) => {
+        await sendMessageEmbed(
+            WELCOME_CHANNEL_ID,
+            `Welcome to the server!`,
+            `<@${member.id}> \n Make sure to check out <#${ROLES_CHANNEL_ID}> to add any roles you want and throw an introduction for yourself in <#${INTRODUCTIONS_CHANNEL_ID}>.` +
+            `Also, please change your nickname on the server to your first name (and last name if you want). \n\n` +
+            `To see any upcoming events or announcements, see the <#${ANNOUNCEMENTS_CHANNEL_ID}> or check our website at https://mtg.bhagat.io ! \n\n` +
+            `Feel free to poke around the different server channels and join us on Friday for our weekly game nights!`
+        );
     });
 }
 
