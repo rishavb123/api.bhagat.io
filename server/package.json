@@ -10,7 +10,10 @@
     "build": "babel src -d temp && uglifyjs-folder temp -eo dist -x .js && rm -rf temp",
     "lint": ".\\node_modules\\.bin\\eslint src --fix",
     "clean": "rm -rf dist & rm -rf ./node_modules",
-    "deploy": "cd .. && git subtree push --prefix server heroku master"
+    "deploy": "cd .. && git subtree push --prefix server heroku master",
+    "down": "heroku ps:scale web=0",
+    "up": "heroku ps:scale web=1",
+    "restart": "heroku restart,"
   },
   "repository": {
     "type": "git",
