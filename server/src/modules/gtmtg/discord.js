@@ -10,6 +10,7 @@ const botState = {};
 
 const dialogStates = {
     'sign up': {
+        description: "Signs you up into our database",
         dialogs: [
             (trigger, state) => {
                 state.step++;
@@ -47,6 +48,19 @@ const dialogStates = {
                 } else {
                     return 'Invalid input try again. Is this information correct? (Y/N)';
                 }
+            }
+        ]
+    },
+    help: {
+        description: "Lists all the processes",
+        dialogs: [
+            (trigger, state) => {
+                state.step = -1;
+                let s = "Here are all the different processes currently available\n";
+                for (let keys in dialogStates) {
+                    s += `**${keys}**: ${dialogStates[keys].description}\n`;
+                }
+                return s;
             }
         ]
     }
@@ -103,7 +117,7 @@ export async function startGTMTGDiscordBot() {
                 await takeStepWithMessage(content, botState[userId]);
                 
             } else {
-                await message.reply('Sorry that does not match any of my known processes. Please DM the mods for any questions.');
+                await message.reply('Sorry that does not match any of my known processes. Please DM the mods for any questions or type help into the chat.');
             }
         }
     });
