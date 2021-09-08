@@ -1,7 +1,7 @@
 import { wrapWithDbClient } from "../db";
 
 export async function addPerson(firstName, lastName, gtUser, discordUser='', discordId='') {
-    await wrapWithDbClient(async (client) => {
+    return await wrapWithDbClient(async (client) => {
         const db = await client.db('gtmtg-db');
         const collection = await db.collection('users');
         const cursor = await collection.find({
