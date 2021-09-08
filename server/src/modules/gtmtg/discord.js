@@ -67,7 +67,6 @@ export async function startGTMTGDiscordBot() {
     });
 
     async function takeStep(message, state) {
-        console.log(state);
         return await dialogStates[state.process].dialogs[state.step](message, state);
     }
 
@@ -100,7 +99,7 @@ export async function startGTMTGDiscordBot() {
                 botState[userId].step = botState[userId].step || 0;
                 botState[userId].process = content.toLowerCase();
                 botState[userId].userId = userId;
-                botState[userId].username = message.author.username;
+                botState[userId].username = message.author.tag;
                 await takeStepWithMessage(content, botState[userId]);
                 
             } else {
