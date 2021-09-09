@@ -1,6 +1,12 @@
 import Discord from 'discord.js';
 import { delay, toTitleCase } from '../utils/misc';
-import { SANDBOX_CHANNEL_ID, WELCOME_CHANNEL_ID, ROLES_CHANNEL_ID, INTRODUCTIONS_CHANNEL_ID, ANNOUNCEMENTS_CHANNEL_ID } from './constants';
+import {
+    SANDBOX_CHANNEL_ID,
+    WELCOME_CHANNEL_ID,
+    ROLES_CHANNEL_ID,
+    INTRODUCTIONS_CHANNEL_ID,
+    ANNOUNCEMENTS_CHANNEL_ID,
+} from './constants';
 import { addPerson } from './roster';
 import { USER_ID } from '../discord/constants';
 
@@ -10,7 +16,7 @@ const botState = {};
 
 const dialogStates = {
     'sign up': {
-        description: "Signs you up into our database",
+        description: 'Signs you up into our database',
         dialogs: [
             (trigger, state) => {
                 state.step++;
@@ -29,17 +35,25 @@ const dialogStates = {
             (gtUser, state) => {
                 state.data.gtUser = gtUser.toLowerCase();
                 state.step++;
-                return `Is this information correct? (Y/N) \nFirst Name: ${state.data.first}\nLast Name: ${state.data.last}\nGT User: ${state.data.gtUser}\nDiscord User: ${state.username}`;
+                return `Is this information correct? (Y/N) \nFirst Name: ${state.data.first}\nLast Name: ` +
+                    `${state.data.last}\nGT User: ${state.data.gtUser}\nDiscord User: ${state.username}`;
             },
             async (confirmation, state) => {
                 if (confirmation.toLowerCase().charAt(0) == 'y') {
-                    const result = await addPerson(state.data.first, state.data.last, state.data.gtUser, state.username, state.userId);
+                    const result = await addPerson(
+                        state.data.first,
+                        state.data.last,
+                        state.data.gtUser,
+                        state.username,
+                        state.userId,
+                    );
                     if (result) {
                         state.step = -1;
                         return 'Awesome! Thanks for the info! I added you into our database!';
                     } else {
                         state.step = -1;
-                        return `Looks like your already in the database. If you would like to update your information, DM <@${USER_ID}>`;
+                        return `Looks like your already in the database. ` +
+                            `If you would like to update your information, DM <@${USER_ID}>`;
                     }
                 } else if (confirmation.toLowerCase().charAt(0) == 'n') {
                     state.step = 0;
@@ -48,23 +62,23 @@ const dialogStates = {
                 } else {
                     return 'Invalid input try again. Is this information correct? (Y/N)';
                 }
-            }
-        ]
+            },
+        ],
     },
-    help: {
-        description: "Lists all the processes",
+    'help': {
+        description: 'Lists all the processes',
         dialogs: [
             (trigger, state) => {
                 state.step = -1;
-                let s = "Here are all the different processes currently available\n";
-                for (let keys in dialogStates) {
+                let s = 'Here are all the different processes currently available\n';
+                for (const keys of Object.keys(dialogStates)) {
                     s += `**${keys}**: ${dialogStates[keys].description}\n`;
                 }
                 return s;
-            }
-        ]
-    }
-}
+            },
+        ],
+    },
+};
 
 export async function startGTMTGDiscordBot() {
     await client.login(process.env.GTMTG_DISCORD_BOT_TOKEN);
@@ -75,23 +89,28 @@ export async function startGTMTGDiscordBot() {
         await sendMessageEmbed(
             WELCOME_CHANNEL_ID,
             `Welcome, fellow Planeswalker!`,
-            `<@${member.id}> \n Make sure to give yourself <#${ROLES_CHANNEL_ID}> and introduce yourself in <#${INTRODUCTIONS_CHANNEL_ID}>. Also, please change your server nickname to your real name. \n
-            Check <#${ANNOUNCEMENTS_CHANNEL_ID}> or our website https://mtg.bhagat.io/ for any upcoming events. Feel free to poke around various channels and join us on Fridays for our weekly game nights!`
+            `<@${member.id}> \n Make sure to give yourself <#${ROLES_CHANNEL_ID}> and introduce yourself ` +
+            `in <#${INTRODUCTIONS_CHANNEL_ID}>. Also, please change your server nickname to your real name. \n
+            Check <#${ANNOUNCEMENTS_CHANNEL_ID}> or our website https://mtg.bhagat.io/ for any upcoming events. ` +
+            `Feel free to poke around various channels and join us on Fridays for our weekly game nights!`,
         );
     });
 
     async function takeStep(message, state) {
-        return await dialogStates[state.process].dialogs[state.step](message, state);
+        try {
+            return await dialogStates[state.process].dialogs[state.step](message, state);
+        } catch (e) {
+            return 'Sorry, I seem to have miscalculated something, please send your last message again.';
+        }
     }
 
     client.on('message', async (message) => {
-
         if (message.channel.type == 'dm' && !message.author.bot) {
-            
             async function takeStepWithMessage(m, s) {
                 const result = await takeStep(m, s);
-                if (result && result.length > 0)
+                if (result && result.length > 0) {
                     await message.reply(result);
+                }
                 if (s.skipResponse) {
                     s.skipResponse = false;
                     await takeStepWithMessage(m, s);
@@ -115,9 +134,9 @@ export async function startGTMTGDiscordBot() {
                 botState[userId].userId = userId;
                 botState[userId].username = message.author.tag;
                 await takeStepWithMessage(content, botState[userId]);
-                
             } else {
-                await message.reply('Sorry that does not match any of my known processes. Please DM the mods for any questions or type help into the chat.');
+                await message.reply('Sorry that does not match any of my known processes. ' +
+                    'Please DM the mods for any questions or type help into the chat.');
             }
         }
     });
