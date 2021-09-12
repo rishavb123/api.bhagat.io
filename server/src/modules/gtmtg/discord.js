@@ -6,6 +6,7 @@ import {
     ROLES_CHANNEL_ID,
     INTRODUCTIONS_CHANNEL_ID,
     ANNOUNCEMENTS_CHANNEL_ID,
+    GENERAL_CHANNEL_ID,
 } from './constants';
 import { addPerson } from './roster';
 import { USER_ID } from '../discord/constants';
@@ -85,11 +86,20 @@ export async function startGTMTGDiscordBot() {
     if (process.env.NODE_ENV === 'production') {
         await sendMessage(SANDBOX_CHANNEL_ID, 'Discord Bot is up and running in the heroku environment.');
     }
+
+    (await getChannel(GENERAL_CHANNEL_ID)).setTopic('Blue is better than Red! BLUE >>>>>>> RED');
+
     client.on('guildMemberAdd', async (member) => {
+        const memberCount = member.guild.memberCount;
+        (await getChannel(SANDBOX_CHANNEL_ID)).setTopic(`We have ${memberCount} members!`);
+        let memberCountMsg = '';
+        if (memberCount % 50 == 0) {
+            memberCountMsg = `You are our ${memberCount}th member!`;
+        }
         await sendMessageEmbed(
             WELCOME_CHANNEL_ID,
             `Welcome, fellow Planeswalker!`,
-            `<@${member.id}> \n Make sure to give yourself <#${ROLES_CHANNEL_ID}> and introduce yourself ` +
+            `<@${member.id}> ${memberCountMsg}\n Make sure to give yourself <#${ROLES_CHANNEL_ID}> and introduce yourself ` +
             `in <#${INTRODUCTIONS_CHANNEL_ID}>. Also, please change your server nickname to your real name. \n
             Check <#${ANNOUNCEMENTS_CHANNEL_ID}> or our website https://mtg.bhagat.io/ for any upcoming events. ` +
             `Feel free to poke around various channels and join us on Fridays for our weekly game nights!`,
