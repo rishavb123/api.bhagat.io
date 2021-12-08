@@ -2,6 +2,7 @@ import Discord from 'discord.js';
 import { delay, toTitleCase } from '../utils/misc';
 import {
     SANDBOX_CHANNEL_ID,
+    REFERENCES_CHANNEL_ID,
     WELCOME_CHANNEL_ID,
     ROLES_CHANNEL_ID,
     INTRODUCTIONS_CHANNEL_ID,
@@ -91,7 +92,7 @@ export async function startGTMTGDiscordBot() {
 
     client.on('guildMemberAdd', async (member) => {
         const memberCount = member.guild.memberCount;
-        (await getChannel(SANDBOX_CHANNEL_ID)).setTopic(`We have ${memberCount} members!`);
+        (await getChannel(REFERENCES_CHANNEL_ID)).setTopic(`We have ${memberCount} members!`);
         let memberCountMsg = '';
         if (memberCount % 50 == 0) {
             memberCountMsg = `You are our ${memberCount}th member!`;
