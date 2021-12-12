@@ -1,6 +1,7 @@
 import Discord from 'discord.js';
 import { delay } from '../utils/misc';
-import { LOGS_CHANNEL_ID } from './constants';
+import commands from '../../commands';
+import { COMMANDS_CHANNEL_ID, LOGS_CHANNEL_ID } from './constants';
 
 const client = new Discord.Client();
 
@@ -63,3 +64,27 @@ export async function discordLog(app, message, state = {}) {
     }
     sendMessage(LOGS_CHANNEL_ID, logMessage);
 }
+
+client.on('message', async (message) => {
+    if (message.channel.id == COMMANDS_CHANNEL_ID && !message.author.bot && message.content.startsWith('!')) {
+        const commandStr = message.content.split(" ")[0].substring(1);
+        const content = message.content.substring(commandStr.length + 2);
+        let reply = '\n';
+
+        if (commandStr == 'help') {
+            reply = "\nCommands: \n";
+            for (const command of commands) {
+                reply += `!${command.name.replaceAll('_', '-')}\n`;
+            }
+        } else {
+            const command = commands.find((command) => command.triggers.includes(commandStr));
+            if (command) {
+                reply += await command.run(command.parseArgs(content));
+            } else {
+                reply = `Command ${commandStr} not found! Try !help to see all commands.`;
+            }
+        }
+
+        await message.reply(reply);
+    }
+})
