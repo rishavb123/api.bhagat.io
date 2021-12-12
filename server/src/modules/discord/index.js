@@ -68,7 +68,7 @@ export async function discordLog(app, message, state = {}) {
 client.on('message', async (message) => {
     if (message.channel.id == COMMANDS_CHANNEL_ID && !message.author.bot && message.content.startsWith('!')) {
         const commandStr = message.content.split(' ')[0].substring(1);
-        const content = message.content.substring(commandStr.length + 2);
+        const content = message.content.substring(commandStr.length + 2).replaceAll('“', '"').replaceAll('”', '"');
         let reply = '\n';
 
         if (commandStr == 'help') {
