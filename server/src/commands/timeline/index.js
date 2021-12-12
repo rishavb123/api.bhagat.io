@@ -33,23 +33,38 @@ function processDate(date) {
 export default [
     {
         name: 'add_event',
+        help: 'Adds an event to the database to be displayed on the timeline at https://bhagat.io#timeline. Usage: !add-event {startDate}-->{endDate} "{Name}" "{Description}" or !add-event "{Name}" "{Description}". The latter uses the current date for start and end.',
         parseArgs: (message) => {
-            const regex = /(.*)-*>(.*) \"(.*)\" \"(.*)\"/;
-            const regex2 = /\"(.*)\" \"(.*)\"/;
+            const regex = /(.*)-*>(.*).\"(.*)\".\"(.*)\"/;
+            const regex2 = /(.*).\"(.*)\".\"(.*)\"/;
+            const regex3 = /\"(.*)\" \"(.*)\"/;
+
+            const lineReplacer = '~+-='
+            message = message.replaceAll('\n', lineReplacer);
+            
             if (regex.test(message)) {
                 const matches = message.match(regex);
                 return {
-                    startDate: matches[1],
-                    endDate: matches[2],
-                    name: matches[3],
-                    description: matches[4],
+                    startDate: matches[1].replaceAll(lineReplacer, '\n'),
+                    endDate: matches[2].replaceAll(lineReplacer, '\n'),
+                    name: matches[3].replaceAll(lineReplacer, '\n'),
+                    description: matches[4].replaceAll(lineReplacer, '\n'),
                 };
             }
             if (regex2.test(message)) {
                 const matches = message.match(regex2);
                 return {
-                    name: matches[1],
-                    description: matches[2],
+                    startDate: matches[1].replaceAll(lineReplacer, '\n'),
+                    endDate: matches[1].replaceAll(lineReplacer, '\n'),
+                    name: matches[2].replaceAll(lineReplacer, '\n'),
+                    description: matches[3].replaceAll(lineReplacer, '\n'),
+                }
+            }
+            if (regex3.test(message)) {
+                const matches = message.match(regex3);
+                return {
+                    name: matches[1].replaceAll(lineReplacer, '\n'),
+                    description: matches[2].replaceAll(lineReplacer, '\n'),
                 };
             }
             return {};

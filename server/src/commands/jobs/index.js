@@ -5,6 +5,7 @@ export default [
     {
         name: 'list_jobs',
         parseArgs: (_) => ({}),
+        help: 'Lists all the jobs and information on them. Usage: !list-jobs',
         run: async (_) => {
             let reply = '';
             const keys = ['name', 'expression', 'disabled', 'runOnStart', 'runInDev', 'currentlyRunning', 'lastExecuted'];
@@ -34,6 +35,7 @@ export default [
     },
     {
         name: 'get_job',
+        help: 'Gets the information on a specified job. Usage: !get-job {jobName}',
         parseArgs: (message) => ({ name: message }),
         run: async ({ name }) => {
             const result = await queryGraphQL(`
@@ -66,6 +68,7 @@ export default [
     },
     {
         name: 'run_job',
+        help: 'Runs the specified job. Usage: !run-job {jobName}. To run in the background use !run-job _{jobName}',
         parseArgs: (message) => {
             if (message.startsWith('_')) {
                 return {

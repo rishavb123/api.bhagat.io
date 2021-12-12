@@ -72,9 +72,9 @@ client.on('message', async (message) => {
         let reply = '\n';
 
         if (commandStr == 'help') {
-            reply = '\nCommands: \n';
+            reply = '\n__Commands:__ \n';
             for (const command of commands) {
-                reply += `!${command.name.replaceAll('_', '-')}\n`;
+                reply += `**!${command.name.replaceAll('_', '-')}**: ${command.help}\n`;
             }
         } else {
             const command = commands.find((command) => command.triggers.includes(commandStr));

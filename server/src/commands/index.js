@@ -22,6 +22,9 @@ function processCommands(commands) {
         if (!command.name) {
             command.name = command.triggers[0].replaceAll('-', '_');
         }
+        if (!command.help) {
+            command.help = `Usage: !${command.name} {ARGS}`;
+        }
     }
     return commands;
 }
@@ -29,6 +32,7 @@ function processCommands(commands) {
 export default processCommands([
     {
         name: 'hello_world',
+        help: 'Says hello! Usage: !hello-world or !hello-world {name: {NAME}}',
         triggers: ['test', 'hello', 'hello-world'],
         run: async (params) => {
             if (params.name) {
