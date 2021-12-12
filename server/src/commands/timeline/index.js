@@ -11,15 +11,6 @@ function processDate(date) {
         };
     } else {
         const arr = date.split('/');
-        if (arr.length !== 3) {
-            return null;
-        }
-        for (const a of arr) {
-            const num = parseInt(a);
-            if (isNaN(num) || num < 0) {
-                return null;
-            }
-        }
         retVal = {
             month: parseInt(arr[0]),
             day: parseInt(arr[1]),
@@ -34,40 +25,21 @@ export default [
     {
         name: 'add_event',
         help: 'Adds an event to the database to be displayed on the timeline at https://bhagat.io#timeline. ' +
-            'Usage: !add-event {startDate} --> {endDate} "{Name}" "{Description}" ' +
-            'or !add-event {startDate} "{Name}" "{Description}" or !add-event "{Name}" "{Description}". ' +
-            'The latter uses the current date for start and end.',
+            'Usage: !add-event {startDate} --> {endDate} "{name}" "{description}" {medialink}.' +
+            'All the parameters are optional except name and description.',
         parseArgs: (message) => {
-            const regex = /(.*)-*>(.*).\"(.*)\".\"(.*)\"/;
-            const regex2 = /(.*).\"(.*)\".\"(.*)\"/;
-            const regex3 = /\"(.*)\" \"(.*)\"/;
-
+            const regex = /(?:([0-9]*\/[0-9]*\/[0-9]*)(?:.*> ?([0-9]*\/[0-9]*\/[0-9]*))?.)?\"(.*)\".\"(.*)\"(?:.(.*))?/;
             const lineReplacer = '~';
             message = message.replaceAll('\n', lineReplacer);
 
             if (regex.test(message)) {
                 const matches = message.match(regex);
                 return {
-                    startDate: matches[1].replaceAll(lineReplacer, '\n'),
-                    endDate: matches[2].replaceAll(lineReplacer, '\n'),
-                    name: matches[3].replaceAll(lineReplacer, '\n'),
-                    description: matches[4].replaceAll(lineReplacer, '\n'),
-                };
-            }
-            if (regex2.test(message)) {
-                const matches = message.match(regex2);
-                return {
-                    startDate: matches[1].replaceAll(lineReplacer, '\n'),
-                    endDate: matches[1].replaceAll(lineReplacer, '\n'),
-                    name: matches[2].replaceAll(lineReplacer, '\n'),
-                    description: matches[3].replaceAll(lineReplacer, '\n'),
-                };
-            }
-            if (regex3.test(message)) {
-                const matches = message.match(regex3);
-                return {
-                    name: matches[1].replaceAll(lineReplacer, '\n'),
-                    description: matches[2].replaceAll(lineReplacer, '\n'),
+                    startDate: matches[1],
+                    endDate: matches[2] ? matches[2] : matches[1],
+                    name: matches[3],
+                    description: matches[4],
+                    media: matches[5],
                 };
             }
             return {};
@@ -98,6 +70,7 @@ export default [
                     description: params.description,
                     startDate,
                     endDate,
+                    media: params.media,
                 });
 
                 return 'Added event to timeline';
