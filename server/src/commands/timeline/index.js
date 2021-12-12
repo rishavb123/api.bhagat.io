@@ -1,4 +1,4 @@
-import { wrapWithDbClient } from "../../modules/db";
+import { wrapWithDbClient } from '../../modules/db';
 
 function processDate(date) {
     let retVal = null;
@@ -10,19 +10,21 @@ function processDate(date) {
             year: d.getFullYear(),
         };
     } else {
-        const arr = date.split("/");
-        if (arr.length !== 3)
+        const arr = date.split('/');
+        if (arr.length !== 3) {
             return null;
+        }
         for (const a of arr) {
             const num = parseInt(a);
-            if (isNaN(num) || num < 0)
+            if (isNaN(num) || num < 0) {
                 return null;
+            }
         }
         retVal = {
             month: parseInt(arr[0]),
             day: parseInt(arr[1]),
             year: parseInt(arr[2]),
-        }
+        };
     }
     retVal.stamp = Math.floor(new Date(retVal.year, retVal.month - 1, retVal.day).getTime() / 86400000);
     return retVal;
@@ -54,9 +56,9 @@ export default [
         },
         run: async (params) => {
             const errorResp = 'Invalid Input. Please edit your command and try again.';
-            console.log(params);
-            if (!params.name || !params.description)
+            if (!params.name || !params.description) {
                 return errorResp;
+            }
             return await wrapWithDbClient(async (client) => {
                 const db = await client.db('bhagat-db');
                 const collection = await db.collection('timeline-events');
@@ -64,21 +66,22 @@ export default [
                 const startDate = processDate(params.startDate);
                 const endDate = processDate(params.endDate);
 
-                if (!startDate || !endDate)
+                if (!startDate || !endDate) {
                     return errorResp;
-                
-                startDate.stamp = Math.floor(new Date(startDate.year, startDate.month - 1, startDate.day).getTime() / 86400000)
-                endDate.stamp = Math.floor(new Date(endDate.year, endDate.month - 1, endDate.day).getTime() / 86400000)
-                
+                }
+
+                startDate.stamp = Math.floor(new Date(startDate.year, startDate.month - 1, startDate.day).getTime() / 86400000);
+                endDate.stamp = Math.floor(new Date(endDate.year, endDate.month - 1, endDate.day).getTime() / 86400000);
+
                 await collection.insertOne({
                     name: params.name,
                     description: params.description,
                     startDate,
-                    endDate
+                    endDate,
                 });
 
-                return "Added event to timeline";
+                return 'Added event to timeline';
             });
-        }
-    }
+        },
+    },
 ];

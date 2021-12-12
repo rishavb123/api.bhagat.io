@@ -10,7 +10,7 @@ function processCommands(commands) {
                 } catch {
                     return {};
                 }
-            }
+            };
         }
         if (!command.triggers) {
             command.triggers = [];
@@ -33,11 +33,10 @@ export default processCommands([
         run: async (params) => {
             if (params.name) {
                 return `Hello, ${params.name}!`;
+            } else {
+                return 'Hello, World!';
             }
-            else {
-                return 'Hello, World!'
-            }
-        }
+        },
     },
     ...jobsCommands,
     ...timelineCommands,

@@ -56,13 +56,13 @@ export default [
             }
             const job = result.data.job;
             let reply = `${job.name}(`;
-            const keys = ['name', 'expression', 'disabled', 'runOnStart', 'runInDev', 'currentlyRunning', 'lastExecuted']
+            const keys = ['name', 'expression', 'disabled', 'runOnStart', 'runInDev', 'currentlyRunning', 'lastExecuted'];
             for (const key of keys) {
                 reply += `\t${key} = ${job[key]}, \n`;
             }
             reply = reply.substring(0, reply.length - 3) + '\n)';
             return reply;
-        }
+        },
     },
     {
         name: 'run_job',
@@ -83,18 +83,18 @@ export default [
             const job = jobs.find((job) => job.name == name);
             if (job) {
                 if (job.running) {
-                    return "Job is already running"
+                    return 'Job is already running';
                 } else if (wait) {
                     await job.call();
-                    return "Finished running job"
+                    return 'Finished running job';
                 } else {
                     job.call();
-                    return "Started job in the background"
+                    return 'Started job in the background';
                 }
             } else {
-                return "Job not found. Run !list_jobs to list all jobs."
+                return 'Job not found. Run !list_jobs to list all jobs.';
             }
         },
     },
 
-]
+];

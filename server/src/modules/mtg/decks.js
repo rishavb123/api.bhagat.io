@@ -28,7 +28,6 @@ export async function getDeckListInfo(url, caching) {
                         count: c,
                         name: nameLink.innerText,
                     });
-
                 }
                 return returnVal;
             });

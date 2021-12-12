@@ -67,12 +67,12 @@ export async function discordLog(app, message, state = {}) {
 
 client.on('message', async (message) => {
     if (message.channel.id == COMMANDS_CHANNEL_ID && !message.author.bot && message.content.startsWith('!')) {
-        const commandStr = message.content.split(" ")[0].substring(1);
+        const commandStr = message.content.split(' ')[0].substring(1);
         const content = message.content.substring(commandStr.length + 2);
         let reply = '\n';
 
         if (commandStr == 'help') {
-            reply = "\nCommands: \n";
+            reply = '\nCommands: \n';
             for (const command of commands) {
                 reply += `!${command.name.replaceAll('_', '-')}\n`;
             }
@@ -87,4 +87,4 @@ client.on('message', async (message) => {
 
         await message.reply(reply);
     }
-})
+});
