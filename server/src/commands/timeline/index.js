@@ -33,15 +33,18 @@ function processDate(date) {
 export default [
     {
         name: 'add_event',
-        help: 'Adds an event to the database to be displayed on the timeline at https://bhagat.io#timeline. Usage: !add-event {startDate}-->{endDate} "{Name}" "{Description}" or !add-event "{Name}" "{Description}". The latter uses the current date for start and end.',
+        help: 'Adds an event to the database to be displayed on the timeline at https://bhagat.io#timeline. ' +
+            'Usage: !add-event {startDate} --> {endDate} "{Name}" "{Description}" ' +
+            'or !add-event {startDate} "{Name}" "{Description}" or !add-event "{Name}" "{Description}". ' +
+            'The latter uses the current date for start and end.',
         parseArgs: (message) => {
             const regex = /(.*)-*>(.*).\"(.*)\".\"(.*)\"/;
             const regex2 = /(.*).\"(.*)\".\"(.*)\"/;
             const regex3 = /\"(.*)\" \"(.*)\"/;
 
-            const lineReplacer = '~+-='
+            const lineReplacer = '~';
             message = message.replaceAll('\n', lineReplacer);
-            
+
             if (regex.test(message)) {
                 const matches = message.match(regex);
                 return {
@@ -58,7 +61,7 @@ export default [
                     endDate: matches[1].replaceAll(lineReplacer, '\n'),
                     name: matches[2].replaceAll(lineReplacer, '\n'),
                     description: matches[3].replaceAll(lineReplacer, '\n'),
-                }
+                };
             }
             if (regex3.test(message)) {
                 const matches = message.match(regex3);
@@ -85,7 +88,9 @@ export default [
                     return errorResp;
                 }
 
-                startDate.stamp = Math.floor(new Date(startDate.year, startDate.month - 1, startDate.day).getTime() / 86400000);
+                startDate.stamp = Math.floor(
+                    new Date(startDate.year, startDate.month - 1, startDate.day).getTime() / 86400000,
+                );
                 endDate.stamp = Math.floor(new Date(endDate.year, endDate.month - 1, endDate.day).getTime() / 86400000);
 
                 await collection.insertOne({

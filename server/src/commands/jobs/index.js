@@ -8,7 +8,8 @@ export default [
         help: 'Lists all the jobs and information on them. Usage: !list-jobs',
         run: async (_) => {
             let reply = '';
-            const keys = ['name', 'expression', 'disabled', 'runOnStart', 'runInDev', 'currentlyRunning', 'lastExecuted'];
+            const keys = ['name', 'expression', 'disabled', 'runOnStart',
+                'runInDev', 'currentlyRunning', 'lastExecuted'];
             const jobsGQL = (await queryGraphQL(`
                 query getJobs {
                     jobs {
@@ -58,7 +59,8 @@ export default [
             }
             const job = result.data.job;
             let reply = `${job.name}(`;
-            const keys = ['name', 'expression', 'disabled', 'runOnStart', 'runInDev', 'currentlyRunning', 'lastExecuted'];
+            const keys = ['name', 'expression', 'disabled', 'runOnStart',
+                'runInDev', 'currentlyRunning', 'lastExecuted'];
             for (const key of keys) {
                 reply += `\t${key} = ${job[key]}, \n`;
             }

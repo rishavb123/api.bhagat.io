@@ -100,7 +100,8 @@ export async function startGTMTGDiscordBot() {
         await sendMessageEmbed(
             WELCOME_CHANNEL_ID,
             `Welcome, fellow Planeswalker!`,
-            `<@${member.id}> ${memberCountMsg}\n Make sure to give yourself <#${ROLES_CHANNEL_ID}> and introduce yourself ` +
+            `<@${member.id}> ${memberCountMsg}\n ` +
+            `Make sure to give yourself <#${ROLES_CHANNEL_ID}> and introduce yourself ` +
             `in <#${INTRODUCTIONS_CHANNEL_ID}>. Also, please change your server nickname to your real name. \n
             Check <#${ANNOUNCEMENTS_CHANNEL_ID}> or our website https://mtg.bhagat.io/ for any upcoming events. ` +
             `Feel free to poke around various channels and join us on Fridays for our weekly game nights!`,
