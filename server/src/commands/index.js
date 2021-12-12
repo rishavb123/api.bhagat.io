@@ -1,4 +1,5 @@
 import jobsCommands from './jobs';
+import timelineCommands from './timeline';
 
 function processCommands(commands) {
     for (const command of commands) {
@@ -39,4 +40,5 @@ export default processCommands([
         }
     },
     ...jobsCommands,
+    ...timelineCommands,
 ]);
