@@ -103,7 +103,7 @@ export async function startGTMTGDiscordBot() {
             `<@${member.id}> ${memberCountMsg}\n ` +
             `Make sure to give yourself <#${ROLES_CHANNEL_ID}> and introduce yourself ` +
             `in <#${INTRODUCTIONS_CHANNEL_ID}>. Also, please change your server nickname to your real name. \n
-            Check <#${ANNOUNCEMENTS_CHANNEL_ID}> or our website https://mtg.bhagat.io/ for any upcoming events. ` +
+            Check <#${ANNOUNCEMENTS_CHANNEL_ID}> or our website https://gtmtg.org/ for any upcoming events. ` +
             `Feel free to poke around various channels and join us on Fridays for our weekly game nights!`,
         );
     });
