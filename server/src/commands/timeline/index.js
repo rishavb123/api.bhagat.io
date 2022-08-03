@@ -84,7 +84,7 @@ export default [
     {
         name: 'list_events',
         help: 'Lists all the events in the database displayed on the timeline at https://bhagat.io#timeline. ' +
-            'Usage: !list-events {startIndex} {endIndex}' + 
+            'Usage: !list-events {startIndex} {endIndex}' +
             'All the parameters are optional.',
         parseArgs: (message) => {
             const arr = message.split(' ');
@@ -97,7 +97,7 @@ export default [
             return await wrapWithDbClient(async (client) => {
                 const db = await client.db('bhagat-db');
                 const collection = await db.collection('timeline-events');
-                
+
                 const events = await collection.find({}).toArray();
 
                 startIndex = (startIndex < 0) ? 0 : startIndex;
@@ -105,16 +105,17 @@ export default [
 
                 let retVal = '**Events in timeline:**\n';
                 for (let i = startIndex; i < events.length && i < endIndex; i++) {
-                    const event = events[i]
+                    const event = events[i];
                     retVal += `\t${event.name}\n`;
                 }
 
-                if (retVal.length > 3999)
+                if (retVal.length > 3999) {
                     return 'Too many events to display. Please use !list-events {startIndex} {endIndex}';
+                }
 
                 return retVal;
             });
-        }
+        },
     },
     {
         name: 'remove_event',
@@ -123,7 +124,6 @@ export default [
         parseArgs: (message) => ({ eventName: message }),
         run: async ({ eventName }) => {
             return await wrapWithDbClient(async (client) => {
-
                 const db = await client.db('bhagat-db');
                 const collection = await db.collection('timeline-events');
 
@@ -135,14 +135,15 @@ export default [
                     return `Removed event with name ${eventName} from timeline.`;
                 }
             });
-        }
+        },
     },
     {
         name: 'edit_event',
         help: 'Edits an event in the database displayed on the timeline at https://bhagat.io#timeline. ' +
             'Usage: !edit-event {eventName} {startDate} --> {endDate} "{name}" "{description}" {medialink}. ' +
-            'All the parameters are optional except name and description.' +
-            'Leave the parameters blank to keep the existing value. For description enter "" to keep the existing value.',
+            'All the parameters are optional except name and description. ' +
+            'Leave the parameters blank to keep the existing value. ' +
+            'For description enter "" to keep the existing value.',
         parseArgs: (message) => {
             const regex = /(?:([0-9]*\/[0-9]*\/[0-9]*)(?:.*> ?([0-9]*\/[0-9]*\/[0-9]*))?.)?\"(.*)\".\"(.*)\"(?:.(.*))?/;
             const lineReplacer = '~';
@@ -172,23 +173,31 @@ export default [
                 const startDate = !params.startDate? undefined: processDate(params.startDate);
                 const endDate = !params.endDate? undefined: processDate(params.endDate);
 
-                if (startDate)
+                if (startDate) {
                     startDate.stamp = Math.floor(
                         new Date(startDate.year, startDate.month - 1, startDate.day).getTime() / 86400000,
                     );
-                if (endDate)
-                    endDate.stamp = Math.floor(new Date(endDate.year, endDate.month - 1, endDate.day).getTime() / 86400000);
+                }
+                if (endDate) {
+                    endDate.stamp = Math.floor(
+                        new Date(endDate.year, endDate.month - 1, endDate.day).getTime() / 86400000,
+                    );
+                }
 
                 const updateSet = {};
-                if (startDate)
+                if (startDate) {
                     updateSet.startDate = startDate;
-                if (endDate)
+                }
+                if (endDate) {
                     updateSet.endDate = endDate;
-                if (params.description)
+                }
+                if (params.description) {
                     updateSet.description = params.description;
-                if (params.media)
+                }
+                if (params.media) {
                     updateSet.media = params.media;
-                
+                }
+
                 await collection.updateOne({
                     name: params.name,
                 }, {
