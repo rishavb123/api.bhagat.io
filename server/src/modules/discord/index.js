@@ -76,6 +76,7 @@ client.on('message', async (message) => {
             for (const command of commands) {
                 reply += `**!${command.name.replaceAll('_', '-')}**: ${command.help}\n`;
             }
+            reply += '**!help**: Shows this message\n';
         } else {
             const command = commands.find((command) => command.triggers.includes(commandStr));
             if (command) {
