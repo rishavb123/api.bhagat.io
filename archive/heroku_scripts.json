@@ -1,0 +1,6 @@
+{
+    "deploy": "cd .. && git subtree push --prefix server heroku master",
+    "down": "heroku ps:scale web=0",
+    "up": "heroku ps:scale web=1",
+    "restart": "heroku restart,"
+}
