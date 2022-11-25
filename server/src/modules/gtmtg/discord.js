@@ -85,7 +85,7 @@ const dialogStates = {
 export async function startGTMTGDiscordBot() {
     await client.login(process.env.GTMTG_DISCORD_BOT_TOKEN);
     if (process.env.NODE_ENV === 'production') {
-        await sendMessage(SANDBOX_CHANNEL_ID, 'Discord Bot is up and running in the heroku environment.');
+        await sendMessage(SANDBOX_CHANNEL_ID, 'Discord Bot is up and running in the production environment.');
     }
 
     (await getChannel(GENERAL_CHANNEL_ID)).setTopic('Blue is better than Red! BLUE >>>>>>> RED');
