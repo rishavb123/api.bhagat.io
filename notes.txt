@@ -1,2 +1,0 @@
-- Currently hosting on render.com
-- Could try cyclic.sh
