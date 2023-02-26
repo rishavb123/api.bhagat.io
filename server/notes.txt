@@ -7,5 +7,7 @@
 - Apollo Sandbox: https://studio.apollographql.com/graph/Personal-API/explorer?variant=current
 - Discord Developer Project: https://discord.com/developers/applications/863172368856121394 
 - Render Hosting Service: https://dashboard.render.com/web/srv-ce06h7un6mpu84t63bsg
+- Cyclic.sh Hosting Service: https://app.cyclic.sh/#/app/rishavb123-api-bhagat-io/builds
+
 
 - Could try cyclic.sh as a render/heroku alternative
