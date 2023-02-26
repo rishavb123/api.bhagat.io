@@ -6,6 +6,7 @@ import { COMMANDS_CHANNEL_ID, LOGS_CHANNEL_ID } from './constants';
 const client = new Discord.Client();
 
 export async function startDiscordBot() {
+    console.log('Starting up Discord Bot');
     await client.login(process.env.DISCORD_BOT_TOKEN);
     if (process.env.NODE_ENV === 'production') {
         discordLog('bhagat-api', 'Server up and running in the production environment');
