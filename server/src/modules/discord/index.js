@@ -10,6 +10,9 @@ export async function startDiscordBot() {
     if (process.env.NODE_ENV === 'production') {
         discordLog('bhagat-api', 'Server up and running in the production environment');
     }
+    process.on('exit', () => { 
+        discordLog('bhagat-api', 'Server shutting down for unknown reason in production environment')
+    });
 }
 
 export async function getChannel(channelId) {
