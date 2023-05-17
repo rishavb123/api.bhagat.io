@@ -62,6 +62,6 @@ export default [
                 console.log('0 decks found! Not pushing to MongoDB');
             }
         },
-        disabled: false,
+        disabled: true,
     },
 ];

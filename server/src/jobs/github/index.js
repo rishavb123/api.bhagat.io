@@ -6,7 +6,7 @@ import { USER } from '../../modules/github/constants';
 export default [
     {
         name: 'read_repos',
-        expression: '55 */2 * * *',
+        expression: '55 0 * * *',
         task: async () => {
             const query = `
                 query readRepos($caching: Boolean!, $forceNoDb: Boolean!) {
