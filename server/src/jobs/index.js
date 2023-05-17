@@ -1,5 +1,6 @@
 import mtgCrons from './mtg';
 import githubCrons from './github';
+import dbCrons from './db';
 import { delay } from '../modules/utils/misc';
 
 function processJobs(jobs) {
@@ -38,4 +39,5 @@ export default processJobs([
     },
     ...mtgCrons,
     ...githubCrons,
+    ...dbCrons,
 ]);

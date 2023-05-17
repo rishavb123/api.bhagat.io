@@ -1,7 +1,7 @@
 import got from 'got';
 import { wrapWithCache } from '../utils/caching';
 
-import { USER, INFO_FILE_NAME, INFO_FILE_BRANCH } from './constants';
+import { USER, USER_EMAIL, INFO_FILE_NAME, INFO_FILE_BRANCH } from './constants';
 
 const instance = got.extend({
     hooks: {
@@ -103,4 +103,30 @@ export async function numRequestsLeft() {
         core: resp.resources.core.remaining,
         search: resp.resources.search.remaining,
     };
+}
+
+export async function uploadJSONFile(jsonObject, repoName, path, message) {
+    const url = `https://api.github.com/repos/${USER}/${repoName}/contents/${path}`;
+    let sha = undefined;
+    try {
+        sha = JSON.parse((await instance(url)).body).sha;
+    } catch (err) { }
+    const data = JSON.stringify({
+        owner: USER,
+        repo: repoName,
+        path: path,
+        message: message,
+        commiter: {
+            name: USER,
+            email: USER_EMAIL,
+        },
+        sha: sha,
+        content: Buffer.from(
+            JSON.stringify(jsonObject)
+        ).toString('base64')
+    })
+
+    return JSON.parse((await instance.put(url, {
+        body: data
+    })).body);
 }
