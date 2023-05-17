@@ -14,10 +14,9 @@ export async function getDeckListInfo(url, caching) {
         case 'moxfield':
             const mName = await $eval(page, '.deckheader-name', (el) => el.innerText);
             const mType = await $eval(page, '.badge', (el) => el.innerText);
-            const mDescription = await $eval(page, '.fw-light.mb-3',
+            const mDescription = await $eval(page, '.fw-light.mb-4',
                 (el) => !el.classList.contains('d-flex') ? el.innerText : null);
             const mComment = await $eval(page, '.comment p', (el) => el ? el.innerText : null, false);
-            console.log(mComment);
             const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
                 const returnVal = [];
                 for (const el of elements) {
