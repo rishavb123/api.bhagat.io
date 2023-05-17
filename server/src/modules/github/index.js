@@ -122,11 +122,11 @@ export async function uploadJSONFile(jsonObject, repoName, path, message) {
         },
         sha: sha,
         content: Buffer.from(
-            JSON.stringify(jsonObject)
-        ).toString('base64')
-    })
+            JSON.stringify(jsonObject),
+        ).toString('base64'),
+    });
 
     return JSON.parse((await instance.put(url, {
-        body: data
+        body: data,
     })).body);
 }

@@ -6,13 +6,13 @@ export default [
         name: 'backup_db',
         expression: '5 0 * * *',
         task: async () => {
-            const backup_queries = [
+            const backupParams = [
                 {
-                    db: "bhagat-db",
-                    collection: "timeline-events",
+                    db: 'bhagat-db',
+                    collection: 'timeline-events',
                     options: {
                         sort: {
-                            "startDate.stamp": -1
+                            'startDate.stamp': -1,
                         },
                         projection: {
                             _id: 0,
@@ -21,70 +21,70 @@ export default [
                             name: 1,
                             description: 1,
                             media: 1,
-                        }
+                        },
                     },
-                    backupName: "timeline"
+                    backupName: 'timeline',
                 },
                 {
                     db: 'bhagat-db',
                     collection: 'mtg-edh-decks',
                     query: {
-                        "deckType": 'Commander / EDH'
+                        'deckType': 'Commander / EDH',
                     },
                     options: {
                         sort: {
-                            name: 1
+                            name: 1,
                         },
                         projection: {
                             _id: 0,
                             name: 1,
                             url: 1,
                             commander: 1,
-                            description: 1
-                        }
+                            description: 1,
+                        },
                     },
-                    backupName: "mtg"
+                    backupName: 'mtg',
                 },
                 {
-                    db: "bhagat-db",
-                    collection: "personal-data",
+                    db: 'bhagat-db',
+                    collection: 'personal-data',
                     query: {
-                        name: "resume-embed-link"
+                        name: 'resume-embed-link',
                     },
                     options: {
                         projection: {
                             _id: 0,
-                            name: 0
-                        }
+                            name: 0,
+                        },
                     },
-                    backupName: "resume"
+                    backupName: 'resume',
                 },
                 {
                     db: 'bhagat-db',
                     collection: 'gh-repos',
                     options: {
                         sort: [
-                            ["info.priority", -1],
-                            ["lastUpdated", -1]
+                            ['info.priority', -1],
+                            ['lastUpdated', -1],
                         ],
                         projection: {
-                            _id: 0,
-                            name: 1,
-                            description: 1,
-                            languages: 1,
-                            "info.links": 1,
-                            "info.imageUrl": 1,
-                            createdDate: 1,
-                            lastUpdated: 1
-                        }
+                            '_id': 0,
+                            'name': 1,
+                            'description': 1,
+                            'languages': 1,
+                            'info.links': 1,
+                            'info.imageUrl': 1,
+                            'createdDate': 1,
+                            'lastUpdated': 1,
+                        },
                     },
-                    backupName: "repos"
-                }
-            ]
+                    backupName: 'repos',
+                },
+            ];
 
             const dbBackup = await wrapWithDbClient(async (client) => {
                 const backup = {};
-                for (const params of backup_queries) {
+                for (const params of backupParams) {
                     const db = await client.db(params.db || 'bhagat-db');
                     const collection = await db.collection(params.collection || 'mtg-edh-decks');
                     const cursor = await collection.find(params.query || {}, params.options || {});
@@ -98,9 +98,11 @@ export default [
                 return backup;
             });
 
-            await uploadJSONFile(dbBackup, "bhagat-db-backup", "website_backup.json", "backing up database for website");
+            await uploadJSONFile(
+                dbBackup, 'bhagat-db-backup', 'website_backup.json', 'backing up database for website',
+            );
         },
         disabled: true,
         runOnStart: false,
-    }
+    },
 ];
