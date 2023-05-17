@@ -17,11 +17,11 @@ export async function getDeckListInfo(url, caching) {
             const mDescription = await $eval(page, '.fw-light.mb-4',
                 (el) => !el.classList.contains('d-flex') ? el.innerText : null);
             const mComment = await $eval(page, '.comment p', (el) => el ? el.innerText : null, false);
-            const mCards = await page.$$eval('.deckview .table-deck-row', (elements) => {
+            const mCards = await page.$$eval('.deckview .deck-group-row', (elements) => {
                 const returnVal = [];
                 for (const el of elements) {
-                    const nameLink = el.querySelector('.text-body');
-                    const c = parseInt(el.querySelector('td.text-end').innerText);
+                    const nameLink = el.querySelector('.table-deck-row-link');
+                    const c = parseInt(el.querySelector('.deck-group-row-quantity').innerText);
                     returnVal.push({
                         link: nameLink.href,
                         count: c,
